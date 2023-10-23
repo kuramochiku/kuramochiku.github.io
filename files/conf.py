@@ -14,8 +14,12 @@ release = '1'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
+#extensions = [
+#    'sphinx.ext.githubpages','sphinx.ext.autodoc','sphinx.ext.napoleon','myst_parser'
+#]
+
 extensions = [
-    'sphinx.ext.githubpages','sphinx.ext.autodoc','sphinx.ext.napoleon','myst_parser'
+    'myst_parser'
 ]
 
 source_suffix = {
