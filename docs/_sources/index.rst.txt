@@ -10,7 +10,9 @@ Welcome to workmemo's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+   ./shpinx.md
+   ./github.md
+   ./その他.md
 
 Indices and tables
 ==================
