@@ -14,13 +14,13 @@ release = '1'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-#extensions = [
-#    'sphinx.ext.githubpages','sphinx.ext.autodoc','sphinx.ext.napoleon','myst_parser'
-#]
-
 extensions = [
-    'myst_parser'
+    'sphinx.ext.githubpages','sphinx.ext.autodoc','sphinx.ext.napoleon','myst_parser'
 ]
+
+#extensions = [
+#    'myst_parser'
+#]
 
 source_suffix = {
     '.rst': 'restructuredtext',
@@ -35,5 +35,5 @@ language = 'jp'
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
+html_theme = 'nature'
 html_static_path = ['_static']
