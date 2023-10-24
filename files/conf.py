@@ -37,3 +37,4 @@ language = 'jp'
 
 html_theme = 'nature'
 html_static_path = ['_static']
+numfig = True

@@ -40,7 +40,7 @@
             
   <section id="sphinx">
 <h1>Sphinxとは<a class="headerlink" href="#sphinx" title="Link to this heading">¶</a></h1>
-<p>Sphinx はブラウザーで表示するドキュメント（オンラインマニュアル 等）を作成するツール。
+<p>Sphinx はブラウザーで表示するドキュメント（オンラインマニュアル 等）を作成するツール。<br />
 元々は Python のドキュメント用に作成されたものですが、現在は多くのドキュメントを作成するのに使用されている。</p>
 </section>
 <section id="id1">
@@ -54,18 +54,26 @@
 https://docs.conda.io/projects/miniconda/en/latest/</p>
 <p>参考<br />
 https://qiita.com/terahide/items/253eff6fba38c8f53746</p>
-<p>2,「anaconda prompt」を起動し、以下を実行しインストール確認を行う。<br />
-conda -V<br />
-python --version</p>
+<p>2,「anaconda prompt」を起動し、以下を実行しインストール確認を行う。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="o">-</span><span class="n">V</span>  
+<span class="n">python</span> <span class="o">--</span><span class="n">version</span>  
+</pre></div>
+</div>
 </section>
 <section id="id2">
 <h3>Sphinxのインストール<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
-<p>1,pipコマンドでインストールを実行<br />
-pip install -U sphinx</p>
-<p>2,インストール確認<br />
-sphinx-build --version</p>
-<p>3,マークダウンを使用するために必要なプラグインのインストール<br />
-pip install --upgrade myst-parser</p>
+<p>1,pipコマンドでインストールを実行</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">sphinx</span>  
+</pre></div>
+</div>
+<p>2,インストール確認</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sphinx</span><span class="o">-</span><span class="n">build</span> <span class="o">--</span><span class="n">version</span>  
+</pre></div>
+</div>
+<p>3,マークダウンを使用するために必要なプラグインのインストール</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">myst</span><span class="o">-</span><span class="n">parser</span>  
+</pre></div>
+</div>
 </section>
 </section>
 <section id="sphinx-linux">
@@ -265,6 +273,26 @@ Indices and tables
 </pre></div>
 </div>
 </section>
+<section id="id4">
+<h1>追加機能色々<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h1>
+<section id="id5">
+<h2>章や節に番号を振りたい<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<p>「index.rst」の「toctree」に「numbered」オプションを追加する。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">toctree</span><span class="p">::</span>
+   <span class="p">:</span><span class="n">maxdepth</span><span class="p">:</span> <span class="mi">2</span>
+   <span class="p">:</span><span class="n">caption</span><span class="p">:</span> <span class="n">Contents</span><span class="p">:</span>
+   <span class="p">:</span><span class="n">numbered</span><span class="p">:</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h2>図に番号を自動で振り、参照したい<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<p>「conf.py」に以下オプションを追加する。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">numfig</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -287,6 +315,11 @@ Indices and tables
 </ul>
 </li>
 <li><a class="reference internal" href="#id3">Sphinx設定</a></li>
+<li><a class="reference internal" href="#id4">追加機能色々</a><ul>
+<li><a class="reference internal" href="#id5">章や節に番号を振りたい</a></li>
+<li><a class="reference internal" href="#id6">図に番号を自動で振り、参照したい</a></li>
+</ul>
+</li>
 </ul>
 
   </div>

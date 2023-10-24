@@ -12,6 +12,7 @@ Welcome to workmemo's documentation!
 
    ./shpinx.md
    ./github.md
+   ./spring.md
    ./その他.md
 
 Indices and tables
