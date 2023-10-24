@@ -1,7 +1,8 @@
-# Sphinx導入手順
+# Sphinxとは
 Sphinx はブラウザーで表示するドキュメント（オンラインマニュアル 等）を作成するツール。
 元々は Python のドキュメント用に作成されたものですが、現在は多くのドキュメントを作成するのに使用されている。
 
+# Sphinx導入
 ## Sphinxインストール(Windows)
 ### Sphinxインストール　事前作業　Minicondaの導入
 まず、Windows上でPythonが動作する環境を構築する。
@@ -38,7 +39,7 @@ mkdir -p /work/sphinx
 cd /work/sphinx
 sphinx-quickstar
 
-## Sphinx設定
+# Sphinx設定
 参考：https://zenn.dev/y_mrok/books/sphinx-no-tsukaikata/viewer/chapter8
 
 1,プロジェクト作成したいフォルダに移動した後、以下コマンドを実行する。
