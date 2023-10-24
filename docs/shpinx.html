@@ -49,41 +49,44 @@
 <h2>Sphinxインストール(Windows)<a class="headerlink" href="#sphinx-windows" title="Link to this heading">¶</a></h2>
 <section id="sphinx-miniconda">
 <h3>Sphinxインストール　事前作業　Minicondaの導入<a class="headerlink" href="#sphinx-miniconda" title="Link to this heading">¶</a></h3>
-<p>まず、Windows上でPythonが動作する環境を構築する。
-1,Minicondaのサイトよりインストーラをダウンロードし、インストールを行う。
+<p>まず、Windows上でPythonが動作する環境を構築する。<br />
+1,Minicondaのサイトよりインストーラをダウンロードし、インストールを行う。<br />
 https://docs.conda.io/projects/miniconda/en/latest/</p>
-<p>参考
+<p>参考<br />
 https://qiita.com/terahide/items/253eff6fba38c8f53746</p>
-<p>2,「anaconda prompt」を起動し、以下を実行しインストール確認を行う。
-conda -V
+<p>2,「anaconda prompt」を起動し、以下を実行しインストール確認を行う。<br />
+conda -V<br />
 python --version</p>
 </section>
 <section id="id2">
 <h3>Sphinxのインストール<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
-<p>1,pipコマンドでインストールを実行
+<p>1,pipコマンドでインストールを実行<br />
 pip install -U sphinx</p>
-<p>2,インストール確認
+<p>2,インストール確認<br />
 sphinx-build --version</p>
-<p>3,マークダウンを使用するために必要なプラグインのインストール
+<p>3,マークダウンを使用するために必要なプラグインのインストール<br />
 pip install --upgrade myst-parser</p>
 </section>
 </section>
 <section id="sphinx-linux">
 <h2>Sphinxインストール(linux)<a class="headerlink" href="#sphinx-linux" title="Link to this heading">¶</a></h2>
 <p>Linuxのインストール手順は以下となる。設定部分はWindowsと共通となる。</p>
-<p>sudo su -
-yum install python-sphinx
-依存関係含めてインストール</p>
-<p>pip install --upgrade myst-parser</p>
-<p>mkdir -p /work/sphinx
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sudo su -  
+yum install python-sphinx  
+※依存関係含めてインストール  
+pip install --upgrade myst-parser  
+mkdir -p /work/sphinx
 cd /work/sphinx
-sphinx-quickstar</p>
+sphinx-quickstar
+</pre></div>
+</div>
 </section>
 </section>
 <section id="id3">
 <h1>Sphinx設定<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h1>
-<p>参考：https://zenn.dev/y_mrok/books/sphinx-no-tsukaikata/viewer/chapter8</p>
-<p>1,プロジェクト作成したいフォルダに移動した後、以下コマンドを実行する。
+<p>参考<br />
+https://zenn.dev/y_mrok/books/sphinx-no-tsukaikata/viewer/chapter8</p>
+<p>1,プロジェクト作成したいフォルダに移動した後、以下コマンドを実行する。<br />
 　今回は「C:\zyuku\work\files」とする。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">base</span><span class="p">)</span> <span class="n">C</span><span class="p">:</span>\<span class="n">zyuku</span>\<span class="n">work</span>\<span class="n">files</span><span class="o">&gt;</span><span class="n">sphinx</span><span class="o">-</span><span class="n">quickstart</span>
 <span class="n">Welcome</span> <span class="n">to</span> <span class="n">the</span> <span class="n">Sphinx</span> <span class="mf">7.2.6</span> <span class="n">quickstart</span> <span class="n">utility</span><span class="o">.</span>
@@ -124,7 +127,7 @@ sphinx-quickstar</p>
 <span class="n">where</span> <span class="s2">&quot;builder&quot;</span> <span class="ow">is</span> <span class="n">one</span> <span class="n">of</span> <span class="n">the</span> <span class="n">supported</span> <span class="n">builders</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">html</span><span class="p">,</span> <span class="n">latex</span> <span class="ow">or</span> <span class="n">linkcheck</span><span class="o">.</span>
 </pre></div>
 </div>
-<p>2,filesの1つ上の階層に「docs」フォルダを作成し、github公開用ファイルはこちらに作成するようにする。
+<p>2,filesの1つ上の階層に「docs」フォルダを作成し、github公開用ファイルはこちらに作成するようにする。<br />
 　なお、「files」配下の「.md」ファイルは記事執筆時に作成する。ファイルである。読み込むファイルは「index.rst」に定義する。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>PS C:\zyuku\work&gt; tree /f
 フォルダー パスの一覧
@@ -147,8 +150,8 @@ C:.
 PS C:\zyuku\work&gt;
 </pre></div>
 </div>
-<p>3,conf.pyの編集
-それぞれ以下要件のためconf.pyを編集する。
+<p>3,conf.pyの編集<br />
+それぞれ以下要件のためconf.pyを編集する。<br />
 ①、デフォルトではmdファイルを認識しないようなので設定を追記する。</p>
 <p>source_suffix を追記します。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source_suffix</span> <span class="o">=</span> <span class="p">{</span>
@@ -165,12 +168,12 @@ PS C:\zyuku\work&gt;
 </pre></div>
 </div>
 <p>これにより、空ファイル.nojekyllが自動生成されるため、CSSや画像がうまく適用されるようになる。</p>
-<p>③、画面テーマの変更
+<p>③、画面テーマの変更<br />
 色々選ぶことはできるがこちらに変更とした。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme</span> <span class="o">=</span> <span class="s1">&#39;nature&#39;</span>
 </pre></div>
 </div>
-<p>4,make.batファイルはWindows環境でビルドするためのバッチファイルのため、今回はこちらを編集する。
+<p>4,make.batファイルはWindows環境でビルドするためのバッチファイルのため、今回はこちらを編集する。<br />
 　なお、MakefileはLinux環境でビルドするためのファイルであり、今回は使用しない。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@ECHO</span> <span class="n">OFF</span>
 
@@ -210,7 +213,7 @@ PS C:\zyuku\work&gt;
 
 </pre></div>
 </div>
-<p>5,「index.rst」ファイルに執筆したmdファイルを記載し、ページ遷移できるようにする。
+<p>5,「index.rst」ファイルに執筆したmdファイルを記載し、ページ遷移できるようにする。<br />
 ※Sphinx のインデントは半角空白 3 文字なので注意すること。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Welcome to workmemo&#39;s documentation!
 ====================================
@@ -231,8 +234,8 @@ Indices and tables
 * :ref:`search`
 </pre></div>
 </div>
-<p>6,ドキュメントをビルドする
-・ビルドの対象になるファイルは追加、変更されたファイルだけです。ビルドした結果が思ったものと異なる場合は docs フォルダー内の .nojekyll ファイル以外を削除し、再度ビルドしてください。
+<p>6,ドキュメントをビルドする<br />
+・ビルドの対象になるファイルは追加、変更されたファイルだけです。ビルドした結果が思ったものと異なる場合は docs フォルダー内の .nojekyll ファイル以外を削除し、再度ビルドしてください。<br />
 ・GitHub へ push する前に、 docs フォルダー内の .nojekyll ファイル以外を削除　→　ビルドすることをお勧めします。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">base</span><span class="p">)</span> <span class="n">C</span><span class="p">:</span>\<span class="n">zyuku</span>\<span class="n">work</span>\<span class="n">files</span><span class="o">&gt;</span><span class="n">make</span> <span class="n">html</span>
 <span class="n">Running</span> <span class="n">Sphinx</span> <span class="n">v7</span><span class="mf">.2.6</span>
