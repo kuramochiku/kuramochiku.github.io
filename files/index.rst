@@ -9,10 +9,12 @@ Welcome to workmemo's documentation!
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+   :numbered:
 
    ./shpinx.md
    ./github.md
    ./spring.md
+   ./TERASOLUNA.md
    ./その他.md
 
 Indices and tables
