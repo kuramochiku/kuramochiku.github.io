@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>GitHubとは &#8212; workmemo 1 documentation</title>
+    <title>GitHub入門 &#8212; workmemo 1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css?v=601dbdee" />
     <script src="_static/documentation_options.js?v=4f78e891"></script>
@@ -13,8 +13,8 @@
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="SpringBootとは" href="spring.html" />
-    <link rel="prev" title="Sphinxとは" href="shpinx.html" /> 
+    <link rel="next" title="SpringBoot入門" href="spring.html" />
+    <link rel="prev" title="Sphinx入門" href="shpinx.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -23,13 +23,13 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="spring.html" title="SpringBootとは"
+          <a href="spring.html" title="SpringBoot入門"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="shpinx.html" title="Sphinxとは"
+          <a href="shpinx.html" title="Sphinx入門"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">workmemo 1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">GitHubとは</a></li> 
+        <li class="nav-item nav-item-this"><a href="">GitHub入門</a></li> 
       </ul>
     </div>  
 
@@ -39,21 +39,23 @@
           <div class="body" role="main">
             
   <section id="github">
-<h1>GitHubとは<a class="headerlink" href="#github" title="Link to this heading">¶</a></h1>
+<h1>GitHub入門<a class="headerlink" href="#github" title="Link to this heading">¶</a></h1>
+<section id="id1">
+<h2>GitHubとは<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>「GitHub」は、ソフトウェア開発プロジェクトのバージョン管理を共有できるWebサービス。<br />
 GitHubは、「Git」の「ハブ：拠点、中心、集まり」という意味に基づいて名付けられました。</p>
 <p>GitHubでは、世界中の人々が自分の作ったソースコードやデザインデータなどを保存、公開できます。</p>
 </section>
-<section id="id1">
-<h1>GitHubのアカウント作成<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<section id="id2">
+<h2>GitHubのアカウント作成<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>1,GitHubサイト(https://github.co.jp/)へアクセス<br />
 2,登録情報を入力<br />
 3,メールに送信されたパスコードを入力し、アカウント作成完了</p>
 </section>
-<section id="id2">
-<h1>クライアント端末準備<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h1>
+<section id="id3">
+<h2>クライアント端末準備<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <section id="windows">
-<h2>Windows<a class="headerlink" href="#windows" title="Link to this heading">¶</a></h2>
+<h3>Windows<a class="headerlink" href="#windows" title="Link to this heading">¶</a></h3>
 <p>Windowsでgitを使用するための準備を行う。(Amazon Linux Workspacesではデフォルトでインストール済みであった)</p>
 <p>参考手順<br />
 https://www.curict.com/item/60/60bfe0e.html</p>
@@ -75,8 +77,10 @@ Checkout as-is, commit as-is
 </section>
 </section>
 <section id="github-pages">
-<h1>GitHub Pagesのクイックスタート<a class="headerlink" href="#github-pages" title="Link to this heading">¶</a></h1>
+<h2>GitHub Pagesのクイックスタート<a class="headerlink" href="#github-pages" title="Link to this heading">¶</a></h2>
 <p>GitHub Pagesを用いることで簡単にWEBページを作成することができる。</p>
+<section id="id4">
+<h3>概要手順<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <p>1,リポジトリを[username].github.ioで作成することで可能となる。 　今回は「kuramochiku.github.io」で作成する。<br />
 ※2以降はリポジトリをプッシュしてから実施する。</p>
 <p>2,リポジトリ名の下にある「Settings」から「Code and automation」の「Pages」を選択する。</p>
@@ -90,8 +94,9 @@ https://docs.github.com/ja/pages/quickstart</p>
 ・ローカルhtmlだと正常なのにgit経由でアクセスするとページが崩れる。<br />
 github Pagesからブランチの設定をmainブランチの「/」配下で「https://kuramochiku.github.io/docs/」でアクセスするのではなく
 「docs」を設定しておき、「https://kuramochiku.github.io/」でアクセスすると直った。</p>
-<section id="id3">
-<h2>実際に作成する<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+</section>
+<section id="id5">
+<h3>実際に作成する<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <p>コマンドラインからローカルリポジトリを作成してプッシュ</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">C</span><span class="p">:</span>\<span class="n">zyuku</span>\<span class="n">work</span>  
 <span class="n">echo</span> <span class="s2">&quot;# kuramochiku.github.io&quot;</span> <span class="o">&gt;&gt;</span> <span class="n">README</span><span class="o">.</span><span class="n">md</span>   
@@ -105,7 +110,7 @@ github Pagesからブランチの設定をmainブランチの「/」配下で「
 </div>
 </section>
 <section id="readme-md">
-<h2>README.md以外の追加分をプッシュする。<a class="headerlink" href="#readme-md" title="Link to this heading">¶</a></h2>
+<h3>README.md以外の追加分をプッシュする。<a class="headerlink" href="#readme-md" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="o">.</span>  <span class="c1">#配下の全ファイルをgit登録する </span>
 <span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;test commit&quot;</span> 
 <span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">main</span>
@@ -113,34 +118,30 @@ github Pagesからブランチの設定をmainブランチの「/」配下で「
 </div>
 </section>
 </section>
-<section id="id4">
-<h1>GitHub参考手順<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h1>
-<section id="id5">
-<h2>リポジトリ作成<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<section id="id6">
+<h2>GitHub参考手順<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<section id="id7">
+<h3>リポジトリ作成<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 <p>緑色の「NEW」画面から作成</p>
 </section>
-<section id="id6">
-<h2>リポジトリ削除の方法<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
-<section id="id7">
-<h3>ローカルリポジトリ削除<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
-<p>プロジェクトフォルダの直下にある.gitファイルを削除する。</p>
-</section>
 <section id="id8">
-<h3>リモートリポジトリ削除<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
-<p>githubの該当リポジトリ画面の「Settings」の一番下<br />
+<h3>リポジトリ削除の方法<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<p>・ローカルリポジトリ削除<br />
+プロジェクトフォルダの直下にある.gitファイルを削除する。</p>
+<p>・リモートリポジトリ削除<br />
+githubの該当リポジトリ画面の「Settings」の一番下<br />
 「Danger Zone」にある「Delete this repository」から削除する。</p>
 </section>
-</section>
 <section id="id9">
-<h2>リポジトリの公開範囲の変更<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
+<h3>リポジトリの公開範囲の変更<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
 <p>githubの該当リポジトリ画面の「Settings」の一番下「Danger Zone」にある<br />
 「Change repository visibility」から変更する。</p>
 </section>
 </section>
 <section id="git">
-<h1>Gitトラブル<a class="headerlink" href="#git" title="Link to this heading">¶</a></h1>
+<h2>Gitトラブル<a class="headerlink" href="#git" title="Link to this heading">¶</a></h2>
 <section id="id10">
-<h2>初回コミットエラー<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h2>
+<h3>初回コミットエラー<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
 <p>commit時に以下エラーが出力。認証情報が端末に保存されていないためエラーとなった。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Author</span> <span class="n">identity</span> <span class="n">unknown</span>
 
@@ -162,6 +163,7 @@ git config --global user.email ここに自分のアドレス<br />
 git config --global user.name ここに自分の名前</p>
 </section>
 </section>
+</section>
 
 
             <div class="clearer"></div>
@@ -173,24 +175,22 @@ git config --global user.name ここに自分の名前</p>
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">GitHubとは</a></li>
-<li><a class="reference internal" href="#id1">GitHubのアカウント作成</a></li>
-<li><a class="reference internal" href="#id2">クライアント端末準備</a><ul>
+<li><a class="reference internal" href="#">GitHub入門</a><ul>
+<li><a class="reference internal" href="#id1">GitHubとは</a></li>
+<li><a class="reference internal" href="#id2">GitHubのアカウント作成</a></li>
+<li><a class="reference internal" href="#id3">クライアント端末準備</a><ul>
 <li><a class="reference internal" href="#windows">Windows</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#github-pages">GitHub Pagesのクイックスタート</a><ul>
-<li><a class="reference internal" href="#id3">実際に作成する</a></li>
+<li><a class="reference internal" href="#id4">概要手順</a></li>
+<li><a class="reference internal" href="#id5">実際に作成する</a></li>
 <li><a class="reference internal" href="#readme-md">README.md以外の追加分をプッシュする。</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id4">GitHub参考手順</a><ul>
-<li><a class="reference internal" href="#id5">リポジトリ作成</a></li>
-<li><a class="reference internal" href="#id6">リポジトリ削除の方法</a><ul>
-<li><a class="reference internal" href="#id7">ローカルリポジトリ削除</a></li>
-<li><a class="reference internal" href="#id8">リモートリポジトリ削除</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#id6">GitHub参考手順</a><ul>
+<li><a class="reference internal" href="#id7">リポジトリ作成</a></li>
+<li><a class="reference internal" href="#id8">リポジトリ削除の方法</a></li>
 <li><a class="reference internal" href="#id9">リポジトリの公開範囲の変更</a></li>
 </ul>
 </li>
@@ -199,17 +199,19 @@ git config --global user.name ここに自分の名前</p>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 
   </div>
   <div>
     <h4>Previous topic</h4>
     <p class="topless"><a href="shpinx.html"
-                          title="previous chapter">Sphinxとは</a></p>
+                          title="previous chapter">Sphinx入門</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
     <p class="topless"><a href="spring.html"
-                          title="next chapter">SpringBootとは</a></p>
+                          title="next chapter">SpringBoot入門</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -239,13 +241,13 @@ git config --global user.name ここに自分の名前</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="spring.html" title="SpringBootとは"
+          <a href="spring.html" title="SpringBoot入門"
              >next</a> |</li>
         <li class="right" >
-          <a href="shpinx.html" title="Sphinxとは"
+          <a href="shpinx.html" title="Sphinx入門"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">workmemo 1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">GitHubとは</a></li> 
+        <li class="nav-item nav-item-this"><a href="">GitHub入門</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

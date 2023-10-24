@@ -1,16 +1,17 @@
-# GitHubとは  
+# GitHub入門  
+## GitHubとは
 「GitHub」は、ソフトウェア開発プロジェクトのバージョン管理を共有できるWebサービス。  
 GitHubは、「Git」の「ハブ：拠点、中心、集まり」という意味に基づいて名付けられました。  
 
 GitHubでは、世界中の人々が自分の作ったソースコードやデザインデータなどを保存、公開できます。  
 
-# GitHubのアカウント作成
+## GitHubのアカウント作成
 1,GitHubサイト(https://github.co.jp/)へアクセス  
 2,登録情報を入力  
 3,メールに送信されたパスコードを入力し、アカウント作成完了  
 
-# クライアント端末準備
-## Windows
+## クライアント端末準備
+### Windows
 Windowsでgitを使用するための準備を行う。(Amazon Linux Workspacesではデフォルトでインストール済みであった)  
 
 参考手順  
@@ -34,9 +35,10 @@ git --version
 git -v  
 ```
 
-# GitHub Pagesのクイックスタート  
+## GitHub Pagesのクイックスタート  
 GitHub Pagesを用いることで簡単にWEBページを作成することができる。  
 
+### 概要手順
 1,リポジトリを[username].github.ioで作成することで可能となる。 　今回は「kuramochiku.github.io」で作成する。  
 ※2以降はリポジトリをプッシュしてから実施する。  
 
@@ -55,7 +57,7 @@ https://docs.github.com/ja/pages/quickstart
 github Pagesからブランチの設定をmainブランチの「/」配下で「https://kuramochiku.github.io/docs/」でアクセスするのではなく
 「docs」を設定しておき、「https://kuramochiku.github.io/」でアクセスすると直った。
 
-## 実際に作成する
+### 実際に作成する
 コマンドラインからローカルリポジトリを作成してプッシュ  
 ```
 cd C:\zyuku\work  
@@ -68,31 +70,31 @@ git remote add origin https://github.com/kuramochiku/kuramochiku.github.io.git  
 git push -u origin main  #リモートリポジトリに保存  
 ```
 
-## README.md以外の追加分をプッシュする。
+### README.md以外の追加分をプッシュする。
 ```
 git add .  #配下の全ファイルをgit登録する 
 git commit -m "test commit" 
 git push origin main
 ```
 
-# GitHub参考手順
-## リポジトリ作成 
+## GitHub参考手順
+### リポジトリ作成 
 緑色の「NEW」画面から作成  
 
-## リポジトリ削除の方法 
-### ローカルリポジトリ削除
+### リポジトリ削除の方法 
+・ローカルリポジトリ削除  
 プロジェクトフォルダの直下にある.gitファイルを削除する。  
 
-### リモートリポジトリ削除 
+・リモートリポジトリ削除  
 githubの該当リポジトリ画面の「Settings」の一番下  
 「Danger Zone」にある「Delete this repository」から削除する。  
 
-## リポジトリの公開範囲の変更 
+### リポジトリの公開範囲の変更 
 githubの該当リポジトリ画面の「Settings」の一番下「Danger Zone」にある  
 「Change repository visibility」から変更する。  
 
-# Gitトラブル
-## 初回コミットエラー
+## Gitトラブル
+### 初回コミットエラー
 commit時に以下エラーが出力。認証情報が端末に保存されていないためエラーとなった。  
 ```
 Author identity unknown

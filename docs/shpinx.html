@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Sphinxとは &#8212; workmemo 1 documentation</title>
+    <title>Sphinx入門 &#8212; workmemo 1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css?v=601dbdee" />
     <script src="_static/documentation_options.js?v=4f78e891"></script>
@@ -13,7 +13,7 @@
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="GitHubとは" href="github.html" />
+    <link rel="next" title="GitHub入門" href="github.html" />
     <link rel="prev" title="Welcome to workmemo&#39;s documentation!" href="index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -23,13 +23,13 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="github.html" title="GitHubとは"
+          <a href="github.html" title="GitHub入門"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Welcome to workmemo&#39;s documentation!"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">workmemo 1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Sphinxとは</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Sphinx入門</a></li> 
       </ul>
     </div>  
 
@@ -39,12 +39,12 @@
           <div class="body" role="main">
             
   <section id="sphinx">
-<h1>Sphinxとは<a class="headerlink" href="#sphinx" title="Link to this heading">¶</a></h1>
+<h1>Sphinx入門<a class="headerlink" href="#sphinx" title="Link to this heading">¶</a></h1>
+<section id="id1">
+<h2>Sphinxとは<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>Sphinx はブラウザーで表示するドキュメント（オンラインマニュアル 等）を作成するツール。<br />
 元々は Python のドキュメント用に作成されたものですが、現在は多くのドキュメントを作成するのに使用されている。</p>
 </section>
-<section id="id1">
-<h1>Sphinx導入<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="sphinx-windows">
 <h2>Sphinxインストール(Windows)<a class="headerlink" href="#sphinx-windows" title="Link to this heading">¶</a></h2>
 <section id="sphinx-miniconda">
@@ -89,9 +89,8 @@ sphinx-quickstar
 </pre></div>
 </div>
 </section>
-</section>
 <section id="id3">
-<h1>Sphinx設定<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h1>
+<h2>Sphinx設定<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>参考<br />
 https://zenn.dev/y_mrok/books/sphinx-no-tsukaikata/viewer/chapter8</p>
 <p>1,プロジェクト作成したいフォルダに移動した後、以下コマンドを実行する。<br />
@@ -274,9 +273,9 @@ Indices and tables
 </div>
 </section>
 <section id="id4">
-<h1>追加機能色々<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h1>
+<h2>追加機能色々<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <section id="id5">
-<h2>章や節に番号を振りたい<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<h3>章や節に番号を振りたい　→うまくいかない？<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <p>「index.rst」の「toctree」に「numbered」オプションを追加する。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">toctree</span><span class="p">::</span>
    <span class="p">:</span><span class="n">maxdepth</span><span class="p">:</span> <span class="mi">2</span>
@@ -286,11 +285,12 @@ Indices and tables
 </div>
 </section>
 <section id="id6">
-<h2>図に番号を自動で振り、参照したい<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<h3>図に番号を自動で振り、参照したい　→うまくいかない？<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <p>「conf.py」に以下オプションを追加する。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">numfig</span> <span class="o">=</span> <span class="kc">True</span>
 </pre></div>
 </div>
+</section>
 </section>
 </section>
 
@@ -304,20 +304,20 @@ Indices and tables
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">Sphinxとは</a></li>
-<li><a class="reference internal" href="#id1">Sphinx導入</a><ul>
+<li><a class="reference internal" href="#">Sphinx入門</a><ul>
+<li><a class="reference internal" href="#id1">Sphinxとは</a></li>
 <li><a class="reference internal" href="#sphinx-windows">Sphinxインストール(Windows)</a><ul>
 <li><a class="reference internal" href="#sphinx-miniconda">Sphinxインストール　事前作業　Minicondaの導入</a></li>
 <li><a class="reference internal" href="#id2">Sphinxのインストール</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#sphinx-linux">Sphinxインストール(linux)</a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#id3">Sphinx設定</a></li>
 <li><a class="reference internal" href="#id4">追加機能色々</a><ul>
-<li><a class="reference internal" href="#id5">章や節に番号を振りたい</a></li>
-<li><a class="reference internal" href="#id6">図に番号を自動で振り、参照したい</a></li>
+<li><a class="reference internal" href="#id5">章や節に番号を振りたい　→うまくいかない？</a></li>
+<li><a class="reference internal" href="#id6">図に番号を自動で振り、参照したい　→うまくいかない？</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -331,7 +331,7 @@ Indices and tables
   <div>
     <h4>Next topic</h4>
     <p class="topless"><a href="github.html"
-                          title="next chapter">GitHubとは</a></p>
+                          title="next chapter">GitHub入門</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -361,13 +361,13 @@ Indices and tables
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="github.html" title="GitHubとは"
+          <a href="github.html" title="GitHub入門"
              >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Welcome to workmemo&#39;s documentation!"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">workmemo 1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Sphinxとは</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Sphinx入門</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

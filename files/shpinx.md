@@ -1,8 +1,8 @@
-# Sphinxとは
+# Sphinx入門
+## Sphinxとは
 Sphinx はブラウザーで表示するドキュメント（オンラインマニュアル 等）を作成するツール。  
 元々は Python のドキュメント用に作成されたものですが、現在は多くのドキュメントを作成するのに使用されている。  
 
-# Sphinx導入
 ## Sphinxインストール(Windows)
 ### Sphinxインストール　事前作業　Minicondaの導入
 まず、Windows上でPythonが動作する環境を構築する。  
@@ -47,7 +47,7 @@ cd /work/sphinx
 sphinx-quickstar
 ```
 
-# Sphinx設定
+## Sphinx設定
 参考  
 https://zenn.dev/y_mrok/books/sphinx-no-tsukaikata/viewer/chapter8  
 
@@ -242,8 +242,8 @@ build succeeded.
 The HTML pages are in ..\docs.
 ```
 
-# 追加機能色々
-## 章や節に番号を振りたい
+## 追加機能色々
+### 章や節に番号を振りたい　→うまくいかない？
 「index.rst」の「toctree」に「numbered」オプションを追加する。  
 ```
 .. toctree::
@@ -252,7 +252,7 @@ The HTML pages are in ..\docs.
    :numbered:
 ```
 
-## 図に番号を自動で振り、参照したい
+### 図に番号を自動で振り、参照したい　→うまくいかない？
 「conf.py」に以下オプションを追加する。  
 ```
 numfig = True

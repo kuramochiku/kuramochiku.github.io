@@ -1,10 +1,11 @@
-# SpringBootとは
+# SpringBoot入門
+## SpringBootとは
 
-# IntelliJとは
+## IntelliJとは
 IntelliJ IDEAは、JetBrains社が開発したJavaなどの言語に対応した統合開発環境である。  
 
 
-# IntelliJ IDEAインストール(Windows)
+## IntelliJ IDEAインストール(Windows)
 1,以下サイトの右上の「ダウンロード」をクリックする。  
 JetBrains：IntelliJ IDEA　https://www.jetbrains.com/ja-jp/idea/  
 
@@ -28,5 +29,5 @@ Create Associations：特定のファイル拡張子をIntelliJ IDEAに関連付
 インストールが完了すると、IntelliJ IDEAの再起動を求められるので、再起動する。  
 再起動後、日本語化されていることを確認する。  
 
-# IntelliJ IDEAの利用
+## IntelliJ IDEAの利用
 
