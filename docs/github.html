@@ -40,14 +40,14 @@
             
   <section id="github">
 <h1>GitHubとは<a class="headerlink" href="#github" title="Link to this heading">¶</a></h1>
-<p>「GitHub」は、ソフトウェア開発プロジェクトのバージョン管理を共有できるWebサービス。
+<p>「GitHub」は、ソフトウェア開発プロジェクトのバージョン管理を共有できるWebサービス。<br />
 GitHubは、「Git」の「ハブ：拠点、中心、集まり」という意味に基づいて名付けられました。</p>
 <p>GitHubでは、世界中の人々が自分の作ったソースコードやデザインデータなどを保存、公開できます。</p>
 </section>
 <section id="id1">
 <h1>GitHubのアカウント作成<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
-<p>1,GitHubサイト(https://github.co.jp/)へアクセス
-2,登録情報を入力
+<p>1,GitHubサイト(https://github.co.jp/)へアクセス<br />
+2,登録情報を入力<br />
 3,メールに送信されたパスコードを入力し、アカウント作成完了</p>
 </section>
 <section id="id2">
@@ -55,19 +55,23 @@ GitHubは、「Git」の「ハブ：拠点、中心、集まり」という意�
 <section id="windows">
 <h2>Windows<a class="headerlink" href="#windows" title="Link to this heading">¶</a></h2>
 <p>Windowsでgitを使用するための準備を行う。(Amazon Linux Workspacesではデフォルトでインストール済みであった)</p>
-<p>参考手順
+<p>参考手順<br />
 https://www.curict.com/item/60/60bfe0e.html</p>
-<p>1,以下公式サイトからインストーラをダウンロードする。
+<p>1,以下公式サイトからインストーラをダウンロードする。<br />
 https://gitforwindows.org/</p>
-<p>2,exeを実行し、インストールを行う。基本はデフォルトのままで良いが今回は以下を変更した。
-＞新しいリポジトリ作成時のブランチ名
-・デフォルトリポジトリ名
-Override the default name →　main
-・改行コード
-Checkout as-is, commit as-is</p>
-<p>3,power shellを起動し、以下コマンドで確認する。
-git --version
-git -v</p>
+<p>2,exeを実行し、インストールを行う。基本はデフォルトのままで良いが今回は以下を変更した。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>＞新しいリポジトリ作成時のブランチ名  
+・デフォルトリポジトリ名  
+Override the default name →　main  
+・改行コード  
+Checkout as-is, commit as-is  
+</pre></div>
+</div>
+<p>3,power shellを起動し、以下コマンドで確認する。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="o">--</span><span class="n">version</span>  
+<span class="n">git</span> <span class="o">-</span><span class="n">v</span>  
+</pre></div>
+</div>
 </section>
 </section>
 <section id="github-pages">
@@ -76,40 +80,37 @@ git -v</p>
 <p>1,リポジトリを[username].github.ioで作成することで可能となる。 　今回は「kuramochiku.github.io」で作成する。<br />
 ※2以降はリポジトリをプッシュしてから実施する。</p>
 <p>2,リポジトリ名の下にある「Settings」から「Code and automation」の「Pages」を選択する。</p>
-<p>3,「Build and deployment」の「Branch」からリポジトリを選択しSaveする。今回は「main」</p>
-<p>4,必要に応じて、リポジトリの README.md ファイルを開きます。
-README.md ファイルは、サイトのコンテンツを記述する場所です。
+<p>3,「Build and deployment」の「Branch」からリポジトリを選択しSaveする。今回は「main」とする。</p>
+<p>4,必要に応じて、リポジトリの README.md ファイルを開きます。<br />
+README.md ファイルは、サイトのコンテンツを記述する場所です。<br />
 このファイルを編集することも、あるいはとりあえずデフォルトの内容をそのままにしておくこともできます。<br />
 ※サイトに対する変更は、その変更を GitHub にプッシュしてから公開されるまで、最大 10 分かかることがある。<br />
 https://docs.github.com/ja/pages/quickstart</p>
-<p>・更新には結構時間かかる。最大10分は待つこと。
-・ローカルhtmlだと正常なのにgit経由でアクセスするとページが崩れる。
+<p>・更新には結構時間かかる。最大10分は待つこと。<br />
+・ローカルhtmlだと正常なのにgit経由でアクセスするとページが崩れる。<br />
 github Pagesからブランチの設定をmainブランチの「/」配下で「https://kuramochiku.github.io/docs/」でアクセスするのではなく
 「docs」を設定しておき、「https://kuramochiku.github.io/」でアクセスすると直った。</p>
 <section id="id3">
 <h2>実際に作成する<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
-<p>コマンドラインからローカルリポジトリを作成してプッシュ
-cd C:\zyuku\work
-echo &quot;# kuramochiku.github.io&quot; &gt;&gt; README.md
-git init
-#ローカルリポジトリ作成
-git add README.md
-#README.mdをgit管理登録
-git commit -m &quot;first commit&quot;
-#コミット。保存みたいなもの。-mでコメントをつける
-git branch -M main
-#現在のブランチ名をmainに強制変更
-git remote add origin https://github.com/kuramochiku/kuramochiku.github.io.git
-#「git remote add origin リモートリポジトリの場所」で、現在のローカルリポジトリに指定したリモートリポジトリを追加する。
-git push -u origin main
-#リモートリポジトリに保存</p>
+<p>コマンドラインからローカルリポジトリを作成してプッシュ</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">C</span><span class="p">:</span>\<span class="n">zyuku</span>\<span class="n">work</span>  
+<span class="n">echo</span> <span class="s2">&quot;# kuramochiku.github.io&quot;</span> <span class="o">&gt;&gt;</span> <span class="n">README</span><span class="o">.</span><span class="n">md</span>   
+<span class="n">git</span> <span class="n">init</span>  <span class="c1">#ローカルリポジトリ作成  </span>
+<span class="n">git</span> <span class="n">add</span> <span class="n">README</span><span class="o">.</span><span class="n">md</span>  <span class="c1">#README.mdをgit管理登録  </span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;first commit&quot;</span>  <span class="c1">#コミット。保存みたいなもの。-mでコメントをつける  </span>
+<span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">M</span> <span class="n">main</span>  <span class="c1">#現在のブランチ名をmainに強制変更  </span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">kuramochiku</span><span class="o">/</span><span class="n">kuramochiku</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">git</span>  <span class="c1">#「git remote add origin リモートリポジトリの場所」で、現在のローカルリポジトリに指定したリモートリポジトリを追加する。  </span>
+<span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">main</span>  <span class="c1">#リモートリポジトリに保存  </span>
+</pre></div>
+</div>
 </section>
 <section id="readme-md">
 <h2>README.md以外の追加分をプッシュする。<a class="headerlink" href="#readme-md" title="Link to this heading">¶</a></h2>
-<p>git add .
-#配下の全ファイルをgit登録する
-git commit -m &quot;test commit&quot;
-git push origin main</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="o">.</span>  <span class="c1">#配下の全ファイルをgit登録する </span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;test commit&quot;</span> 
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">main</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section id="id4">
@@ -126,13 +127,13 @@ git push origin main</p>
 </section>
 <section id="id8">
 <h3>リモートリポジトリ削除<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
-<p>githubの該当リポジトリ画面の「Settings」の一番下
+<p>githubの該当リポジトリ画面の「Settings」の一番下<br />
 「Danger Zone」にある「Delete this repository」から削除する。</p>
 </section>
 </section>
 <section id="id9">
 <h2>リポジトリの公開範囲の変更<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
-<p>githubの該当リポジトリ画面の「Settings」の一番下「Danger Zone」にある
+<p>githubの該当リポジトリ画面の「Settings」の一番下「Danger Zone」にある<br />
 「Change repository visibility」から変更する。</p>
 </section>
 </section>
@@ -156,8 +157,8 @@ git push origin main</p>
 <span class="n">fatal</span><span class="p">:</span> <span class="n">unable</span> <span class="n">to</span> <span class="n">auto</span><span class="o">-</span><span class="n">detect</span> <span class="n">email</span> <span class="n">address</span> <span class="p">(</span><span class="n">got</span> <span class="s1">&#39;okmjy@kohei.(none)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>対処方法
-git config --global user.email ここに自分のアドレス
+<p>対処方法<br />
+git config --global user.email ここに自分のアドレス<br />
 git config --global user.name ここに自分の名前</p>
 </section>
 </section>
