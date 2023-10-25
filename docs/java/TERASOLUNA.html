@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html lang="jp" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>TERASOLUNAチュートリアル &#8212; workmemo 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
+    <script src="../_static/documentation_options.js?v=4f78e891"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="その他様々な情報を記載する。" href="%E3%81%9D%E3%81%AE%E4%BB%96.html" />
+    <link rel="prev" title="SpringBoot入門" href="spring.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="%E3%81%9D%E3%81%AE%E4%BB%96.html" title="その他様々な情報を記載する。"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="spring.html" title="SpringBoot入門"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">TERASOLUNAチュートリアル</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="terasoluna">
+<h1>TERASOLUNAチュートリアル<a class="headerlink" href="#terasoluna" title="Link to this heading">¶</a></h1>
+<p>以下チュートリアルについての情報を記す。<br />
+http://terasolunaorg.github.io/guideline/5.7.0.RELEASE/ja/Tutorial/TutorialTodo.html</p>
+<section id="id1">
+<h2>環境構築<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<section id="spring-tool-suite-sts">
+<h3>Spring Tool Suite(STS)<a class="headerlink" href="#spring-tool-suite-sts" title="Link to this heading">¶</a></h3>
+<p>1,インストール
+IDEとして「Spring Tool Suite」をインストールする。<br />
+公式サイトからzipファイルをダウンロードし、任意のフォルダに解凍する。<br />
+今回は「C:\zyuku」配下とする。</p>
+<p>※Windows標準機能での解凍では非常に時間がかかった。2時間くらい。Lhaplusを利用すると１分ほど。。。<br />
+　解凍後のパスが長すぎてエラーとなった。LhaplusでCドライブ直下に解凍するとエラーなく解凍できた。<br />
+　今回は解凍後に上記パスへと移動させた。</p>
+<p>2,起動
+「C:\zyuku\sts-bundle\sts-3.9.18.RELEASE」配下の「STS.exe」を起動する。<br />
+起動時にWorkspaceを求められる。とりあえず今回は「C:\zyuku\sts_work」とする。</p>
+</section>
+<section id="apache-maven">
+<h3>Apache Maven<a class="headerlink" href="#apache-maven" title="Link to this heading">¶</a></h3>
+<p>1,インストール<br />
+Build Toolとして「Apache Maven」をインストールする。<br />
+公式サイトからバイナリのzipファイルをダウンロードし、任意のフォルダに解凍する。<br />
+今回は「C:\zyuku」配下とする。</p>
+<p>2,環境変数<br />
+以下フォルダに解凍した場合は<br />
+「C:\zyuku」<br />
+以下を環境変数に追加する。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">zyuku</span>\<span class="n">apache</span><span class="o">-</span><span class="n">maven</span><span class="o">-</span><span class="mf">3.9.5</span><span class="o">-</span><span class="nb">bin</span>\<span class="n">apache</span><span class="o">-</span><span class="n">maven</span><span class="o">-</span><span class="mf">3.9.5</span>\<span class="nb">bin</span>
+</pre></div>
+</div>
+<p>コマンドプロンプトを開き、以下コマンドを実行し、パスが通っていることを確認する。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mvn</span> <span class="o">-</span><span class="n">version</span>
+</pre></div>
+</div>
+<p>環境変数「JAVA_HOME」が設定されていない場合はエラーとなるため注意すること。<br />
+パスはbinまで通す必要はなく、今回は「C:\Program Files\Java\jdk-21」とする。</p>
+</section>
+</section>
+<section id="id2">
+<h2>プロジェクト作成<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>1.O/R Mapperに依存しないブランクプロジェクトの作成
+コマンドプロンプト(今回は誤ってanaconda prompt)より以下を実行する。結果はかなり長いため割愛する。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span>  <span class="n">C</span><span class="p">:</span>\<span class="n">zyuku</span>\<span class="n">sts_work</span>
+
+<span class="n">mvn</span> <span class="n">archetype</span><span class="p">:</span><span class="n">generate</span> <span class="o">-</span><span class="n">B</span><span class="o">^</span>
+ <span class="o">-</span><span class="n">DarchetypeGroupId</span><span class="o">=</span><span class="n">org</span><span class="o">.</span><span class="n">terasoluna</span><span class="o">.</span><span class="n">gfw</span><span class="o">.</span><span class="n">blank</span><span class="o">^</span>
+ <span class="o">-</span><span class="n">DarchetypeArtifactId</span><span class="o">=</span><span class="n">terasoluna</span><span class="o">-</span><span class="n">gfw</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="n">blank</span><span class="o">-</span><span class="n">archetype</span><span class="o">^</span>
+ <span class="o">-</span><span class="n">DarchetypeVersion</span><span class="o">=</span><span class="mf">5.7.0</span><span class="o">.</span><span class="n">RELEASE</span><span class="o">^</span>
+ <span class="o">-</span><span class="n">DgroupId</span><span class="o">=</span><span class="n">com</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">todo</span><span class="o">^</span>
+ <span class="o">-</span><span class="n">DartifactId</span><span class="o">=</span><span class="n">todo</span><span class="o">^</span>
+ <span class="o">-</span><span class="n">Dversion</span><span class="o">=</span><span class="mf">1.0.0</span><span class="o">-</span><span class="n">SNAPSHOT</span>
+</pre></div>
+</div>
+<p>2.プロジェクトのインポート
+STSのメニューから、[File] -&gt; [Import] -&gt; [Maven] -&gt; [Existing Maven Projects] -&gt; [Next]を選択し、archetypeで作成したプロジェクトを選択する。
+<img alt="STS_import" src="../_images/sts_import.png" /></p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">TERASOLUNAチュートリアル</a><ul>
+<li><a class="reference internal" href="#id1">環境構築</a><ul>
+<li><a class="reference internal" href="#spring-tool-suite-sts">Spring Tool Suite(STS)</a></li>
+<li><a class="reference internal" href="#apache-maven">Apache Maven</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">プロジェクト作成</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="spring.html"
+                          title="previous chapter">SpringBoot入門</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="%E3%81%9D%E3%81%AE%E4%BB%96.html"
+                          title="next chapter">その他様々な情報を記載する。</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/java/TERASOLUNA.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="%E3%81%9D%E3%81%AE%E4%BB%96.html" title="その他様々な情報を記載する。"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="spring.html" title="SpringBoot入門"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">TERASOLUNAチュートリアル</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, kuramochi.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

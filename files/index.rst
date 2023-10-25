@@ -11,11 +11,11 @@ Welcome to workmemo's documentation!
    :caption: Contents:
    :numbered:
 
-   ./shpinx.md
-   ./github.md
-   ./spring.md
-   ./TERASOLUNA.md
-   ./その他.md
+   ./java/shpinx.md
+   ./java/github.md
+   ./java/spring.md
+   ./java/TERASOLUNA.md
+   ./java/その他.md
 
 Indices and tables
 ==================
