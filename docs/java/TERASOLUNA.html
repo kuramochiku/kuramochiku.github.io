@@ -56,6 +56,10 @@ IDEとして「Spring Tool Suite」をインストールする。<br />
 <p>2,起動
 「C:\zyuku\sts-bundle\sts-3.9.18.RELEASE」配下の「STS.exe」を起動する。<br />
 起動時にWorkspaceを求められる。とりあえず今回は「C:\zyuku\sts_work」とする。</p>
+<p>3.日本語化(必要に応じて)<br />
+以下の日本語化サイトの「Pleiades プラグイン・ダウンロード」からファイルをダウンロードし、解凍後に「setup.exe」を実行し上記「STS.exe」を選択する。<br />
+http://mergedoc.osdn.jp/</p>
+<p><img alt="STS_japanese" src="../_images/sts_japanese.png" /></p>
 </section>
 <section id="apache-maven">
 <h3>Apache Maven<a class="headerlink" href="#apache-maven" title="Link to this heading">¶</a></h3>
@@ -82,7 +86,7 @@ Build Toolとして「Apache Maven」をインストールする。<br />
 <h2>プロジェクト作成<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>1.O/R Mapperに依存しないブランクプロジェクトの作成
 コマンドプロンプト(今回は誤ってanaconda prompt)より以下を実行する。結果はかなり長いため割愛する。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span>  <span class="n">C</span><span class="p">:</span>\<span class="n">zyuku</span>\<span class="n">sts_work</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span>  <span class="n">C</span><span class="p">:</span>\<span class="n">zyuku</span>\<span class="n">test</span>
 
 <span class="n">mvn</span> <span class="n">archetype</span><span class="p">:</span><span class="n">generate</span> <span class="o">-</span><span class="n">B</span><span class="o">^</span>
  <span class="o">-</span><span class="n">DarchetypeGroupId</span><span class="o">=</span><span class="n">org</span><span class="o">.</span><span class="n">terasoluna</span><span class="o">.</span><span class="n">gfw</span><span class="o">.</span><span class="n">blank</span><span class="o">^</span>
@@ -96,6 +100,21 @@ Build Toolとして「Apache Maven」をインストールする。<br />
 <p>2.プロジェクトのインポート
 STSのメニューから、[File] -&gt; [Import] -&gt; [Maven] -&gt; [Existing Maven Projects] -&gt; [Next]を選択し、archetypeで作成したプロジェクトを選択する。
 <img alt="STS_import" src="../_images/sts_import.png" /></p>
+<p>プロジェクトを作成したフォルダの「todo」を選択し、FINISHをクリックする。以下のような結果となる。<br />
+※今回なぜか初回はうまくいかなかったのでファイルを全て削除してプロジェクト作成からやり直したらうまくインポートされた。<br />
+<img alt="STS_import_after" src="../_images/sts_import_after.png" /></p>
+<p>3.プロジェクトの実行<br />
+プロジェクトを右クリックして「実行」-&gt;「サーバで実行」を選択する。<br />
+APサーバー(Pivotal tc Server Developer Edition v4.0)を選択し、「Next」をクリックする。<br />
+<img alt="STS_run" src="../_images/sts_run.png" /></p>
+<p>todoが「Configured」に含まれていることを確認して「Finish」をクリックしてサーバーを起動する。</p>
+<p>今回は以下のようなエラーが出力した。これはJava8からPermanent領域が無くなったことによるオプションエラーです。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">unrecognized</span> <span class="n">vm</span> <span class="n">option</span> <span class="s1">&#39;maxpermsize=256m&#39;</span>  
+</pre></div>
+</div>
+<p>プロジェクトを右クリックして「実行」-&gt;「実行の構成」を選択する。<br />
+引数タブのVM引数内の「-XX:maxpermsize=256m」を削除する。</p>
+<p><img alt="STS_run_error" src="../_images/STS_run_error.png" /></p>
 </section>
 </section>
 
