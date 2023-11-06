@@ -79,10 +79,32 @@ Create Associations：特定のファイル拡張子をIntelliJ IDEAに関連付
 再起動後、日本語化されていることを確認する。</p>
 </section>
 <section id="intellij-idea">
-<h2>IntelliJ IDEAプロジェクトの作成<a class="headerlink" href="#intellij-idea" title="Link to this heading">¶</a></h2>
+<h2>IntelliJ IDEAプロジェクトの作成(初心者向け)<a class="headerlink" href="#intellij-idea" title="Link to this heading">¶</a></h2>
 <p>1,Javaプロジェクトを作成する場合は、左側の「Javaモジュール」を選択し、プロジェクトで使用するSDKのバージョンを選択して「次へ」をクリックする。<br />
 ※JDKをインストールしていない場合はプロジェクトSDKの一覧に表示されないため、JDKを別途ダウンロード（AoptOpenJDKのダウンロード）するか、プロジェクトSDKの選択「Download JDK...」から対象のバージョンのJDKをインストールすること。</p>
-<p>2,プロジェクト名を設定し、作成をクリックする。</p>
+<p>2,プロジェクト名を設定し、作成をクリックする。今回は「Hello」。<br />
+<img alt="new_project" src="../_images/IntelliJ_new_project.png" /></p>
+<p>3.「src」→「main」→「java」を右クリックし、「新規」→「javaクラス」からjavaクラスを作成する。今回は「Hello_world」。</p>
+<p>4.コードを記載する。以下のようにmainメソッドの定義とプリント出力を記載する。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">public</span> <span class="k">class</span> <span class="nc">hello_world</span> <span class="p">{</span>
+    <span class="n">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">){</span>
+        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Hello test&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>5.コード実行する。コードにエラーが無い状態だと行数の隣に▶マークが表示されるため、クリックしてポップアップ表示される「'helloworld.main()'」を選択する。<br />
+<img alt="exce_hello" src="../_images/IntelliJ_exec_hello.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">xxxx</span>\<span class="o">.</span><span class="n">jdks</span>\<span class="n">openjdk</span><span class="o">-</span><span class="mf">21.0.1</span>\<span class="nb">bin</span>\<span class="n">java</span><span class="o">.</span><span class="n">exe</span> <span class="s2">&quot;-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2023.2.3\lib\idea_rt.jar=62291:C:\Program Files\JetBrains\IntelliJ IDEA 2023.2.3</span><span class="se">\b</span><span class="s2">in&quot;</span> <span class="o">-</span><span class="n">Dfile</span><span class="o">.</span><span class="n">encoding</span><span class="o">=</span><span class="n">UTF</span><span class="o">-</span><span class="mi">8</span> <span class="o">-</span><span class="n">Dsun</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">encoding</span><span class="o">=</span><span class="n">UTF</span><span class="o">-</span><span class="mi">8</span> <span class="o">-</span><span class="n">Dsun</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">encoding</span><span class="o">=</span><span class="n">UTF</span><span class="o">-</span><span class="mi">8</span> <span class="o">-</span><span class="n">classpath</span> <span class="n">C</span><span class="p">:</span>\<span class="n">zyuku</span>\<span class="n">test</span>\<span class="n">Hello2</span>\<span class="n">target</span>\<span class="n">classes</span> <span class="n">hello_world</span>
+<span class="n">Hello</span> <span class="n">test</span>
+
+<span class="n">プロセスは終了コード</span> <span class="mi">0</span> <span class="n">で終了しました</span>
+</pre></div>
+</div>
+<p>6.jarファイルにパッケージする。<br />
+ファイル→プロジェクト構造に移動し、アーティファクトをクリックする。<br />
+「+」→「java」→「依存関係を持つモジュールから」をクリックする。</p>
+<p><img alt="create_jar" src="../_images/IntelliJ_create_jar.png" /></p>
 </section>
 </section>
 
@@ -100,7 +122,7 @@ Create Associations：特定のファイル拡張子をIntelliJ IDEAに関連付
 <li><a class="reference internal" href="#id1">SpringBootとは</a></li>
 <li><a class="reference internal" href="#intellij">IntelliJとは</a></li>
 <li><a class="reference internal" href="#intellij-idea-windows">IntelliJ IDEAインストール(Windows)</a></li>
-<li><a class="reference internal" href="#intellij-idea">IntelliJ IDEAプロジェクトの作成</a></li>
+<li><a class="reference internal" href="#intellij-idea">IntelliJ IDEAプロジェクトの作成(初心者向け)</a></li>
 </ul>
 </li>
 </ul>

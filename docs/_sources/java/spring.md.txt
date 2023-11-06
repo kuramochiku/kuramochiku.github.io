@@ -39,8 +39,36 @@ Create Associations：特定のファイル拡張子をIntelliJ IDEAに関連付
 インストールが完了すると、IntelliJ IDEAの再起動を求められるので、再起動する。  
 再起動後、日本語化されていることを確認する。  
 
-## IntelliJ IDEAプロジェクトの作成
+## IntelliJ IDEAプロジェクトの作成(初心者向け)
 1,Javaプロジェクトを作成する場合は、左側の「Javaモジュール」を選択し、プロジェクトで使用するSDKのバージョンを選択して「次へ」をクリックする。  
 ※JDKをインストールしていない場合はプロジェクトSDKの一覧に表示されないため、JDKを別途ダウンロード（AoptOpenJDKのダウンロード）するか、プロジェクトSDKの選択「Download JDK...」から対象のバージョンのJDKをインストールすること。  
 
-2,プロジェクト名を設定し、作成をクリックする。  
+2,プロジェクト名を設定し、作成をクリックする。今回は「Hello」。  
+![new_project](./images/IntelliJ_new_project.png)
+
+3.「src」→「main」→「java」を右クリックし、「新規」→「javaクラス」からjavaクラスを作成する。今回は「Hello_world」。  
+
+4.コードを記載する。以下のようにmainメソッドの定義とプリント出力を記載する。  
+```
+public class hello_world {
+    public static void main(String[] args){
+        System.out.println("Hello test");
+    }
+}
+```
+
+5.コード実行する。コードにエラーが無い状態だと行数の隣に▶マークが表示されるため、クリックしてポップアップ表示される「'helloworld.main()'」を選択する。  
+![exce_hello](./images/IntelliJ_exec_hello.png)
+
+```
+C:\Users\xxxx\.jdks\openjdk-21.0.1\bin\java.exe "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2023.2.3\lib\idea_rt.jar=62291:C:\Program Files\JetBrains\IntelliJ IDEA 2023.2.3\bin" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath C:\zyuku\test\Hello2\target\classes hello_world
+Hello test
+
+プロセスは終了コード 0 で終了しました
+```
+
+6.jarファイルにパッケージする。  
+ファイル→プロジェクト構造に移動し、アーティファクトをクリックする。  
+「+」→「java」→「依存関係を持つモジュールから」をクリックする。  
+
+![create_jar](./images/IntelliJ_create_jar.png)
