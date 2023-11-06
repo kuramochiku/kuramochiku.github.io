@@ -52,14 +52,14 @@
 <h1>テーマ再検討(AWS)<a class="headerlink" href="#aws" title="Link to this heading">¶</a></h1>
 <p>spring学習の進捗が芳しくないため、AWSに特化したテーマの再検討を行う。</p>
 <section id="networkfirewall-aws-waf">
-<h2>NetworkFirewall/AWS WAF使ってみる<a class="headerlink" href="#networkfirewall-aws-waf" title="Link to this heading">¶</a></h2>
+<h2>案① NetworkFirewall/AWS WAF使ってみる<a class="headerlink" href="#networkfirewall-aws-waf" title="Link to this heading">¶</a></h2>
 <p>利用したことがなく、興味もあるため。</p>
 <section id="id4">
 <h3>検証ポイント<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 </section>
 </section>
 <section id="trangitgateway">
-<h2>Trangitgateway使ってみる<a class="headerlink" href="#trangitgateway" title="Link to this heading">¶</a></h2>
+<h2>案② Trangitgateway使ってみる<a class="headerlink" href="#trangitgateway" title="Link to this heading">¶</a></h2>
 <section id="id5">
 <h3>移行検討<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <p>現状プロジェクトでTGW/DXGWを使わず、直接VGWに紐づけている。<br />
@@ -84,43 +84,82 @@
 </section>
 </section>
 <section id="id9">
-<h2>AWSサービス使ってみる<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
+<h2>案③ AWSサービス使ってみる<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
 <p>使ったことが無いAWSサービスは数多く存在する。<br />
 1つ1つ触ってみて簡易的なレポートを作成する。</p>
 </section>
 <section id="id10">
-<h2>ランニングコストを削減するための方法検討<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h2>
+<h2>案④ ランニングコストを削減するための方法検討<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h2>
 <p>AWSで少しでもコストを削減したい時の方法について調査、検証する。</p>
 <section id="id11">
-<h3>検証ポイント<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<h3>検討候補<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<p>以下公式アプローチ方式について<br />
+参考：https://aws.amazon.com/jp/blogs/news/9ways-to-optimize-aws-cost/</p>
+<section id="amazon-ec2amazon-rds">
+<h4>1　未使用状態のAmazon EC2やAmazon RDS インスタンスへの支払いを止める<a class="headerlink" href="#amazon-ec2amazon-rds" title="Link to this heading">¶</a></h4>
 </section>
+<section id="amazon-redshift">
+<h4>2　未使用状態のAmazon Redshift クラスターへの支払いを止める<a class="headerlink" href="#amazon-redshift" title="Link to this heading">¶</a></h4>
+<p>利用していない時間を停止することでコスト削減を図る。<br />
+サービス別での対応方針などを調査、検討する。</p>
+</section>
+<section id="amazon-s3-intelligent-tiering">
+<h4>3　Amazon S3 Intelligent-Tieringを有効にする<a class="headerlink" href="#amazon-s3-intelligent-tiering" title="Link to this heading">¶</a></h4>
+<p>S3標準ストレージではなく、低コストストレージを組み合わせることでコスト削減を図る。<br />
+細かな設定をせずに、S3 Intelligent-Tieringを使用することで自動的に最適化をすることが可能。<br />
+S3 Intelligent-Tieringの動作について検証してみるのもありかもしれない。</p>
+</section>
+<section id="amazon-dynamodb">
+<h4>4　Amazon DynamoDB にはオンデマンドのキャパシティーモードを利用する<a class="headerlink" href="#amazon-dynamodb" title="Link to this heading">¶</a></h4>
+</section>
+<section id="ec2">
+<h4>5　十分に活用されていないEC2 インスタンスへの支払いを止める<a class="headerlink" href="#ec2" title="Link to this heading">¶</a></h4>
 </section>
 <section id="id12">
-<h2>ランニングコストを監視する方式検討<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h2>
-<p>AWSのランニングコストの利用状況を監視する方式について調査、検証する。</p>
-<section id="id13">
-<h3>検証ポイント<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
+<h4>6　十分に活用されていないネットワークリソースを削除する<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h4>
 </section>
+<section id="id13">
+<h4>7　EC2 スポットインスタンスを利用する<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h4>
+<p>スポットインスタンスとは、AWSが用意している余剰リソースを、非常に安価で利用できるようにした購入オプションの1つである。<br />
+安価である一方、AWS側のキャパシティーの都合により、停止となる可能性があるため、これらに対応できる方法で利用する必要がある。<br />
+商用運用に耐えうるスポットインスタンスの利用方法について検討する。</p>
+</section>
+<section id="compute-savings-plans">
+<h4>8　Compute Savings Plans を利用する<a class="headerlink" href="#compute-savings-plans" title="Link to this heading">¶</a></h4>
+<p>プランの話となるため、サービス概要を机上調査し、情報をまとめる。</p>
 </section>
 <section id="id14">
-<h2>AWSでセキュリティを守るためのベストプラクティス<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
-<p>AWSセキュリティのベストプラクティスについて実際に調査、検証する。</p>
+<h4>9　リザーブドインスタンスを利用する<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h4>
+<p>プランの話となるため、サービス概要を机上調査し、情報をまとめる。</p>
+</section>
+</section>
+</section>
 <section id="id15">
-<h3>検証ポイント<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h3>
-</section>
-</section>
-<section id="awsos">
-<h2>AWS内のOSセキュリティのベストプラクティス<a class="headerlink" href="#awsos" title="Link to this heading">¶</a></h2>
-<p>AWS内部にサーバ構築した時のセキュリティ担保方法について調査、検証する。</p>
+<h2>案⑤ ランニングコストを監視する方式検討<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h2>
+<p>AWSのランニングコストの利用状況を監視する方式について調査、検証する。</p>
 <section id="id16">
 <h3>検証ポイント<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h3>
 </section>
 </section>
-<section id="noaworkspaceswindows">
-<h2>NOA環境でのWorkspaces、Windows操作実現<a class="headerlink" href="#noaworkspaceswindows" title="Link to this heading">¶</a></h2>
-<p>NOA環境でのWorkspaces、Windows操作をするための方式について調査、検証する。</p>
 <section id="id17">
-<h3>検証ポイント<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h3>
+<h2>案⑥ AWSでセキュリティを守るためのベストプラクティス<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h2>
+<p>AWSセキュリティのベストプラクティスについて実際に調査、検証する。</p>
+<section id="id18">
+<h3>検証ポイント<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h3>
+</section>
+</section>
+<section id="awsos">
+<h2>案⑦ AWS内のOSセキュリティのベストプラクティス<a class="headerlink" href="#awsos" title="Link to this heading">¶</a></h2>
+<p>AWS内部にサーバ構築した時のセキュリティ担保方法について調査、検証する。</p>
+<section id="id19">
+<h3>検証ポイント<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h3>
+</section>
+</section>
+<section id="noaworkspaceswindows">
+<h2>案⑧ NOA環境でのWorkspaces、Windows操作実現<a class="headerlink" href="#noaworkspaceswindows" title="Link to this heading">¶</a></h2>
+<p>NOA環境でのWorkspaces、Windows操作をするための方式について調査、検証する。</p>
+<section id="id20">
+<h3>検証ポイント<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h3>
 </section>
 </section>
 </section>
@@ -141,36 +180,47 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#aws">テーマ再検討(AWS)</a><ul>
-<li><a class="reference internal" href="#networkfirewall-aws-waf">NetworkFirewall/AWS WAF使ってみる</a><ul>
+<li><a class="reference internal" href="#networkfirewall-aws-waf">案① NetworkFirewall/AWS WAF使ってみる</a><ul>
 <li><a class="reference internal" href="#id4">検証ポイント</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#trangitgateway">Trangitgateway使ってみる</a><ul>
+<li><a class="reference internal" href="#trangitgateway">案② Trangitgateway使ってみる</a><ul>
 <li><a class="reference internal" href="#id5">移行検討</a></li>
 <li><a class="reference internal" href="#id6">移行前イメージ</a></li>
 <li><a class="reference internal" href="#id7">移行後イメージ</a></li>
 <li><a class="reference internal" href="#id8">検証ポイント</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id9">AWSサービス使ってみる</a></li>
-<li><a class="reference internal" href="#id10">ランニングコストを削減するための方法検討</a><ul>
-<li><a class="reference internal" href="#id11">検証ポイント</a></li>
+<li><a class="reference internal" href="#id9">案③ AWSサービス使ってみる</a></li>
+<li><a class="reference internal" href="#id10">案④ ランニングコストを削減するための方法検討</a><ul>
+<li><a class="reference internal" href="#id11">検討候補</a><ul>
+<li><a class="reference internal" href="#amazon-ec2amazon-rds">1　未使用状態のAmazon EC2やAmazon RDS インスタンスへの支払いを止める</a></li>
+<li><a class="reference internal" href="#amazon-redshift">2　未使用状態のAmazon Redshift クラスターへの支払いを止める</a></li>
+<li><a class="reference internal" href="#amazon-s3-intelligent-tiering">3　Amazon S3 Intelligent-Tieringを有効にする</a></li>
+<li><a class="reference internal" href="#amazon-dynamodb">4　Amazon DynamoDB にはオンデマンドのキャパシティーモードを利用する</a></li>
+<li><a class="reference internal" href="#ec2">5　十分に活用されていないEC2 インスタンスへの支払いを止める</a></li>
+<li><a class="reference internal" href="#id12">6　十分に活用されていないネットワークリソースを削除する</a></li>
+<li><a class="reference internal" href="#id13">7　EC2 スポットインスタンスを利用する</a></li>
+<li><a class="reference internal" href="#compute-savings-plans">8　Compute Savings Plans を利用する</a></li>
+<li><a class="reference internal" href="#id14">9　リザーブドインスタンスを利用する</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id12">ランニングコストを監視する方式検討</a><ul>
-<li><a class="reference internal" href="#id13">検証ポイント</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id14">AWSでセキュリティを守るためのベストプラクティス</a><ul>
-<li><a class="reference internal" href="#id15">検証ポイント</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#awsos">AWS内のOSセキュリティのベストプラクティス</a><ul>
+<li><a class="reference internal" href="#id15">案⑤ ランニングコストを監視する方式検討</a><ul>
 <li><a class="reference internal" href="#id16">検証ポイント</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#noaworkspaceswindows">NOA環境でのWorkspaces、Windows操作実現</a><ul>
-<li><a class="reference internal" href="#id17">検証ポイント</a></li>
+<li><a class="reference internal" href="#id17">案⑥ AWSでセキュリティを守るためのベストプラクティス</a><ul>
+<li><a class="reference internal" href="#id18">検証ポイント</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#awsos">案⑦ AWS内のOSセキュリティのベストプラクティス</a><ul>
+<li><a class="reference internal" href="#id19">検証ポイント</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#noaworkspaceswindows">案⑧ NOA環境でのWorkspaces、Windows操作実現</a><ul>
+<li><a class="reference internal" href="#id20">検証ポイント</a></li>
 </ul>
 </li>
 </ul>
