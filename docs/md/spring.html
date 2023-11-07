@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>SpringBoot入門 &#8212; workmemo 1 documentation</title>
+    <title>2. SpringBoot入門 &#8212; workmemo 1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
     <script src="../_static/documentation_options.js?v=4f78e891"></script>
@@ -13,8 +13,8 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="TERASOLUNAチュートリアル" href="TERASOLUNA.html" />
-    <link rel="prev" title="GitHub入門" href="github.html" /> 
+    <link rel="next" title="1. EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討" href="ECS.html" />
+    <link rel="prev" title="1. TERASOLUNAチュートリアル" href="TERASOLUNA.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -23,13 +23,13 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="TERASOLUNA.html" title="TERASOLUNAチュートリアル"
+          <a href="ECS.html" title="1. EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="github.html" title="GitHub入門"
+          <a href="TERASOLUNA.html" title="1. TERASOLUNAチュートリアル"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">SpringBoot入門</a></li> 
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">2. </span>SpringBoot入門</a></li> 
       </ul>
     </div>  
 
@@ -39,12 +39,12 @@
           <div class="body" role="main">
             
   <section id="springboot">
-<h1>SpringBoot入門<a class="headerlink" href="#springboot" title="Link to this heading">¶</a></h1>
+<h1><span class="section-number">2. </span>SpringBoot入門<a class="headerlink" href="#springboot" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>SpringBootとは<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">2.1. </span>SpringBootとは<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 </section>
 <section id="intellij">
-<h2>IntelliJとは<a class="headerlink" href="#intellij" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">2.2. </span>IntelliJとは<a class="headerlink" href="#intellij" title="Link to this heading">¶</a></h2>
 <p>IntelliJ IDEAは、JetBrains社が開発したJavaなどの言語に対応した統合開発環境である。</p>
 <p>なお、IDE(統合開発環境)とはプログラマーがソフトウェアコードを効率的に開発するのに役立つソフトウェアアプリケーションであり、IDEには以下のようなメリットがある。<br />
 ・コード編集のオートメーション<br />
@@ -57,7 +57,7 @@
 ・デバッグ</p>
 </section>
 <section id="intellij-idea-windows">
-<h2>IntelliJ IDEAインストール(Windows)<a class="headerlink" href="#intellij-idea-windows" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">2.3. </span>IntelliJ IDEAインストール(Windows)<a class="headerlink" href="#intellij-idea-windows" title="Link to this heading">¶</a></h2>
 <p>1,以下サイトの右上の「ダウンロード」をクリックする。<br />
 JetBrains：IntelliJ IDEA　https://www.jetbrains.com/ja-jp/idea/</p>
 <p>2,保存したexeファイルを実行し、インストールを行う。<br />
@@ -79,7 +79,7 @@ Create Associations：特定のファイル拡張子をIntelliJ IDEAに関連付
 再起動後、日本語化されていることを確認する。</p>
 </section>
 <section id="intellij-idea">
-<h2>IntelliJ IDEAプロジェクトの作成(初心者向け)<a class="headerlink" href="#intellij-idea" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">2.4. </span>IntelliJ IDEAプロジェクトの作成(初心者向け)<a class="headerlink" href="#intellij-idea" title="Link to this heading">¶</a></h2>
 <p>1,Javaプロジェクトを作成する場合は、左側の「Javaモジュール」を選択し、プロジェクトで使用するSDKのバージョンを選択して「次へ」をクリックする。<br />
 ※JDKをインストールしていない場合はプロジェクトSDKの一覧に表示されないため、JDKを別途ダウンロード（AoptOpenJDKのダウンロード）するか、プロジェクトSDKの選択「Download JDK...」から対象のバージョンのJDKをインストールすること。</p>
 <p>2,プロジェクト名を設定し、作成をクリックする。今回は「Hello」。<br />
@@ -118,11 +118,11 @@ Create Associations：特定のファイル拡張子をIntelliJ IDEAに関連付
   <div>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">SpringBoot入門</a><ul>
-<li><a class="reference internal" href="#id1">SpringBootとは</a></li>
-<li><a class="reference internal" href="#intellij">IntelliJとは</a></li>
-<li><a class="reference internal" href="#intellij-idea-windows">IntelliJ IDEAインストール(Windows)</a></li>
-<li><a class="reference internal" href="#intellij-idea">IntelliJ IDEAプロジェクトの作成(初心者向け)</a></li>
+<li><a class="reference internal" href="#">2. SpringBoot入門</a><ul>
+<li><a class="reference internal" href="#id1">2.1. SpringBootとは</a></li>
+<li><a class="reference internal" href="#intellij">2.2. IntelliJとは</a></li>
+<li><a class="reference internal" href="#intellij-idea-windows">2.3. IntelliJ IDEAインストール(Windows)</a></li>
+<li><a class="reference internal" href="#intellij-idea">2.4. IntelliJ IDEAプロジェクトの作成(初心者向け)</a></li>
 </ul>
 </li>
 </ul>
@@ -130,18 +130,18 @@ Create Associations：特定のファイル拡張子をIntelliJ IDEAに関連付
   </div>
   <div>
     <h4>Previous topic</h4>
-    <p class="topless"><a href="github.html"
-                          title="previous chapter">GitHub入門</a></p>
+    <p class="topless"><a href="TERASOLUNA.html"
+                          title="previous chapter"><span class="section-number">1. </span>TERASOLUNAチュートリアル</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="TERASOLUNA.html"
-                          title="next chapter">TERASOLUNAチュートリアル</a></p>
+    <p class="topless"><a href="ECS.html"
+                          title="next chapter"><span class="section-number">1. </span>EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/java/spring.md.txt"
+      <li><a href="../_sources/md/spring.md.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -166,13 +166,13 @@ Create Associations：特定のファイル拡張子をIntelliJ IDEAに関連付
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="TERASOLUNA.html" title="TERASOLUNAチュートリアル"
+          <a href="ECS.html" title="1. EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討"
              >next</a> |</li>
         <li class="right" >
-          <a href="github.html" title="GitHub入門"
+          <a href="TERASOLUNA.html" title="1. TERASOLUNAチュートリアル"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">SpringBoot入門</a></li> 
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">2. </span>SpringBoot入門</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

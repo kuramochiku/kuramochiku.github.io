@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Sphinx入門 &#8212; workmemo 1 documentation</title>
+    <title>1. Sphinx入門 &#8212; workmemo 1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
     <script src="../_static/documentation_options.js?v=4f78e891"></script>
@@ -13,8 +13,8 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="GitHub入門" href="github.html" />
-    <link rel="prev" title="Welcome to workmemo&#39;s documentation!" href="../index.html" /> 
+    <link rel="next" title="2. GitHub入門" href="github.html" />
+    <link rel="prev" title="2. 「テーマ名」概要" href="%E5%A1%BE%E3%81%AE%E9%80%B2%E3%82%81%E6%96%B9.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -23,13 +23,13 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="github.html" title="GitHub入門"
+          <a href="github.html" title="2. GitHub入門"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../index.html" title="Welcome to workmemo&#39;s documentation!"
+          <a href="%E5%A1%BE%E3%81%AE%E9%80%B2%E3%82%81%E6%96%B9.html" title="2. 「テーマ名」概要"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Sphinx入門</a></li> 
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1. </span>Sphinx入門</a></li> 
       </ul>
     </div>  
 
@@ -39,16 +39,16 @@
           <div class="body" role="main">
             
   <section id="sphinx">
-<h1>Sphinx入門<a class="headerlink" href="#sphinx" title="Link to this heading">¶</a></h1>
+<h1><span class="section-number">1. </span>Sphinx入門<a class="headerlink" href="#sphinx" title="Link to this heading">¶</a></h1>
 <section id="id1">
-<h2>Sphinxとは<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.1. </span>Sphinxとは<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>Sphinx はブラウザーで表示するドキュメント（オンラインマニュアル 等）を作成するツール。<br />
 元々は Python のドキュメント用に作成されたものですが、現在は多くのドキュメントを作成するのに使用されている。</p>
 </section>
 <section id="sphinx-windows">
-<h2>Sphinxインストール(Windows)<a class="headerlink" href="#sphinx-windows" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.2. </span>Sphinxインストール(Windows)<a class="headerlink" href="#sphinx-windows" title="Link to this heading">¶</a></h2>
 <section id="sphinx-miniconda">
-<h3>Sphinxインストール　事前作業　Minicondaの導入<a class="headerlink" href="#sphinx-miniconda" title="Link to this heading">¶</a></h3>
+<h3><span class="section-number">1.2.1. </span>Sphinxインストール　事前作業　Minicondaの導入<a class="headerlink" href="#sphinx-miniconda" title="Link to this heading">¶</a></h3>
 <p>まず、Windows上でPythonが動作する環境を構築する。<br />
 1,Minicondaのサイトよりインストーラをダウンロードし、インストールを行う。<br />
 https://docs.conda.io/projects/miniconda/en/latest/</p>
@@ -61,7 +61,7 @@ https://qiita.com/terahide/items/253eff6fba38c8f53746</p>
 </div>
 </section>
 <section id="id2">
-<h3>Sphinxのインストール<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<h3><span class="section-number">1.2.2. </span>Sphinxのインストール<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <p>1,pipコマンドでインストールを実行</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">sphinx</span>  
 </pre></div>
@@ -77,7 +77,7 @@ https://qiita.com/terahide/items/253eff6fba38c8f53746</p>
 </section>
 </section>
 <section id="sphinx-linux">
-<h2>Sphinxインストール(linux)<a class="headerlink" href="#sphinx-linux" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.3. </span>Sphinxインストール(linux)<a class="headerlink" href="#sphinx-linux" title="Link to this heading">¶</a></h2>
 <p>Linuxのインストール手順は以下となる。設定部分はWindowsと共通となる。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sudo su -  
 yum install python-sphinx  
@@ -90,7 +90,7 @@ sphinx-quickstar
 </div>
 </section>
 <section id="id3">
-<h2>Sphinx設定<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.4. </span>Sphinx設定<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>参考<br />
 https://zenn.dev/y_mrok/books/sphinx-no-tsukaikata/viewer/chapter8</p>
 <p>1,プロジェクト作成したいフォルダに移動した後、以下コマンドを実行する。<br />
@@ -273,9 +273,9 @@ Indices and tables
 </div>
 </section>
 <section id="id4">
-<h2>追加機能色々<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.5. </span>追加機能色々<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <section id="id5">
-<h3>章や節に番号を振りたい　→うまくいかない？<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<h3><span class="section-number">1.5.1. </span>章や節に番号を振りたい　→うまくいかない？<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <p>「index.rst」の「toctree」に「numbered」オプションを追加する。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">toctree</span><span class="p">::</span>
    <span class="p">:</span><span class="n">maxdepth</span><span class="p">:</span> <span class="mi">2</span>
@@ -285,14 +285,14 @@ Indices and tables
 </div>
 </section>
 <section id="id6">
-<h3>図に番号を自動で振り、参照したい　→うまくいかない？<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<h3><span class="section-number">1.5.2. </span>図に番号を自動で振り、参照したい　→うまくいかない？<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <p>「conf.py」に以下オプションを追加する。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">numfig</span> <span class="o">=</span> <span class="kc">True</span>
 </pre></div>
 </div>
 </section>
 <section id="id7">
-<h3>自動ビルド<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<h3><span class="section-number">1.5.3. </span>自動ビルド<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 <p>Sphinxの sphinx-autobuild を用いると、ファイルを変更すると自動的にビルドが実行され、更新が反映される。</p>
 <p>1.sphinx-autobuild モジュールのインストールする。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">sphinx</span><span class="o">-</span><span class="n">autobuild</span>
@@ -344,19 +344,19 @@ Indices and tables
   <div>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">Sphinx入門</a><ul>
-<li><a class="reference internal" href="#id1">Sphinxとは</a></li>
-<li><a class="reference internal" href="#sphinx-windows">Sphinxインストール(Windows)</a><ul>
-<li><a class="reference internal" href="#sphinx-miniconda">Sphinxインストール　事前作業　Minicondaの導入</a></li>
-<li><a class="reference internal" href="#id2">Sphinxのインストール</a></li>
+<li><a class="reference internal" href="#">1. Sphinx入門</a><ul>
+<li><a class="reference internal" href="#id1">1.1. Sphinxとは</a></li>
+<li><a class="reference internal" href="#sphinx-windows">1.2. Sphinxインストール(Windows)</a><ul>
+<li><a class="reference internal" href="#sphinx-miniconda">1.2.1. Sphinxインストール　事前作業　Minicondaの導入</a></li>
+<li><a class="reference internal" href="#id2">1.2.2. Sphinxのインストール</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#sphinx-linux">Sphinxインストール(linux)</a></li>
-<li><a class="reference internal" href="#id3">Sphinx設定</a></li>
-<li><a class="reference internal" href="#id4">追加機能色々</a><ul>
-<li><a class="reference internal" href="#id5">章や節に番号を振りたい　→うまくいかない？</a></li>
-<li><a class="reference internal" href="#id6">図に番号を自動で振り、参照したい　→うまくいかない？</a></li>
-<li><a class="reference internal" href="#id7">自動ビルド</a></li>
+<li><a class="reference internal" href="#sphinx-linux">1.3. Sphinxインストール(linux)</a></li>
+<li><a class="reference internal" href="#id3">1.4. Sphinx設定</a></li>
+<li><a class="reference internal" href="#id4">1.5. 追加機能色々</a><ul>
+<li><a class="reference internal" href="#id5">1.5.1. 章や節に番号を振りたい　→うまくいかない？</a></li>
+<li><a class="reference internal" href="#id6">1.5.2. 図に番号を自動で振り、参照したい　→うまくいかない？</a></li>
+<li><a class="reference internal" href="#id7">1.5.3. 自動ビルド</a></li>
 </ul>
 </li>
 </ul>
@@ -366,18 +366,18 @@ Indices and tables
   </div>
   <div>
     <h4>Previous topic</h4>
-    <p class="topless"><a href="../index.html"
-                          title="previous chapter">Welcome to workmemo's documentation!</a></p>
+    <p class="topless"><a href="%E5%A1%BE%E3%81%AE%E9%80%B2%E3%82%81%E6%96%B9.html"
+                          title="previous chapter"><span class="section-number">2. </span>「テーマ名」概要</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
     <p class="topless"><a href="github.html"
-                          title="next chapter">GitHub入門</a></p>
+                          title="next chapter"><span class="section-number">2. </span>GitHub入門</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/java/shpinx.md.txt"
+      <li><a href="../_sources/md/shpinx.md.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -402,13 +402,13 @@ Indices and tables
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="github.html" title="GitHub入門"
+          <a href="github.html" title="2. GitHub入門"
              >next</a> |</li>
         <li class="right" >
-          <a href="../index.html" title="Welcome to workmemo&#39;s documentation!"
+          <a href="%E5%A1%BE%E3%81%AE%E9%80%B2%E3%82%81%E6%96%B9.html" title="2. 「テーマ名」概要"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Sphinx入門</a></li> 
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1. </span>Sphinx入門</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
