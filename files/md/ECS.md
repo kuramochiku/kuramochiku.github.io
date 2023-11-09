@@ -6,6 +6,17 @@ EC2とサーバレスの違いは分かるが、EC2とECSの使い分けにつ�
 本検証に伴う構築、設定変更はcloudformationを利用して行う方針とする。  
 cloudformationを扱ったことがなく、プロジェクトでも利用出来ていないためである。  
 
+## 想定構成図  
+EC2の構成図  
+![EC2_Diagram](./images/EC2.drawio.png)
+
+ECSの構成図  
+![ECS_Diagram](./images/ECS.drawio.png)
+
+サーバレスの構成図  
+![less_Diagram](./images/serverless.drawio.png)
+
+
 ## 評価観点  
 ・構築時に必要な作業(工数)  
 ・設定変更に必要な作業(工数)  

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討 &#8212; workmemo 1 documentation</title>
+    <title>「テーマ名」概要 &#8212; workmemo 1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
     <script src="../_static/documentation_options.js?v=4f78e891"></script>
@@ -13,8 +13,8 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="テーマ再検討(AWS)" href="AWS1.html" />
-    <link rel="prev" title="2. SpringBoot入門" href="spring.html" /> 
+    <link rel="next" title="活動状況" href="activity.html" />
+    <link rel="prev" title="塾活動について" href="../index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -23,13 +23,13 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="AWS1.html" title="テーマ再検討(AWS)"
+          <a href="activity.html" title="活動状況"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="spring.html" title="2. SpringBoot入門"
+          <a href="../index.html" title="塾活動について"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1. </span>EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討</a></li> 
+        <li class="nav-item nav-item-this"><a href="">「テーマ名」概要</a></li> 
       </ul>
     </div>  
 
@@ -38,34 +38,22 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="ec2-ecs">
-<h1><span class="section-number">1. </span>EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討<a class="headerlink" href="#ec2-ecs" title="Link to this heading">¶</a></h1>
-<p>EC2とサーバレスの違いは分かるが、EC2とECSの使い分けについて自分の言葉で説明できない。<br />
-実際にECSを扱ってみることで、使い分け方を整理したい。<br />
-※コンテナの方が良いといったイメージがあるが、オーバーヘッドもあるため、EC2オートスケーリングとの優位性が分からない。</p>
-<p>本検証に伴う構築、設定変更はcloudformationを利用して行う方針とする。<br />
-cloudformationを扱ったことがなく、プロジェクトでも利用出来ていないためである。</p>
-<section id="id1">
-<h2><span class="section-number">1.1. </span>想定構成図<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
-<p>EC2の構成図<br />
-<img alt="EC2_Diagram" src="../_images/EC2.drawio.png" /></p>
-<p>ECSの構成図<br />
-<img alt="ECS_Diagram" src="../_images/ECS.drawio.png" /></p>
-<p>サーバレスの構成図<br />
-<img alt="less_Diagram" src="../_images/serverless.drawio.png" /></p>
-</section>
+  <section id="id1">
+<h1>「テーマ名」概要<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>XXXXX</p>
 <section id="id2">
-<h2><span class="section-number">1.2. </span>評価観点<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<p>・構築時に必要な作業(工数)<br />
-・設定変更に必要な作業(工数)<br />
-・ランニングコスト(通常時、コスト削減方法のバリエーション)<br />
-・拡張性<br />
-・冗長性(リリース時の影響)<br />
-・セキュリティ担保<br />
-・監視<br />
-・ログ管理<br />
-・開発者の責任範囲<br />
-・その他</p>
+<h2>スケジュール<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="id3">
+<h3>2023/10実績<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>・記事執筆環境の学習、整備<br />
+・spring環境の整備、TERASOLUNAチュートリアルの着手(難航)<br />
+→プログラミング学習の優先度を下げる方針とする。</p>
+</section>
+<section id="id4">
+<h3>2023/11<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p>・テーマ再検討<br />
+・EC2/ECS/サーバレスのメリットデメリット整理。現プロジェクトの最適構成検討。</p>
+</section>
 </section>
 </section>
 
@@ -79,9 +67,12 @@ cloudformationを扱ったことがなく、プロジェクトでも利用出来
   <div>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">1. EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討</a><ul>
-<li><a class="reference internal" href="#id1">1.1. 想定構成図</a></li>
-<li><a class="reference internal" href="#id2">1.2. 評価観点</a></li>
+<li><a class="reference internal" href="#">「テーマ名」概要</a><ul>
+<li><a class="reference internal" href="#id2">スケジュール</a><ul>
+<li><a class="reference internal" href="#id3">2023/10実績</a></li>
+<li><a class="reference internal" href="#id4">2023/11</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -89,18 +80,18 @@ cloudformationを扱ったことがなく、プロジェクトでも利用出来
   </div>
   <div>
     <h4>Previous topic</h4>
-    <p class="topless"><a href="spring.html"
-                          title="previous chapter"><span class="section-number">2. </span>SpringBoot入門</a></p>
+    <p class="topless"><a href="../index.html"
+                          title="previous chapter">塾活動について</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="AWS1.html"
-                          title="next chapter">テーマ再検討(AWS)</a></p>
+    <p class="topless"><a href="activity.html"
+                          title="next chapter">活動状況</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/md/ECS.md.txt"
+      <li><a href="../_sources/md/school.md.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -125,13 +116,13 @@ cloudformationを扱ったことがなく、プロジェクトでも利用出来
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="AWS1.html" title="テーマ再検討(AWS)"
+          <a href="activity.html" title="活動状況"
              >next</a> |</li>
         <li class="right" >
-          <a href="spring.html" title="2. SpringBoot入門"
+          <a href="../index.html" title="塾活動について"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1. </span>EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討</a></li> 
+        <li class="nav-item nav-item-this"><a href="">「テーマ名」概要</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

@@ -11,8 +11,8 @@
    :caption: Contents:
    :numbered:
 
-   ./md/活動状況.md
-   ./md/塾の進め方.md
+   ./md/school.md
+   ./md/activity.md
 
 記事執筆環境整備
 ==================
@@ -54,9 +54,9 @@ AWS検証記録
    :caption: Contents:
    :numbered:
    
-   ./md/その他.md
-   ./md/AWS_検討.md
-
+   ./md/AWS1.md
+   ./md/other.md
+   
 Indices and tables
 ==================
 

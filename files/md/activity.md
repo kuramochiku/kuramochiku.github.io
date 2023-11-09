@@ -3,9 +3,9 @@
 ### 前回記載した次回までのToDO
 1.TERASOLUNAチュートリアルを通じてjavaの学習を行う。  
 →あまり時間取れず。  
-　チュートリアルそのままだとバージョン差異などで環境エラーが多発している。
+　チュートリアルそのままだとバージョン差異などで環境エラーが多発している。  
 　少しずつ進めていたが、断念して「Hello World」から始めることとした。  
-　https://kuramochiku.github.io/java/spring.html#intellij-idea  
+　https://kuramochiku.github.io/md/spring.html#intellij-idea  
 
 2.AWSに特化したテーマの再検討(～11月末)  
 →再検討を実施した。3月までのテーマとしては別途追加する予定であるが、直近としては以下としたいと考えている。  
@@ -20,6 +20,16 @@ EC2とサーバレスの違いは分かるが、EC2とECSの使い分けにつ�
 本検証に伴う構築、設定変更はcloudformationを利用して行う方針とする。  
 cloudformationを扱ったことがなく、プロジェクトでも利用出来ていないためである。  
 
+### 想定構成図  
+EC2の構成図  
+![EC2_Diagram](./images/EC2.drawio.png)
+
+ECSの構成図  
+![ECS_Diagram](./images/ECS.drawio.png)
+
+サーバレスの構成図  
+![less_Diagram](./images/serverless.drawio.png)
+
 ### 評価観点  
 ・構築時に必要な作業(工数)  
 ・設定変更に必要な作業(工数)  
@@ -32,8 +42,10 @@ cloudformationを扱ったことがなく、プロジェクトでも利用出来
 ・開発者の責任範囲  
 ・その他  
 
-### 困っていること
+3.上記を進めるためCloudformationを学習中。VPC、サブネット、ルートテーブルまでは作成。  
+
+### 困っていること  
 業務多忙です。。。しばらくは状況悪化する可能性の方が高いです。  
 
 ### 次回までのToDO
-1.Cloudformationで
+1.CloudformationでEC2環境の構築  

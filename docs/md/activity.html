@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討 &#8212; workmemo 1 documentation</title>
+    <title>活動状況 &#8212; workmemo 1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
     <script src="../_static/documentation_options.js?v=4f78e891"></script>
@@ -13,8 +13,8 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="テーマ再検討(AWS)" href="AWS1.html" />
-    <link rel="prev" title="2. SpringBoot入門" href="spring.html" /> 
+    <link rel="next" title="1. Sphinx入門" href="shpinx.html" />
+    <link rel="prev" title="「テーマ名」概要" href="school.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -23,13 +23,13 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="AWS1.html" title="テーマ再検討(AWS)"
+          <a href="shpinx.html" title="1. Sphinx入門"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="spring.html" title="2. SpringBoot入門"
+          <a href="school.html" title="「テーマ名」概要"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1. </span>EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討</a></li> 
+        <li class="nav-item nav-item-this"><a href="">活動状況</a></li> 
       </ul>
     </div>  
 
@@ -38,15 +38,31 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="ec2-ecs">
-<h1><span class="section-number">1. </span>EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討<a class="headerlink" href="#ec2-ecs" title="Link to this heading">¶</a></h1>
+  <section id="id1">
+<h1>活動状況<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<section id="id2">
+<h2>2023/11/09時点の状況<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="todo">
+<h3>前回記載した次回までのToDO<a class="headerlink" href="#todo" title="Link to this heading">¶</a></h3>
+<p>1.TERASOLUNAチュートリアルを通じてjavaの学習を行う。<br />
+→あまり時間取れず。<br />
+　チュートリアルそのままだとバージョン差異などで環境エラーが多発している。<br />
+　少しずつ進めていたが、断念して「Hello World」から始めることとした。<br />
+　https://kuramochiku.github.io/md/spring.html#intellij-idea</p>
+<p>2.AWSに特化したテーマの再検討(～11月末)<br />
+→再検討を実施した。3月までのテーマとしては別途追加する予定であるが、直近としては以下としたいと考えている。</p>
+</section>
+<section id="id3">
+<h3>直近のテーマと選定理由(～12月)<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>EC2/ECS/サーバレスの使い分け整理。現プロジェクトの最適構成検討。</p>
 <p>EC2とサーバレスの違いは分かるが、EC2とECSの使い分けについて自分の言葉で説明できない。<br />
 実際にECSを扱ってみることで、使い分け方を整理したい。<br />
 ※コンテナの方が良いといったイメージがあるが、オーバーヘッドもあるため、EC2オートスケーリングとの優位性が分からない。</p>
 <p>本検証に伴う構築、設定変更はcloudformationを利用して行う方針とする。<br />
 cloudformationを扱ったことがなく、プロジェクトでも利用出来ていないためである。</p>
-<section id="id1">
-<h2><span class="section-number">1.1. </span>想定構成図<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+</section>
+<section id="id4">
+<h3>想定構成図<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <p>EC2の構成図<br />
 <img alt="EC2_Diagram" src="../_images/EC2.drawio.png" /></p>
 <p>ECSの構成図<br />
@@ -54,8 +70,8 @@ cloudformationを扱ったことがなく、プロジェクトでも利用出来
 <p>サーバレスの構成図<br />
 <img alt="less_Diagram" src="../_images/serverless.drawio.png" /></p>
 </section>
-<section id="id2">
-<h2><span class="section-number">1.2. </span>評価観点<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="id5">
+<h3>評価観点<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <p>・構築時に必要な作業(工数)<br />
 ・設定変更に必要な作業(工数)<br />
 ・ランニングコスト(通常時、コスト削減方法のバリエーション)<br />
@@ -66,6 +82,16 @@ cloudformationを扱ったことがなく、プロジェクトでも利用出来
 ・ログ管理<br />
 ・開発者の責任範囲<br />
 ・その他</p>
+<p>3.上記を進めるためCloudformationを学習中。VPC、サブネット、ルートテーブルまでは作成。</p>
+</section>
+<section id="id6">
+<h3>困っていること<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<p>業務多忙です。。。しばらくは状況悪化する可能性の方が高いです。</p>
+</section>
+<section id="id7">
+<h3>次回までのToDO<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<p>1.CloudformationでEC2環境の構築</p>
+</section>
 </section>
 </section>
 
@@ -79,9 +105,16 @@ cloudformationを扱ったことがなく、プロジェクトでも利用出来
   <div>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">1. EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討</a><ul>
-<li><a class="reference internal" href="#id1">1.1. 想定構成図</a></li>
-<li><a class="reference internal" href="#id2">1.2. 評価観点</a></li>
+<li><a class="reference internal" href="#">活動状況</a><ul>
+<li><a class="reference internal" href="#id2">2023/11/09時点の状況</a><ul>
+<li><a class="reference internal" href="#todo">前回記載した次回までのToDO</a></li>
+<li><a class="reference internal" href="#id3">直近のテーマと選定理由(～12月)</a></li>
+<li><a class="reference internal" href="#id4">想定構成図</a></li>
+<li><a class="reference internal" href="#id5">評価観点</a></li>
+<li><a class="reference internal" href="#id6">困っていること</a></li>
+<li><a class="reference internal" href="#id7">次回までのToDO</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -89,18 +122,18 @@ cloudformationを扱ったことがなく、プロジェクトでも利用出来
   </div>
   <div>
     <h4>Previous topic</h4>
-    <p class="topless"><a href="spring.html"
-                          title="previous chapter"><span class="section-number">2. </span>SpringBoot入門</a></p>
+    <p class="topless"><a href="school.html"
+                          title="previous chapter">「テーマ名」概要</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="AWS1.html"
-                          title="next chapter">テーマ再検討(AWS)</a></p>
+    <p class="topless"><a href="shpinx.html"
+                          title="next chapter"><span class="section-number">1. </span>Sphinx入門</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/md/ECS.md.txt"
+      <li><a href="../_sources/md/activity.md.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -125,13 +158,13 @@ cloudformationを扱ったことがなく、プロジェクトでも利用出来
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="AWS1.html" title="テーマ再検討(AWS)"
+          <a href="shpinx.html" title="1. Sphinx入門"
              >next</a> |</li>
         <li class="right" >
-          <a href="spring.html" title="2. SpringBoot入門"
+          <a href="school.html" title="「テーマ名」概要"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1. </span>EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討</a></li> 
+        <li class="nav-item nav-item-this"><a href="">活動状況</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

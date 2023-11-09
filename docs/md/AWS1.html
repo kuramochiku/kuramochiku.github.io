@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html lang="jp" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>テーマ再検討(AWS) &#8212; workmemo 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
+    <script src="../_static/documentation_options.js?v=4f78e891"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="その他様々な情報を記載する。" href="other.html" />
+    <link rel="prev" title="1. EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討" href="ECS.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="other.html" title="その他様々な情報を記載する。"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ECS.html" title="1. EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">テーマ再検討(AWS)</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="aws">
+<h1>テーマ再検討(AWS)<a class="headerlink" href="#aws" title="Link to this heading">¶</a></h1>
+<p>spring学習の進捗が芳しくないため、AWSに特化したテーマの再検討を行う。</p>
+<section id="networkfirewall-aws-waf">
+<h2>案① NetworkFirewall/AWS WAF使ってみる<a class="headerlink" href="#networkfirewall-aws-waf" title="Link to this heading">¶</a></h2>
+<p>利用したことがなく、興味もあるため。</p>
+<section id="id1">
+<h3>検証ポイント<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+</section>
+</section>
+<section id="trangitgateway">
+<h2>案② Trangitgateway使ってみる<a class="headerlink" href="#trangitgateway" title="Link to this heading">¶</a></h2>
+<section id="id2">
+<h3>移行検討<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p>現状プロジェクトでTGW/DXGWを使わず、直接VGWに紐づけている。<br />
+影響無く移行する手順を検討したい。</p>
+</section>
+<section id="id3">
+<h3>移行前イメージ<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p><img alt="TGW" src="../_images/Trangitgateway_before.png" /></p>
+</section>
+<section id="id4">
+<h3>移行後イメージ<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p><img alt="TGW" src="../_images/Trangitgateway_after.png" /></p>
+</section>
+<section id="id5">
+<h3>検証ポイント<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<p>・移行方式は何があるか。方式別で以下はどうなるか。<br />
+・DirectConnectは流用可能か。<br />
+・ダウンタイムはどのくらいか。<br />
+・設定変更が必要な箇所はどこか。<br />
+・コストに影響あるか。<br />
+・その他懸念はあるか。</p>
+</section>
+</section>
+<section id="id6">
+<h2>案③ AWSサービス使ってみる<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<p>使ったことが無いAWSサービスは数多く存在する。<br />
+1つ1つ触ってみて簡易的なレポートを作成する。</p>
+</section>
+<section id="id7">
+<h2>案④ ランニングコストを削減するための方法検討<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
+<p>AWSで少しでもコストを削減したい時の方法について調査、検証する。</p>
+<section id="id8">
+<h3>検討候補<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<p>以下公式アプローチ方式について<br />
+参考：https://aws.amazon.com/jp/blogs/news/9ways-to-optimize-aws-cost/</p>
+<section id="amazon-ec2amazon-rds">
+<h4>1　未使用状態のAmazon EC2やAmazon RDS インスタンスへの支払いを止める<a class="headerlink" href="#amazon-ec2amazon-rds" title="Link to this heading">¶</a></h4>
+</section>
+<section id="amazon-redshift">
+<h4>2　未使用状態のAmazon Redshift クラスターへの支払いを止める<a class="headerlink" href="#amazon-redshift" title="Link to this heading">¶</a></h4>
+<p>利用していない時間を停止することでコスト削減を図る。<br />
+サービス別での対応方針などを調査、検討する。</p>
+</section>
+<section id="amazon-s3-intelligent-tiering">
+<h4>3　Amazon S3 Intelligent-Tieringを有効にする<a class="headerlink" href="#amazon-s3-intelligent-tiering" title="Link to this heading">¶</a></h4>
+<p>S3標準ストレージではなく、低コストストレージを組み合わせることでコスト削減を図る。<br />
+細かな設定をせずに、S3 Intelligent-Tieringを使用することで自動的に最適化をすることが可能。<br />
+S3 Intelligent-Tieringの動作について検証してみるのもありかもしれない。</p>
+</section>
+<section id="amazon-dynamodb">
+<h4>4　Amazon DynamoDB にはオンデマンドのキャパシティーモードを利用する<a class="headerlink" href="#amazon-dynamodb" title="Link to this heading">¶</a></h4>
+</section>
+<section id="ec2">
+<h4>5　十分に活用されていないEC2 インスタンスへの支払いを止める<a class="headerlink" href="#ec2" title="Link to this heading">¶</a></h4>
+</section>
+<section id="id9">
+<h4>6　十分に活用されていないネットワークリソースを削除する<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h4>
+</section>
+<section id="id10">
+<h4>7　EC2 スポットインスタンスを利用する<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h4>
+<p>スポットインスタンスとは、AWSが用意している余剰リソースを、非常に安価で利用できるようにした購入オプションの1つである。<br />
+安価である一方、AWS側のキャパシティーの都合により、停止となる可能性があるため、これらに対応できる方法で利用する必要がある。<br />
+商用運用に耐えうるスポットインスタンスの利用方法について検討する。</p>
+</section>
+<section id="compute-savings-plans">
+<h4>8　Compute Savings Plans を利用する<a class="headerlink" href="#compute-savings-plans" title="Link to this heading">¶</a></h4>
+<p>プランの話となるため、サービス概要を机上調査し、情報をまとめる。</p>
+</section>
+<section id="id11">
+<h4>9　リザーブドインスタンスを利用する<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h4>
+<p>プランの話となるため、サービス概要を机上調査し、情報をまとめる。</p>
+</section>
+</section>
+</section>
+<section id="id12">
+<h2>案⑤ ランニングコストを監視する方式検討<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h2>
+<p>AWSのランニングコストの利用状況を監視する方式について調査、検証する。</p>
+<section id="id13">
+<h3>検証ポイント<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
+</section>
+</section>
+<section id="id14">
+<h2>案⑥ AWSでセキュリティを守るためのベストプラクティス<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
+<p>AWSセキュリティのベストプラクティスについて実際に調査、検証する。</p>
+<section id="id15">
+<h3>検証ポイント<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h3>
+</section>
+</section>
+<section id="awsos">
+<h2>案⑦ AWS内のOSセキュリティのベストプラクティス<a class="headerlink" href="#awsos" title="Link to this heading">¶</a></h2>
+<p>AWS内部にサーバ構築した時のセキュリティ担保方法について調査、検証する。</p>
+<section id="id16">
+<h3>検証ポイント<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h3>
+</section>
+</section>
+<section id="noaworkspaceswindows">
+<h2>案⑧ NOA環境でのWorkspaces、Windows操作実現<a class="headerlink" href="#noaworkspaceswindows" title="Link to this heading">¶</a></h2>
+<p>NOA環境でのWorkspaces、Windows操作をするための方式について調査、検証する。</p>
+<section id="id17">
+<h3>検証ポイント<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h3>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">テーマ再検討(AWS)</a><ul>
+<li><a class="reference internal" href="#networkfirewall-aws-waf">案① NetworkFirewall/AWS WAF使ってみる</a><ul>
+<li><a class="reference internal" href="#id1">検証ポイント</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#trangitgateway">案② Trangitgateway使ってみる</a><ul>
+<li><a class="reference internal" href="#id2">移行検討</a></li>
+<li><a class="reference internal" href="#id3">移行前イメージ</a></li>
+<li><a class="reference internal" href="#id4">移行後イメージ</a></li>
+<li><a class="reference internal" href="#id5">検証ポイント</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">案③ AWSサービス使ってみる</a></li>
+<li><a class="reference internal" href="#id7">案④ ランニングコストを削減するための方法検討</a><ul>
+<li><a class="reference internal" href="#id8">検討候補</a><ul>
+<li><a class="reference internal" href="#amazon-ec2amazon-rds">1　未使用状態のAmazon EC2やAmazon RDS インスタンスへの支払いを止める</a></li>
+<li><a class="reference internal" href="#amazon-redshift">2　未使用状態のAmazon Redshift クラスターへの支払いを止める</a></li>
+<li><a class="reference internal" href="#amazon-s3-intelligent-tiering">3　Amazon S3 Intelligent-Tieringを有効にする</a></li>
+<li><a class="reference internal" href="#amazon-dynamodb">4　Amazon DynamoDB にはオンデマンドのキャパシティーモードを利用する</a></li>
+<li><a class="reference internal" href="#ec2">5　十分に活用されていないEC2 インスタンスへの支払いを止める</a></li>
+<li><a class="reference internal" href="#id9">6　十分に活用されていないネットワークリソースを削除する</a></li>
+<li><a class="reference internal" href="#id10">7　EC2 スポットインスタンスを利用する</a></li>
+<li><a class="reference internal" href="#compute-savings-plans">8　Compute Savings Plans を利用する</a></li>
+<li><a class="reference internal" href="#id11">9　リザーブドインスタンスを利用する</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id12">案⑤ ランニングコストを監視する方式検討</a><ul>
+<li><a class="reference internal" href="#id13">検証ポイント</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id14">案⑥ AWSでセキュリティを守るためのベストプラクティス</a><ul>
+<li><a class="reference internal" href="#id15">検証ポイント</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#awsos">案⑦ AWS内のOSセキュリティのベストプラクティス</a><ul>
+<li><a class="reference internal" href="#id16">検証ポイント</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#noaworkspaceswindows">案⑧ NOA環境でのWorkspaces、Windows操作実現</a><ul>
+<li><a class="reference internal" href="#id17">検証ポイント</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="ECS.html"
+                          title="previous chapter"><span class="section-number">1. </span>EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="other.html"
+                          title="next chapter">その他様々な情報を記載する。</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/md/AWS1.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="other.html" title="その他様々な情報を記載する。"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ECS.html" title="1. EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">テーマ再検討(AWS)</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, kuramochi.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>
