@@ -1,7 +1,10 @@
 # 活動状況  
 ## 2023/12/07時点の状況  
 ### 実施したこと  
-1.CloudformationでEC2環境の構築 →Cloudformationで以下作成している。  
+1.CloudformationでEC2環境の構築  
+→Cloudformationで以下作成している。  
+
+![cfs_stack](./images/cfs_stack.png)
 
 Stack①　Cloudformation Cloudformationを利用する環境を整えるためのStack。初回のみの実行で基本的には変更しない。  
 Cloudformation資材のS3バケットや今回は未実施だがCloudformationを実行するIAM周りもここで実施の想定。  
@@ -11,6 +14,8 @@ SGは変更が多いため別項目とした方が良さそう？今回は使う
 
 Stack③　EC2 今回は3構成作ってみる予定のため、構成別でStackを分割する想定。  
 SSM接続用のエンドポイントは固定費かかるし、EC2利用時以外は使わない気もしたため、こちらに入れた。通常はおそらくVPCに入れる認識。  
+
+Stack④　ECS ECSで利用するリソース作成用。現状はSGとALBのみ。  
 
 Stackは現状上記で分割しているが、分割方針の考え方などあればご教示いただきたい。  
 AWSサービス単位での分割が良いか、AP機能単位での分割が良いか。運用上、機能単位で廃止ということもありえるため機能単位の方が使いやすい？  
