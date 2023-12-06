@@ -13,6 +13,7 @@
 
    ./md/school.md
    ./md/activity.md
+   ./md/task.md
 
 記事執筆環境整備
 ==================
@@ -44,6 +45,7 @@ AWS検証記録
    :caption: Contents:
    :numbered:
    
+   ./md/CFS.md
    ./md/ECS.md
 
 その他検討など

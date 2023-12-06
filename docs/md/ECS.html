@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討 &#8212; workmemo 1 documentation</title>
+    <title>1. ECS入門 &#8212; workmemo 1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
     <script src="../_static/documentation_options.js?v=4f78e891"></script>
@@ -14,7 +14,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="テーマ再検討(AWS)" href="AWS1.html" />
-    <link rel="prev" title="2. SpringBoot入門" href="spring.html" /> 
+    <link rel="prev" title="CloudFormation入門" href="CFS.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,10 +26,10 @@
           <a href="AWS1.html" title="テーマ再検討(AWS)"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="spring.html" title="2. SpringBoot入門"
+          <a href="CFS.html" title="CloudFormation入門"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1. </span>EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討</a></li> 
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1. </span>ECS入門</a></li> 
       </ul>
     </div>  
 
@@ -38,34 +38,66 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="ec2-ecs">
-<h1><span class="section-number">1. </span>EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討<a class="headerlink" href="#ec2-ecs" title="Link to this heading">¶</a></h1>
-<p>EC2とサーバレスの違いは分かるが、EC2とECSの使い分けについて自分の言葉で説明できない。<br />
-実際にECSを扱ってみることで、使い分け方を整理したい。<br />
-※コンテナの方が良いといったイメージがあるが、オーバーヘッドもあるため、EC2オートスケーリングとの優位性が分からない。</p>
-<p>本検証に伴う構築、設定変更はcloudformationを利用して行う方針とする。<br />
-cloudformationを扱ったことがなく、プロジェクトでも利用出来ていないためである。</p>
-<section id="id1">
-<h2><span class="section-number">1.1. </span>想定構成図<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
-<p>EC2の構成図<br />
-<img alt="EC2_Diagram" src="../_images/EC2.drawio.png" /></p>
-<p>ECSの構成図<br />
-<img alt="ECS_Diagram" src="../_images/ECS.drawio.png" /></p>
-<p>サーバレスの構成図<br />
-<img alt="less_Diagram" src="../_images/serverless.drawio.png" /></p>
+  <section id="ecs">
+<h1><span class="section-number">1. </span>ECS入門<a class="headerlink" href="#ecs" title="Link to this heading">¶</a></h1>
+<section id="amazon-ecs">
+<h2><span class="section-number">1.1. </span>Amazon ECS 入門ハンズオン<a class="headerlink" href="#amazon-ecs" title="Link to this heading">¶</a></h2>
+<p>AWSが用意しているハンズオンをベースに学習する。<br />
+以下のように様々なハンズオンがあるため、自分に合ったハンズオンを選択すること。<br />
+https://aws-samples.github.io/jp-contents-hub/#containers</p>
+<p>本ハンズオンの作業ステップは以下となる。</p>
+<ul class="simple">
+<li><p>AWS Cloud9 上で Dockerfile からコンテナイメージを作成</p></li>
+<li><p>Amazon Elastic Container Registry(Amazon ECR) に作成したコンテナイメージをアップロード</p></li>
+<li><p>コンテナオーケストレーションサービスである、Amazon Elastic Container Service(Amazon ECS) と、コンテナ向けのサーバレス実行環境である AWS Fargate を使ってコンテナを実行</p></li>
+<li><p>動かしたコンテナイメージに、内部踏み台からアクセス</p></li>
+<li><p>Amazon ECS によるコンテナのスケジューリング、スケーリングを体験</p></li>
+</ul>
+<section id="aws-cloud9">
+<h3><span class="section-number">1.1.1. </span>作業環境の作成(AWS Cloud9)<a class="headerlink" href="#aws-cloud9" title="Link to this heading">¶</a></h3>
+<p>コンテナイメージを作成する作業環境として、AWS Cloud9 を利用します。<br />
+AWS Cloud9は、ブラウザ経由でコードを記述、実行、デバッグが出来るクラウドベースのIDEです。<br />
+SpringBootの執筆環境としても利用可能らしい。</p>
+<p>今回は下部にあるターミナルからdocekerを利用する。(dockerは初期インストール済み)<br />
+ターミナル画面が無い場合は「Window」→「New Terminal」</p>
+<p>なお、実態はEC2であり、作成時にVPCを選択する必要がある。(選択画面は隠れていて、デフォルトはデフォルトVPC)<br />
+Cloud9を利用するためにはEC2からインターネット接続が必要である。(IGWがあるサブネットかNATGateway経由のアクセス)</p>
 </section>
+</section>
+<section id="id1">
+<h2><span class="section-number">1.2. </span>ECS エラー<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <section id="id2">
-<h2><span class="section-number">1.2. </span>評価観点<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<p>・構築時に必要な作業(工数)<br />
-・設定変更に必要な作業(工数)<br />
-・ランニングコスト(通常時、コスト削減方法のバリエーション)<br />
-・拡張性<br />
-・冗長性(リリース時の影響)<br />
-・セキュリティ担保<br />
-・監視<br />
-・ログ管理<br />
-・開発者の責任範囲<br />
-・その他</p>
+<h3><span class="section-number">1.2.1. </span>ECSタスク作成時<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p>指定したVPCがインターネット接続が可能でないといけないかも。</p>
+</section>
+</section>
+</section>
+<section id="docker">
+<h1><span class="section-number">2. </span>Docker入門<a class="headerlink" href="#docker" title="Link to this heading">¶</a></h1>
+<p>Dockerとは、軽量で高速に動作するコンテナ型仮想環境用のプラットフォームです。<br />
+Dockerを使うことで、1台のサーバー上で様々なアプリケーションを手軽に仮想化・実行できるようになります。<br />
+従来の仮想化では仮想マシンごとに1つのゲストOSをインストールし、あたかも1台の独立したサーバーのように利用していました。<br />
+一方でDockerではホストOSのカーネルを共有して利用することで、従来の仮想化と違いゲストOSを必要としません。<br />
+その分だけDockerは軽快に動作するのが特徴です。</p>
+<p>DocekrはDockerfileという、コンテナイメージ作成で使う命令が書かれているファイルにより構成されます。<br />
+本ファイルは書かれている内容が上から順に解釈され、コンテナイメージをどのように作成するか指定できます。<br />
+dockerのマニュアルページは以下となる。詳細はこちらを調べること。<br />
+https://docs.docker.jp/engine/reference/builder.html</p>
+<section id="id3">
+<h2><span class="section-number">2.1. </span>Dockerエラー<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<section id="docker-bulid">
+<h3><span class="section-number">2.1.1. </span>docker bulid時<a class="headerlink" href="#docker-bulid" title="Link to this heading">¶</a></h3>
+<p>どのファイルからdockerを構成するかのパスやURLの指定が無い時のエラー。引数不足。<br />
+「 .」と指定した場合、このローカルディレクトリにある全てのファイルはtar化され、Dockerデーモンに送られます。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;docker build&quot;</span> <span class="n">requires</span> <span class="n">exactly</span> <span class="mi">1</span> <span class="n">argument</span><span class="o">.</span> 
+<span class="n">See</span> <span class="s1">&#39;docker build --help&#39;</span><span class="o">.</span>
+
+<span class="n">Usage</span><span class="p">:</span> <span class="n">docker</span> <span class="n">build</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span> <span class="n">PATH</span> <span class="o">|</span> <span class="n">URL</span> <span class="o">|</span> <span class="o">-</span>  
+
+<span class="n">Build</span> <span class="n">an</span> <span class="n">image</span> <span class="kn">from</span> <span class="nn">a</span> <span class="n">Dockerfile</span> 
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 
@@ -79,9 +111,22 @@ cloudformationを扱ったことがなく、プロジェクトでも利用出来
   <div>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">1. EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討</a><ul>
-<li><a class="reference internal" href="#id1">1.1. 想定構成図</a></li>
-<li><a class="reference internal" href="#id2">1.2. 評価観点</a></li>
+<li><a class="reference internal" href="#">1. ECS入門</a><ul>
+<li><a class="reference internal" href="#amazon-ecs">1.1. Amazon ECS 入門ハンズオン</a><ul>
+<li><a class="reference internal" href="#aws-cloud9">1.1.1. 作業環境の作成(AWS Cloud9)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">1.2. ECS エラー</a><ul>
+<li><a class="reference internal" href="#id2">1.2.1. ECSタスク作成時</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#docker">2. Docker入門</a><ul>
+<li><a class="reference internal" href="#id3">2.1. Dockerエラー</a><ul>
+<li><a class="reference internal" href="#docker-bulid">2.1.1. docker bulid時</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -89,8 +134,8 @@ cloudformationを扱ったことがなく、プロジェクトでも利用出来
   </div>
   <div>
     <h4>Previous topic</h4>
-    <p class="topless"><a href="spring.html"
-                          title="previous chapter"><span class="section-number">2. </span>SpringBoot入門</a></p>
+    <p class="topless"><a href="CFS.html"
+                          title="previous chapter">CloudFormation入門</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
@@ -128,10 +173,10 @@ cloudformationを扱ったことがなく、プロジェクトでも利用出来
           <a href="AWS1.html" title="テーマ再検討(AWS)"
              >next</a> |</li>
         <li class="right" >
-          <a href="spring.html" title="2. SpringBoot入門"
+          <a href="CFS.html" title="CloudFormation入門"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1. </span>EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討</a></li> 
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1. </span>ECS入門</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

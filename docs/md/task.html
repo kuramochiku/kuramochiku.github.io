@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="jp" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討 &#8212; workmemo 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
+    <script src="../_static/documentation_options.js?v=4f78e891"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Sphinx入門" href="shpinx.html" />
+    <link rel="prev" title="活動状況" href="activity.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="shpinx.html" title="1. Sphinx入門"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="activity.html" title="活動状況"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="ec2-ecs">
+<h1>EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討<a class="headerlink" href="#ec2-ecs" title="Link to this heading">¶</a></h1>
+<p>EC2とサーバレスの違いは分かるが、EC2とECSの使い分けについて自分の言葉で説明できない。<br />
+実際にECSを扱ってみることで、使い分け方を整理したい。<br />
+※コンテナの方が良いといったイメージがあるが、オーバーヘッドもあるため、EC2オートスケーリングとの優位性が分からない。</p>
+<p>本検証に伴う構築、設定変更はcloudformationを利用して行う方針とする。<br />
+cloudformationを扱ったことがなく、プロジェクトでも利用出来ていないためである。</p>
+<section id="id1">
+<h2>想定構成図<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p>EC2の構成図<br />
+<img alt="EC2_Diagram" src="../_images/EC2.drawio.png" /></p>
+<p>ECSの構成図<br />
+<img alt="ECS_Diagram" src="../_images/ECS.drawio.png" /></p>
+<p>サーバレスの構成図<br />
+<img alt="less_Diagram" src="../_images/serverless.drawio.png" /></p>
+</section>
+<section id="id2">
+<h2>評価観点<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>・構築時に必要な作業(工数)<br />
+・設定変更に必要な作業(工数)<br />
+・ランニングコスト(通常時、コスト削減方法のバリエーション)<br />
+・拡張性<br />
+・冗長性(リリース時の影響)<br />
+・セキュリティ担保<br />
+・監視<br />
+・ログ管理<br />
+・開発者の責任範囲<br />
+・その他</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討</a><ul>
+<li><a class="reference internal" href="#id1">想定構成図</a></li>
+<li><a class="reference internal" href="#id2">評価観点</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="activity.html"
+                          title="previous chapter">活動状況</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="shpinx.html"
+                          title="next chapter"><span class="section-number">1. </span>Sphinx入門</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/md/task.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="shpinx.html" title="1. Sphinx入門"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="activity.html" title="活動状況"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, kuramochi.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

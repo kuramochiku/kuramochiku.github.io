@@ -13,7 +13,7 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Sphinx入門" href="shpinx.html" />
+    <link rel="next" title="EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討" href="task.html" />
     <link rel="prev" title="「テーマ名」概要" href="school.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -23,7 +23,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="shpinx.html" title="1. Sphinx入門"
+          <a href="task.html" title="EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="school.html" title="「テーマ名」概要"
@@ -41,9 +41,41 @@
   <section id="id1">
 <h1>活動状況<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="id2">
-<h2>2023/11/09時点の状況<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<h2>2023/12/07時点の状況<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="id3">
+<h3>実施したこと<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>1.CloudformationでEC2環境の構築 →Cloudformationで以下作成している。</p>
+<p>Stack①　Cloudformation Cloudformationを利用する環境を整えるためのStack。初回のみの実行で基本的には変更しない。<br />
+Cloudformation資材のS3バケットや今回は未実施だがCloudformationを実行するIAM周りもここで実施の想定。</p>
+<p>Stack②　VPC ネットワーク周りの設定を行うStack。<br />
+SGは変更が多いため別項目とした方が良さそう？今回は使うリソースとセットでSGを作るようにしたが、管理的に良くない？</p>
+<p>Stack③　EC2 今回は3構成作ってみる予定のため、構成別でStackを分割する想定。<br />
+SSM接続用のエンドポイントは固定費かかるし、EC2利用時以外は使わない気もしたため、こちらに入れた。通常はおそらくVPCに入れる認識。</p>
+<p>Stackは現状上記で分割しているが、分割方針の考え方などあればご教示いただきたい。<br />
+AWSサービス単位での分割が良いか、AP機能単位での分割が良いか。運用上、機能単位で廃止ということもありえるため機能単位の方が使いやすい？<br />
+また、検証環境夜間停止で節約したいといった時に構成にもよるがEBSやELB分、単純停止よりもCloudformationで削除、作成の方が安い？金額的に誤差みたいなものだから話に挙がらない？</p>
+<p>2,ECSのハンズオン →ハンズオン実施。Dockerも初体験。<br />
+インターネットから接続する前提のハンズオンだったため、読み替えて閉域VPCで進めていたらECSタスク作成部分でエラーとなった。<br />
+ECSのタスク起動時にECRからコンテナイメージを取得する必要がある認識だが、これはインターネット接続必須とかあるのでしょうか？</p>
+</section>
+<section id="id4">
+<h3>困っていること<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p>既に別の人が質問していたかもですが、IGWについて確認です。<br />
+基本的にIGWは利用不可？で、Linux等で利用する時もNATGateway経由と利用者規約を読んだが、IGWのあるVPCとピアリングして使うイメージか？<br />
+それとも許可いただいて、自分のVPCにパブリックサブネットを作成し、そこにNATGatewayとかも作って利用するイメージか？<br />
+Cloud9利用時にインターネット接続が必要でした。yumも使うかもですし、上記ECSでも必要かもなので確認させていただければと思います。</p>
+</section>
 <section id="todo">
-<h3>前回記載した次回までのToDO<a class="headerlink" href="#todo" title="Link to this heading">¶</a></h3>
+<h3>次回までのToDO<a class="headerlink" href="#todo" title="Link to this heading">¶</a></h3>
+<p>1,ECSハンズオンの完了<br />
+2,共有会の準備<br />
+3,EC2構成を進める。(アプリはどこかから拾う想定)</p>
+</section>
+</section>
+<section id="id5">
+<h2>2023/11/09時点の状況<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<section id="id6">
+<h3>前回記載した次回までのToDO<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <p>1.TERASOLUNAチュートリアルを通じてjavaの学習を行う。<br />
 →あまり時間取れず。<br />
 　チュートリアルそのままだとバージョン差異などで環境エラーが多発している。<br />
@@ -52,8 +84,8 @@
 <p>2.AWSに特化したテーマの再検討(～11月末)<br />
 →再検討を実施した。3月までのテーマとしては別途追加する予定であるが、直近としては以下としたいと考えている。</p>
 </section>
-<section id="id3">
-<h3>直近のテーマと選定理由(～12月)<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<section id="id7">
+<h3>直近のテーマと選定理由(～12月)<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 <p>EC2/ECS/サーバレスの使い分け整理。現プロジェクトの最適構成検討。</p>
 <p>EC2とサーバレスの違いは分かるが、EC2とECSの使い分けについて自分の言葉で説明できない。<br />
 実際にECSを扱ってみることで、使い分け方を整理したい。<br />
@@ -61,8 +93,8 @@
 <p>本検証に伴う構築、設定変更はcloudformationを利用して行う方針とする。<br />
 cloudformationを扱ったことがなく、プロジェクトでも利用出来ていないためである。</p>
 </section>
-<section id="id4">
-<h3>想定構成図<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<section id="id8">
+<h3>想定構成図<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
 <p>EC2の構成図<br />
 <img alt="EC2_Diagram" src="../_images/EC2.drawio.png" /></p>
 <p>ECSの構成図<br />
@@ -70,8 +102,8 @@ cloudformationを扱ったことがなく、プロジェクトでも利用出来
 <p>サーバレスの構成図<br />
 <img alt="less_Diagram" src="../_images/serverless.drawio.png" /></p>
 </section>
-<section id="id5">
-<h3>評価観点<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<section id="id9">
+<h3>評価観点<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
 <p>・構築時に必要な作業(工数)<br />
 ・設定変更に必要な作業(工数)<br />
 ・ランニングコスト(通常時、コスト削減方法のバリエーション)<br />
@@ -84,12 +116,12 @@ cloudformationを扱ったことがなく、プロジェクトでも利用出来
 ・その他</p>
 <p>3.上記を進めるためCloudformationを学習中。VPC、サブネット、ルートテーブルまでは作成。</p>
 </section>
-<section id="id6">
-<h3>困っていること<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<section id="id10">
+<h3>困っていること<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
 <p>業務多忙です。。。しばらくは状況悪化する可能性の方が高いです。</p>
 </section>
-<section id="id7">
-<h3>次回までのToDO<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<section id="id11">
+<h3>次回までのToDO<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
 <p>1.CloudformationでEC2環境の構築</p>
 </section>
 </section>
@@ -106,13 +138,19 @@ cloudformationを扱ったことがなく、プロジェクトでも利用出来
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">活動状況</a><ul>
-<li><a class="reference internal" href="#id2">2023/11/09時点の状況</a><ul>
-<li><a class="reference internal" href="#todo">前回記載した次回までのToDO</a></li>
-<li><a class="reference internal" href="#id3">直近のテーマと選定理由(～12月)</a></li>
-<li><a class="reference internal" href="#id4">想定構成図</a></li>
-<li><a class="reference internal" href="#id5">評価観点</a></li>
-<li><a class="reference internal" href="#id6">困っていること</a></li>
-<li><a class="reference internal" href="#id7">次回までのToDO</a></li>
+<li><a class="reference internal" href="#id2">2023/12/07時点の状況</a><ul>
+<li><a class="reference internal" href="#id3">実施したこと</a></li>
+<li><a class="reference internal" href="#id4">困っていること</a></li>
+<li><a class="reference internal" href="#todo">次回までのToDO</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">2023/11/09時点の状況</a><ul>
+<li><a class="reference internal" href="#id6">前回記載した次回までのToDO</a></li>
+<li><a class="reference internal" href="#id7">直近のテーマと選定理由(～12月)</a></li>
+<li><a class="reference internal" href="#id8">想定構成図</a></li>
+<li><a class="reference internal" href="#id9">評価観点</a></li>
+<li><a class="reference internal" href="#id10">困っていること</a></li>
+<li><a class="reference internal" href="#id11">次回までのToDO</a></li>
 </ul>
 </li>
 </ul>
@@ -127,8 +165,8 @@ cloudformationを扱ったことがなく、プロジェクトでも利用出来
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="shpinx.html"
-                          title="next chapter"><span class="section-number">1. </span>Sphinx入門</a></p>
+    <p class="topless"><a href="task.html"
+                          title="next chapter">EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -158,7 +196,7 @@ cloudformationを扱ったことがなく、プロジェクトでも利用出来
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="shpinx.html" title="1. Sphinx入門"
+          <a href="task.html" title="EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討"
              >next</a> |</li>
         <li class="right" >
           <a href="school.html" title="「テーマ名」概要"

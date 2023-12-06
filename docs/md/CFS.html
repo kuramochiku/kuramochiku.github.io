@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html lang="jp" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>CloudFormation入門 &#8212; workmemo 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
+    <script src="../_static/documentation_options.js?v=4f78e891"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. ECS入門" href="ECS.html" />
+    <link rel="prev" title="2. SpringBoot入門" href="spring.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ECS.html" title="1. ECS入門"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="spring.html" title="2. SpringBoot入門"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">CloudFormation入門</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="cloudformation">
+<h1>CloudFormation入門<a class="headerlink" href="#cloudformation" title="Link to this heading">¶</a></h1>
+<p>CloudFormation(CF)とは、AWSリソースを自動作成するサービスである。<br />
+JSONやYAML形式のファイルに設定値を記載する。</p>
+<section id="vpc">
+<h2>書式サンプル(VPC作成)<a class="headerlink" href="#vpc" title="Link to this heading">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>AWSTemplateFormatVersion: 2010-09-09 # テンプレートフォーマットのバージョン。1つしか無いらしい。  
+Description: Template for VPC  
+
+Resources:
+  TESTVPC: # CF内で使用する論理ID。  
+    Type: AWS::EC2::VPC # 何のリソースかの定義  
+    Properties: # 必要な設定を入れる  
+      CidrBlock: 192.168.1.0/24  
+      InstanceTenancy: default
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags: # 付与したいタグを入れる  
+        - Key: Name  
+          Value: TEST-vpc  
+          
+  PrivateSubnet:  
+    Type: AWS::EC2::Subnet  
+      Properties:  
+        CidrBlock: 192.168.1.0/25  
+        MapPublicIpOnLaunch: false  
+        VpcId: !Ref TESTVPC # 上記でVPCを作成しないとVPCIDが分からないため、変数的な記載となる。  
+        AvailabilityZone: &quot;ap-northeast-1a&quot;  
+        Tags:  
+          - Key: Name  
+            Value: private-1a  
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h2>パラメータ定義<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p>Cloudformationでは以下のようにパラメータを定義し、代入することが可能である。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Parameters:  
+ BucketNameShizai: #パラメータ名。何でもOKと思われる。  
+  Type: String # パラメータのタイプ定義。  
+  Description: Name for Shizai BucketName # パラメータの説明文。何でもOKと思われるが分かりやすい説明が良い。  
+  Default: ma-kuramochiku-shizai # デフォルト値。特に設定しなくても良い。  
+  
+Resources:  
+  S3BucketShizai:  
+    Type: AWS::S3::Bucket  
+    Properties:  
+      AccessControl: Private  
+      BucketName: !Ref BucketNameShizai # 事前に定義したパラメータの利用。 
+</pre></div>
+</div>
+<p>なお、実際にパラメータの値に何を入れるかはAWSマネジメントコンソールからスタックを作成するタイミングでパラメータ画面が表示される。<br />
+デフォルト設定している場合は本画面表示時に値が入っている。</p>
+<section id="id2">
+<h3>入力パラメータの限定<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Parameters</span><span class="p">:</span>  
+  <span class="n">Env</span><span class="p">:</span>  
+    <span class="n">Type</span><span class="p">:</span> <span class="n">String</span>  
+    <span class="n">Default</span><span class="p">:</span> <span class="n">dev</span>  
+    <span class="n">AllowedValues</span><span class="p">:</span> <span class="c1"># 入力値を以下に限定する  </span>
+      <span class="o">-</span> <span class="n">dev</span>  
+      <span class="o">-</span> <span class="n">prod</span>  
+    <span class="n">Description</span><span class="p">:</span> <span class="s2">&quot;Enter an environment name&quot;</span> 
+</pre></div>
+</div>
+<p>AllowedValuesを用いることで入力値を限定することができる。スタック作成時にはドロップダウンリストで表示される。</p>
+</section>
+</section>
+<section id="ref-sub">
+<h2>!Refと!Subの使い分け<a class="headerlink" href="#ref-sub" title="Link to this heading">¶</a></h2>
+<p>CloudFormationの組み込み関数として、!Refと!Subがあります。<br />
+これらは基本的には同一であり、論理名を参照し、規定の値に変換する。</p>
+<section id="id3">
+<h3>使い方注意<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>!Refは論理名を直接表記するのに対し、!Subは論理名を${}でくくって使用する。<br />
+なお、!Ref で参照する論理名を${}でくくると、CloudFormationはエラーを返す。<br />
+!Subで${}を忘れた場合、エラーは発生しないが後述の文字列を結合する作用の関係で論理名が文字列として認識されるため、変換が行われない。</p>
+</section>
+<section id="id4">
+<h3>文字列との結合<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p>!Subは、そのまま変数と文字列を結合可能である。!Refでは文字列の結合は行えない。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>      BucketName: !Sub ${BucketNameShizai}-test
+      
+      BucketName: !Sub ${BucketNameShizai}-test-${Env} 
+      
+</pre></div>
+</div>
+</section>
+</section>
+<section id="outputs">
+<h2>Outputsの使い方<a class="headerlink" href="#outputs" title="Link to this heading">¶</a></h2>
+<p>Cloudformationでは、Outputsセクションを定義することでクロススタック(他スタックに値を引き渡)したり、値をマネジメントコンソール上に表示することができる。<br />
+以下では値の引き渡しについて記載する。サンプルコードは以下となる。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>エクスポート元.yaml  
+Outputs:  
+  VpcId:  
+    Value: !Ref VPC # 省略しているが、本スタック内で作成したVPCの情報をエクスポート対象とする。  
+    Export: # 渡す値をExportで出力する  
+      Name: VpcId # VpcIdというパラメータ名でエクスポートする。  
+      
+インポート先.yaml  
+  Properties:  
+    VpcId: !ImportValue VpcId # 事前にエクスポートしていたVpcIdというパラメータを利用する。  
+    CidrBlock: 10.250.251.0/28  
+</pre></div>
+</div>
+<p>クロススタック参照には以下の制限があります。</p>
+<ul class="simple">
+<li><p>AWS アカウントごとに、Export 名前がリージョン内で一意である必要があります。</p></li>
+<li><p>リージョン間でクロススタック参照を作成することはできません。組み込み関数 Fn::ImportValue を使用して、同じリージョン内にエクスポートされた値のみをインポートできます。</p></li>
+<li><p>出力の場合、Export の Name プロパティの値は、リソースに依存する Ref または GetAtt の関数を使用できません。</p></li>
+<li><p>同様に、ImportValue 関数にリソースに依存する Ref または GetAtt 関数を含めることはできません。</p></li>
+<li><p>別のスタックがその出力の 1 つを参照している場合、スタックを削除することはできません。</p></li>
+<li><p>別のスタックによって参照されている出力値を変更または削除することはできません。</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>発生したエラーのメモ<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<section id="id">
+<h3>論理ID定義ミス<a class="headerlink" href="#id" title="Link to this heading">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Template</span> <span class="nb">format</span> <span class="n">error</span><span class="p">:</span> <span class="n">Unresolved</span> <span class="n">resource</span> <span class="n">dependencies</span> <span class="p">[</span><span class="n">PublicRouteTable</span><span class="p">,</span> <span class="n">PublicSubnet1C</span><span class="p">]</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">Resources</span> <span class="n">block</span> <span class="n">of</span> <span class="n">the</span> <span class="n">template</span> 
+</pre></div>
+</div>
+<p>単純な論理IDのミス。定義していない論理IDを設定したことによるエラー。名前を修正することで解決。</p>
+</section>
+<section id="id6">
+<h3>論理IDに使用してはいけない文字を使用<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CloudFormation</span><span class="p">::</span> <span class="n">Parameter</span> <span class="ow">is</span> <span class="n">non</span> <span class="n">alphaNumeric</span> 
+</pre></div>
+</div>
+<p>論理IDに使えない文字を使用したことによるエラー。ハイフンもNGとのこと。</p>
+</section>
+<section id="id7">
+<h3>論路IDの重複<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<p>論理 ID が重複する複数のリソースを作成すると、そのうち 1 つのリソースのみが作成される。<br />
+論理 ID が重複するリソースを CloudFormation テンプレートで定義した場合には、意図した設定のリソースが作成されない可能性がある。</p>
+</section>
+<section id="id8">
+<h3>何かが違う・・・？<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<p>ELBのリソース作成時に以下エラーが出力<br />
+マニュアルを見てもStringが入るべき場所なのに「JSONArray」を想定しているというエラー</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Properties</span> <span class="n">validation</span> <span class="n">failed</span> <span class="k">for</span> <span class="n">resource</span> <span class="n">ALBName</span> <span class="k">with</span> <span class="n">message</span><span class="p">:</span> <span class="c1">#/SecurityGroups: expected type: JSONArray, found: String </span>
+</pre></div>
+</div>
+<p>意味が分からなかったが、以下のように記載の仕方を変えてみたら通った。謎・・・。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>      SecurityGroups: !Ref ALBSG 
+↓
+      SecurityGroups: 
+        - !Ref ALBSG 
+</pre></div>
+</div>
+</section>
+<section id="id9">
+<h3>設定値の大文字、小文字によるエラー<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<p>ELB作成時に以下エラーが発生した。
+「internal」にしているはずだよな、スペルミスかなと確認したところ「Internal」となっていた。<br />
+これだけで動かないのかと思いつつ、変更して実行したところ正常に動作した。<br />
+なお、エラーの直接的な意味としては「設定された値が想定されているものと違うから確認してね」といったところである。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Resource</span> <span class="n">handler</span> <span class="n">returned</span> <span class="n">message</span><span class="p">:</span> <span class="s2">&quot;1 validation error detected: Value &#39;Internal&#39; at &#39;scheme&#39; failed to satisfy constraint: Member must satisfy enum value set: [internet-facing, internal] (Service: ElasticLoadBalancingV2, Status Code: 400, Request ID: 62e736d4-648f-4056-9f86-e6f9c04b0f0d)&quot;</span> <span class="p">(</span><span class="n">RequestToken</span><span class="p">:</span> <span class="mf">87e3</span><span class="n">adf8</span><span class="o">-</span><span class="mi">9100</span><span class="o">-</span><span class="mi">9416</span><span class="o">-</span><span class="mi">23</span><span class="n">a5</span><span class="o">-</span><span class="n">dae97f4295e0</span><span class="p">,</span> <span class="n">HandlerErrorCode</span><span class="p">:</span> <span class="n">InvalidRequest</span><span class="p">)</span>  
+</pre></div>
+</div>
+</section>
+<section id="id10">
+<h3>よく分からない系<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<p>ちゃんとメモしていなかったが、スタックを実行しようとするが実行前に構文エラー。<br />
+デザインページで構文チェックするも問題なし。<br />
+何度かファイルを読み直すと、そのまま通ったためスタック実行して特にエラーなく終了。</p>
+<p>似た話でインポートした変数が存在しないというエラーで、スタックの実行ができないことがあった。<br />
+エクスポート元のスタックでは変数出力出来ているようにしか見えないず、ググってもよく分からず。<br />
+試しに変数部分をハードコーディングに変更し、他にあったエラーを解消してから再度インポート変数化したところ、問題なく実行できた。<br />
+マネコン実行前のチェックによるエラーはよく分からない。(別のエラーとかに引っ張られた？)</p>
+</section>
+</section>
+<section id="id11">
+<h2>小技<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h2>
+<section id="vpc-cidr">
+<h3>VPC Cidr関数<a class="headerlink" href="#vpc-cidr" title="Link to this heading">¶</a></h3>
+<p>Subnet作成時にVPC Cidrの範囲から作成することとなるが、これらをハードコーディングするのは不便である。<br />
+これを関数で解決するのが以下となる。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!Select [ 1, !Cidr [ !GetAtt VPC.CidrBlock, 2, 7 ]] 
+</pre></div>
+</div>
+<p>カンマで区切られた4つのエリアについて以下に説明する。<br />
+1.取り出すデータ領域の指定 配列に格納された何番目のデータを取り出すか指定する。<br />
+配列は「0」から始まるので1つ目のデータを取り出したい場合は「0」と指定し、3番目のデータを取り出したい場合は「2」と指定する。</p>
+<p>2.元データを指定 配列に格納される元データを指定する。</p>
+<p>3.作成する配列データの数を指定 何個の配列データを作成するかを指定する。</p>
+<p>4.サブネットビットを指定 サブネットビットはサブネットマスクの逆である。例えば/24を指定したい場合は8、/25を指定する場合は7となる。</p>
+</section>
+<section id="az">
+<h3>AZ取得関数<a class="headerlink" href="#az" title="Link to this heading">¶</a></h3>
+<p>以下のような記述とすることでサブネットのアベイラビリティーゾーンを指定できる。どちらも同じ意味である。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">AvailabilityZone</span><span class="p">:</span>  
+      <span class="n">Fn</span><span class="p">::</span><span class="n">Select</span><span class="p">:</span>  
+        <span class="o">-</span> <span class="mi">0</span>   
+        <span class="o">-</span> <span class="n">Fn</span><span class="p">::</span><span class="n">GetAZs</span><span class="p">:</span> <span class="s2">&quot;&quot;</span> 
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>AvailabilityZone: !Select  
+  - 0  
+  - Fn::GetAZs: !Ref &#39;AWS::Region&#39; 
+</pre></div>
+</div>
+<p>◆注意点
+本機能は「デプロイ先リージョンのすべての AZ をリスト」する機能ではない。<br />
+デフォルト VPC が存在するリージョンでは、デフォルトのサブネットがあるアベイラビリティーゾーンのみを返却する。</p>
+</section>
+</section>
+<section id="id12">
+<h2>その他<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h2>
+<section id="iam">
+<h3>IAMインスタンスプロファイル<a class="headerlink" href="#iam" title="Link to this heading">¶</a></h3>
+<p>EC2にIAM権限を付与する時は「IAMインスタンスプロファイル」というものをEC2にアタッチする。<br />
+インスタンスプロファイルはEC2のみに使われる概念であり、IAMロールを作成すると自動で同名のIAMインスタンスプロファイルが作成されるため、あまり意識することは無い。<br />
+ただし、Cloudformationでは明示的に作成する必要があるため、注意が必要である。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>AWSTemplateFormatVersion: &quot;2010-09-09&quot;
+Resources:  
+  EC2Instance:  
+    Type: &quot;AWS::EC2::Instance&quot;  
+    Properties:
+      IamInstanceProfile: !Ref IAMRole  
+      Tags:   
+        - 
+          Key: &quot;Name&quot;  
+          Value: &quot;Test&quot;  
+    
+  IAMRole:  
+    Type: &quot;AWS::IAM::Role&quot;  
+    Properties:  
+      Path: &quot;/&quot;  
+      RoleName: &quot;Test-Role&quot;  
+      AssumeRolePolicyDocument: &quot;{\&quot;Version\&quot;:\&quot;2012-10-17\&quot;,\&quot;Statement\&quot;:[{\&quot;Effect\&quot;:\&quot;Allow\&quot;,\&quot;Principal\&quot;:{\&quot;Service\&quot;:\&quot;ec2.amazonaws.com\&quot;},\&quot;Action\&quot;:\&quot;sts:AssumeRole\&quot;}]}&quot;     
+      
+      # IAMインスタンスプロファイルを作成する必要がある   
+  IAMInstanceProfile:  
+    Type: &quot;AWS::IAM::InstanceProfile&quot;  
+    Properties:  
+      Path: &quot;/&quot;
+      InstanceProfileName: !Ref IAMRole  
+      Roles:  
+        - !Ref IAMRole
+</pre></div>
+</div>
+</section>
+<section id="ssm">
+<h3>SSM接続<a class="headerlink" href="#ssm" title="Link to this heading">¶</a></h3>
+<p>LinuxのEC2にSSM接続するためには以下の設定が必要である。<br />
+1,EC2に「AmazonSSMManagedInstanceCore」ポリシーを付与したIAMロールを設定する。<br />
+2,EC2にSSMAgentをインストールし、起動する。(AmazonLinuxは初期インストール済み)<br />
+3,インターネット接続不可なEC2の場合は以下エンドポイントを設定する。</p>
+<ul class="simple">
+<li><p>com.amazonaws.region.ssm</p></li>
+<li><p>com.amazonaws.region.ec2messages</p></li>
+<li><p>com.amazonaws.region.ssmmessages</p></li>
+</ul>
+<p>なお、Cloudformationでエンドポイントを作成する場合、タグの付与は出来ないようである。作成後に手動追加が必要。(結構不便・・・)</p>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">CloudFormation入門</a><ul>
+<li><a class="reference internal" href="#vpc">書式サンプル(VPC作成)</a></li>
+<li><a class="reference internal" href="#id1">パラメータ定義</a><ul>
+<li><a class="reference internal" href="#id2">入力パラメータの限定</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ref-sub">!Refと!Subの使い分け</a><ul>
+<li><a class="reference internal" href="#id3">使い方注意</a></li>
+<li><a class="reference internal" href="#id4">文字列との結合</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#outputs">Outputsの使い方</a></li>
+<li><a class="reference internal" href="#id5">発生したエラーのメモ</a><ul>
+<li><a class="reference internal" href="#id">論理ID定義ミス</a></li>
+<li><a class="reference internal" href="#id6">論理IDに使用してはいけない文字を使用</a></li>
+<li><a class="reference internal" href="#id7">論路IDの重複</a></li>
+<li><a class="reference internal" href="#id8">何かが違う・・・？</a></li>
+<li><a class="reference internal" href="#id9">設定値の大文字、小文字によるエラー</a></li>
+<li><a class="reference internal" href="#id10">よく分からない系</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id11">小技</a><ul>
+<li><a class="reference internal" href="#vpc-cidr">VPC Cidr関数</a></li>
+<li><a class="reference internal" href="#az">AZ取得関数</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id12">その他</a><ul>
+<li><a class="reference internal" href="#iam">IAMインスタンスプロファイル</a></li>
+<li><a class="reference internal" href="#ssm">SSM接続</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="spring.html"
+                          title="previous chapter"><span class="section-number">2. </span>SpringBoot入門</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="ECS.html"
+                          title="next chapter"><span class="section-number">1. </span>ECS入門</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/md/CFS.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ECS.html" title="1. ECS入門"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="spring.html" title="2. SpringBoot入門"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">CloudFormation入門</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, kuramochi.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>
