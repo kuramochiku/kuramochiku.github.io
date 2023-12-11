@@ -137,7 +137,26 @@ Properties validation failed for resource ALBName with message: #/SecurityGroups
 ↓
       SecurityGroups: 
         - !Ref ALBSG 
-```  
+```
+
+VPCエンドポイントの「RouteTableIds」でも同事象あり。  
+マニュアルを見ると以下のようになっており、複数のものを羅列することが可能な場合は、例え1つしか記載しなくても、1行に記載するとエラーになると思われる。  
+```
+Type: AWS::EC2::VPCEndpoint
+Properties:
+  PolicyDocument: Json
+  PrivateDnsEnabled: Boolean
+  RouteTableIds: 
+    - String
+  SecurityGroupIds: 
+    - String
+  ServiceName: String
+  SubnetIds: 
+    - String
+  VpcEndpointType: String
+  VpcId: String
+```
+
 ### 設定値の大文字、小文字によるエラー  
 ELB作成時に以下エラーが発生した。 
 「internal」にしているはずだよな、スペルミスかなと確認したところ「Internal」となっていた。  
