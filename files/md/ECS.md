@@ -24,7 +24,20 @@ Cloud9を利用するためにはEC2からインターネット接続が必要�
 
 ## ECS エラー 
 ### ECSタスク作成時 
-指定したVPCがインターネット接続が可能でないといけないかも。  
+指定したVPCがインターネット接続が可能でないといけない。  
+
+```
+CannotPullContainerError: ref pull has been retried 5 time(s): failed to copy: httpReadSeeker: failed open: failed to do request: Get 626394096352.dkr.ecr.ap-northeast-1.amazonaws.com/ma-kuramochiku-ecs-helloworld:0.0.1: dial tcp 52.219.199.138:443: i/o timeout
+```
+
+エンドポイントも用意されており、以下エンドポイントでも代用可能である。  
+ECR用エンドポイント  
+* com.amazonaws.region.ecr.dkr  
+* com.amazonaws.region.ecr.api
+* com.amazonaws.region.s3（ゲートウェイ型）
+
+構築するリソースによって必要なエンドポイントは異なる。詳細は以下などを参照すること。  
+https://dev.classmethod.jp/articles/vpc-endpoints-for-ecs-2022/#toc-1  
 
 # Docker入門  
 Dockerとは、軽量で高速に動作するコンテナ型仮想環境用のプラットフォームです。  
