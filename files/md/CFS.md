@@ -195,6 +195,41 @@ Parameters:
   Default: ma-kuramochiku-shizai
 ```
 
+### インデント
+```
+Template format error: YAML not well-formed. (line 40, column 3)
+```
+
+以下のように1つ目のリソースのインデントを誤っているにも関わらず、エラーの行数は2つ目のリソースを指してくるパターンもある。  
+2つ目ばっかり見ていたから気付くのに非常に時間がかかった。。。こういうのはきつい。  
+
+```
+Resources:
+    SSMIAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              Service:
+                - 'ec2.amazonaws.com'
+            Action:
+              - 'sts:AssumeRole'
+      Path: '/'
+      RoleName: !Sub ${CommonName}-ssm-role
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+
+  SSMIAMProfile:
+    Type: 'AWS::IAM::InstanceProfile'
+    Properties:
+      Path: '/'
+      Roles:
+        - !Ref SSMIAMRole
+```
+
 ### オートスケーリンググループエラーメモ
 「LoadBalancerNames」を設定しているが、ALBの場合左記ではなく「TargetGroupARNs」が必要というエラー？
 ```
