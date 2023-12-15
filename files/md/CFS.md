@@ -176,6 +176,25 @@ Resource handler returned message: "1 validation error detected: Value 'Internal
 試しに変数部分をハードコーディングに変更し、他にあったエラーを解消してから再度インポート変数化したところ、問題なく実行できた。  
 マネコン実行前のチェックによるエラーはよく分からない。(別のエラーとかに引っ張られた？)  
 
+### 凡ミス
+パラメータ指定している部分で以下エラーが出力。何度見てもおかしいところが分からなかったが・・・  
+```
+YAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 10, column 7: Type: String ^
+```
+
+1行前に「:」が抜けておりました。凡ミスですね。  
+```
+Parameters:
+ CommonName:
+  Type: String
+  Description: Name for CommonName
+  Default: ma-kuramochiku
+ S3prefix
+  Type: String
+  Description: Name for S3 prefix
+  Default: ma-kuramochiku-shizai
+```
+
 ## 小技  
 ### VPC Cidr関数  
 Subnet作成時にVPC Cidrの範囲から作成することとなるが、これらをハードコーディングするのは不便である。  
