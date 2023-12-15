@@ -195,6 +195,16 @@ Parameters:
   Default: ma-kuramochiku-shizai
 ```
 
+### オートスケーリンググループエラーメモ
+「LoadBalancerNames」を設定しているが、ALBの場合左記ではなく「TargetGroupARNs」が必要というエラー？
+```
+Resource handler returned message: "Provided Load Balancers may not be valid. Please ensure they exist and try again. (Service: AutoScaling, Status Code: 400, Request ID: 316a87f0-eb2d-4d9e-a347-aae690e5eb61)" (RequestToken: 2db92335-17e5-e79e-3bcd-7ceccff815de, HandlerErrorCode: InvalidRequest)
+```
+
+```
+Resource handler returned message: "You must use a valid fully-formed launch template. The key pair 'ma-kuramochiku-ec2-key' does not exist (Service: AutoScaling, Status Code: 400, Request ID: fbe71325-7b27-470a-ac43-00ab72af682e)" (RequestToken: 7f50cc4a-e688-659b-6138-79e41e6dbedc, HandlerErrorCode: InvalidRequest)
+```
+
 ## 小技  
 ### VPC Cidr関数  
 Subnet作成時にVPC Cidrの範囲から作成することとなるが、これらをハードコーディングするのは不便である。  
