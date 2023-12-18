@@ -271,12 +271,25 @@ Resource handler returned message: "route table rtb-0f0208b3b143f23ea and networ
 
   PubRoute01:
     Type: "AWS::EC2::Route"
+    DependsOn: AttachGateway　　★　ここが重要
     Properties:
-      DependsOn: AttachGateway　　★　ここが重要
       DestinationCidrBlock: 0.0.0.0/0
       GatewayId: !Ref InternetGateway
       RouteTableId: !ImportValue KuramochikuPublicRouteTable
 ```
+
+### NatGateway作成が終わらない(CREATE IN PROCESSがずっと続く)
+Stackが完了せず、以下のようにタイムアウトしてエラーとなった。今回は該当リソース作成開始から25分くらい。  
+該当処理はPrivateサブネットのルートテーブルにNatgateway向きのルート情報を追加しようとした処理である。  
+処理自体は完了しているように見え、Privateサブネットからのインターネット通信はできるようになったが処理が終わらない。  
+```
+Resource handler returned message: "Exceeded attempts to wait" (RequestToken: 94734a53-b53f-b335-1b4f-45f2716253c8, HandlerErrorCode: NotStabilized)
+```
+
+結論から言うと、GatewayIdのキーにNATゲートウェイを指定していたことが原因でした。  
+本来は、NatGatewayIdというキーに対してNATゲートウェイを指定するのが正しい書き方になります。  
+「GatewayIdに設定できるのは、インターネットゲートウェイと仮装プライベートゲートウェイだけ」だそうです。  
+紛らわしい・・・。下手に一時的に動作しちゃうのも問題ですね。  
 
 ## 小技  
 ### VPC Cidr関数  
