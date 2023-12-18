@@ -241,6 +241,43 @@ Resource handler returned message: "Provided Load Balancers may not be valid. Pl
 Resource handler returned message: "You must use a valid fully-formed launch template. The key pair 'ma-kuramochiku-ec2-key' does not exist (Service: AutoScaling, Status Code: 400, Request ID: fbe71325-7b27-470a-ac43-00ab72af682e)" (RequestToken: 7f50cc4a-e688-659b-6138-79e41e6dbedc, HandlerErrorCode: InvalidRequest)
 ```
 
+### Subnetを再構成しようとStack更新した時のエラー
+/25×2個のサブネットから/26×4個のサブネット構成に変更しようとしてStack更新したが以下のエラーとなった。  
+既存サブネットが削除される前に新サブネットを追加しようとしてエラーとなったのかも？  
+```
+Resource handler returned message: "The CIDR '10.2.77.128/26' conflicts with another subnet (Service: Ec2, Status Code: 400, Request ID: 215e1dce-4a0d-4f45-b1c6-8566becc28b5)" (RequestToken: 7482c495-a16d-6fb3-a419-601f7dd09766, HandlerErrorCode: AlreadyExists)
+```
+
+### IGWのルーティング追加
+IGW用のルートテーブル作成時に以下のようにルートテーブルと別ネットワークだよというエラー発生。  
+```
+Resource handler returned message: "route table rtb-0f0208b3b143f23ea and network gateway igw-0ef28e6de1223f62a belong to different networks (Service: Ec2, Status Code: 400, Request ID: 2e551dfb-eca4-4308-84bf-2cb217ce6fa7)" (RequestToken: 33a5c3a7-3a8b-1e36-4a08-6e957f41df29, HandlerErrorCode: GeneralServiceException)
+```
+調べてみるとスタックとしては以下のようになっており、IGW作成時点ではVPCにアタッチされない。  
+そのため、アタッチ処理が完了してからルートテーブル編集するように「DependsOn」をつけてあげる必要がある。  
+```
+  InternetGateway:
+    Type: "AWS::EC2::InternetGateway"
+    Properties:
+      Tags:
+      - Key: Name
+        Value: !Sub ${CommonName}-igw
+        
+  AttachGateway:
+    Type: "AWS::EC2::VPCGatewayAttachment"
+    Properties:
+      InternetGatewayId: !Ref InternetGateway
+      VpcId: !ImportValue KuramochikuVpcId
+
+  PubRoute01:
+    Type: "AWS::EC2::Route"
+    Properties:
+      DependsOn: AttachGateway　　★　ここが重要
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+      RouteTableId: !ImportValue KuramochikuPublicRouteTable
+```
+
 ## 小技  
 ### VPC Cidr関数  
 Subnet作成時にVPC Cidrの範囲から作成することとなるが、これらをハードコーディングするのは不便である。  
