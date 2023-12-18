@@ -13,6 +13,9 @@ https://aws.amazon.com/jp/events/aws-event-resource/hands-on/
 ECSハンズオン  
 https://aws-samples.github.io/jp-contents-hub/#containers  
 
+ECS CICD ハンズオン  
+https://pages.awscloud.com/rs/112-TZM-766/images/AWS_CICD_ECS_Handson.pdf  
+
 ### 管理
 Cloud Financial Managementベンチマーク調査  
 https://aws.amazon.com/jp/blogs/news/aws-cfm-benchmark-survey/  
