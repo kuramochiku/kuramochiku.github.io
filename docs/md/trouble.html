@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>その他様々な情報を記載する。 &#8212; workmemo 1 documentation</title>
+    <title>トラブル雑記 &#8212; workmemo 1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
     <script src="../_static/documentation_options.js?v=4f78e891"></script>
@@ -13,6 +13,7 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="URLリンク集" href="URL.html" />
     <link rel="prev" title="テーマ再検討(AWS)" href="AWS1.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -22,10 +23,13 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="URL.html" title="URLリンク集"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
           <a href="AWS1.html" title="テーマ再検討(AWS)"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">その他様々な情報を記載する。</a></li> 
+        <li class="nav-item nav-item-this"><a href="">トラブル雑記</a></li> 
       </ul>
     </div>  
 
@@ -35,11 +39,28 @@
           <div class="body" role="main">
             
   <section id="id1">
-<h1>その他様々な情報を記載する。<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<h1>トラブル雑記<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>本項には各作業に直接関連しないトラブルについて記載する。</p>
+<section id="aws">
+<h2>AWS<a class="headerlink" href="#aws" title="Link to this heading">¶</a></h2>
+<section id="id2">
+<h3>要インターネット通信<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p>閉域VPC内でインターネット接続が必要なサービスを利用する時はエンドポイントが無いかを確認すること。多分、ほぼ存在する。<br />
+※ 今回例、ECR,ECS,Cloud9</p>
+</section>
+<section id="s3">
+<h3>S3エンドポイント(ゲートウェイ型)<a class="headerlink" href="#s3" title="Link to this heading">¶</a></h3>
+<p>ゲートウェイ型のエンドポイントの場合、宛先IPがプライベートIPになる訳ではなく、グローバルIPの通信がルーティングされるイメージである。<br />
+そのため、NetworkACLとしてはグローバルIPを許可する必要がある。</p>
+</section>
+</section>
+<section id="windows">
+<h2>Windows<a class="headerlink" href="#windows" title="Link to this heading">¶</a></h2>
 <section id="windows11">
-<h2>Windows11の拡張子表示<a class="headerlink" href="#windows11" title="Link to this heading">¶</a></h2>
+<h3>Windows11の拡張子表示<a class="headerlink" href="#windows11" title="Link to this heading">¶</a></h3>
 <p>フォルダオプションから変更ではなく、任意のフォルダのメニューから「表示」→「表示」→「ファイル名拡張子」をクリックすることで表示可能。<br />
 隠しファイルも同様の手順で表示可能となる。</p>
+</section>
 </section>
 </section>
 
@@ -53,8 +74,16 @@
   <div>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">その他様々な情報を記載する。</a><ul>
+<li><a class="reference internal" href="#">トラブル雑記</a><ul>
+<li><a class="reference internal" href="#aws">AWS</a><ul>
+<li><a class="reference internal" href="#id2">要インターネット通信</a></li>
+<li><a class="reference internal" href="#s3">S3エンドポイント(ゲートウェイ型)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#windows">Windows</a><ul>
 <li><a class="reference internal" href="#windows11">Windows11の拡張子表示</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -65,10 +94,15 @@
     <p class="topless"><a href="AWS1.html"
                           title="previous chapter">テーマ再検討(AWS)</a></p>
   </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="URL.html"
+                          title="next chapter">URLリンク集</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/md/other.md.txt"
+      <li><a href="../_sources/md/trouble.md.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -93,10 +127,13 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
+          <a href="URL.html" title="URLリンク集"
+             >next</a> |</li>
+        <li class="right" >
           <a href="AWS1.html" title="テーマ再検討(AWS)"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">その他様々な情報を記載する。</a></li> 
+        <li class="nav-item nav-item-this"><a href="">トラブル雑記</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

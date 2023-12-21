@@ -63,12 +63,28 @@ SpringBootの執筆環境としても利用可能らしい。</p>
 <p>なお、実態はEC2であり、作成時にVPCを選択する必要がある。(選択画面は隠れていて、デフォルトはデフォルトVPC)<br />
 Cloud9を利用するためにはEC2からインターネット接続が必要である。(IGWがあるサブネットかNATGateway経由のアクセス)</p>
 </section>
+<section id="cloud9">
+<h3><span class="section-number">1.1.2. </span>Cloud9でメニューバーが消えた時の対処<a class="headerlink" href="#cloud9" title="Link to this heading">¶</a></h3>
+<p>上の部分に隠れているという扱いらしく、隙間をクリックするとメニューバーが表示される。</p>
+</section>
 </section>
 <section id="id1">
 <h2><span class="section-number">1.2. </span>ECS エラー<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <section id="id2">
 <h3><span class="section-number">1.2.1. </span>ECSタスク作成時<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
-<p>指定したVPCがインターネット接続が可能でないといけないかも。</p>
+<p>指定したVPCがインターネット接続が可能でないといけない。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CannotPullContainerError</span><span class="p">:</span> <span class="n">ref</span> <span class="n">pull</span> <span class="n">has</span> <span class="n">been</span> <span class="n">retried</span> <span class="mi">5</span> <span class="n">time</span><span class="p">(</span><span class="n">s</span><span class="p">):</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">copy</span><span class="p">:</span> <span class="n">httpReadSeeker</span><span class="p">:</span> <span class="n">failed</span> <span class="nb">open</span><span class="p">:</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">do</span> <span class="n">request</span><span class="p">:</span> <span class="n">Get</span> <span class="mf">626394096352.</span><span class="n">dkr</span><span class="o">.</span><span class="n">ecr</span><span class="o">.</span><span class="n">ap</span><span class="o">-</span><span class="n">northeast</span><span class="o">-</span><span class="mf">1.</span><span class="n">amazonaws</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ma</span><span class="o">-</span><span class="n">kuramochiku</span><span class="o">-</span><span class="n">ecs</span><span class="o">-</span><span class="n">helloworld</span><span class="p">:</span><span class="mf">0.0.1</span><span class="p">:</span> <span class="n">dial</span> <span class="n">tcp</span> <span class="mf">52.219.199.138</span><span class="p">:</span><span class="mi">443</span><span class="p">:</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span> <span class="n">timeout</span>
+</pre></div>
+</div>
+<p>エンドポイントも用意されており、以下エンドポイントでも代用可能である。<br />
+ECR用エンドポイント</p>
+<ul class="simple">
+<li><p>com.amazonaws.region.ecr.dkr</p></li>
+<li><p>com.amazonaws.region.ecr.api</p></li>
+<li><p>com.amazonaws.region.s3（ゲートウェイ型）</p></li>
+</ul>
+<p>構築するリソースによって必要なエンドポイントは異なる。詳細は以下などを参照すること。<br />
+https://dev.classmethod.jp/articles/vpc-endpoints-for-ecs-2022/#toc-1</p>
 </section>
 </section>
 </section>
@@ -114,6 +130,7 @@ https://docs.docker.jp/engine/reference/builder.html</p>
 <li><a class="reference internal" href="#">1. ECS入門</a><ul>
 <li><a class="reference internal" href="#amazon-ecs">1.1. Amazon ECS 入門ハンズオン</a><ul>
 <li><a class="reference internal" href="#aws-cloud9">1.1.1. 作業環境の作成(AWS Cloud9)</a></li>
+<li><a class="reference internal" href="#cloud9">1.1.2. Cloud9でメニューバーが消えた時の対処</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#id1">1.2. ECS エラー</a><ul>

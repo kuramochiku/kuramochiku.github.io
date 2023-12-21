@@ -189,6 +189,23 @@ Outputs:
         - !Ref ALBSG 
 </pre></div>
 </div>
+<p>VPCエンドポイントの「RouteTableIds」でも同事象あり。<br />
+マニュアルを見ると以下のようになっており、複数のものを羅列することが可能な場合は、例え1つしか記載しなくても、1行に記載するとエラーになると思われる。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Type</span><span class="p">:</span> <span class="n">AWS</span><span class="p">::</span><span class="n">EC2</span><span class="p">::</span><span class="n">VPCEndpoint</span>
+<span class="n">Properties</span><span class="p">:</span>
+  <span class="n">PolicyDocument</span><span class="p">:</span> <span class="n">Json</span>
+  <span class="n">PrivateDnsEnabled</span><span class="p">:</span> <span class="n">Boolean</span>
+  <span class="n">RouteTableIds</span><span class="p">:</span> 
+    <span class="o">-</span> <span class="n">String</span>
+  <span class="n">SecurityGroupIds</span><span class="p">:</span> 
+    <span class="o">-</span> <span class="n">String</span>
+  <span class="n">ServiceName</span><span class="p">:</span> <span class="n">String</span>
+  <span class="n">SubnetIds</span><span class="p">:</span> 
+    <span class="o">-</span> <span class="n">String</span>
+  <span class="n">VpcEndpointType</span><span class="p">:</span> <span class="n">String</span>
+  <span class="n">VpcId</span><span class="p">:</span> <span class="n">String</span>
+</pre></div>
+</div>
 </section>
 <section id="id9">
 <h3>設定値の大文字、小文字によるエラー<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
@@ -210,9 +227,125 @@ Outputs:
 試しに変数部分をハードコーディングに変更し、他にあったエラーを解消してから再度インポート変数化したところ、問題なく実行できた。<br />
 マネコン実行前のチェックによるエラーはよく分からない。(別のエラーとかに引っ張られた？)</p>
 </section>
-</section>
 <section id="id11">
-<h2>小技<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h2>
+<h3>凡ミス<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<p>パラメータ指定している部分で以下エラーが出力。何度見てもおかしいところが分からなかったが・・・</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">YAMLException</span><span class="p">:</span> <span class="n">can</span> <span class="ow">not</span> <span class="n">read</span> <span class="n">a</span> <span class="n">block</span> <span class="n">mapping</span> <span class="n">entry</span><span class="p">;</span> <span class="n">a</span> <span class="n">multiline</span> <span class="n">key</span> <span class="n">may</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">an</span> <span class="n">implicit</span> <span class="n">key</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">10</span><span class="p">,</span> <span class="n">column</span> <span class="mi">7</span><span class="p">:</span> <span class="n">Type</span><span class="p">:</span> <span class="n">String</span> <span class="o">^</span>
+</pre></div>
+</div>
+<p>1行前に「:」が抜けておりました。凡ミスですね。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Parameters</span><span class="p">:</span>
+ <span class="n">CommonName</span><span class="p">:</span>
+  <span class="n">Type</span><span class="p">:</span> <span class="n">String</span>
+  <span class="n">Description</span><span class="p">:</span> <span class="n">Name</span> <span class="k">for</span> <span class="n">CommonName</span>
+  <span class="n">Default</span><span class="p">:</span> <span class="n">ma</span><span class="o">-</span><span class="n">kuramochiku</span>
+ <span class="n">S3prefix</span>
+  <span class="n">Type</span><span class="p">:</span> <span class="n">String</span>
+  <span class="n">Description</span><span class="p">:</span> <span class="n">Name</span> <span class="k">for</span> <span class="n">S3</span> <span class="n">prefix</span>
+  <span class="n">Default</span><span class="p">:</span> <span class="n">ma</span><span class="o">-</span><span class="n">kuramochiku</span><span class="o">-</span><span class="n">shizai</span>
+</pre></div>
+</div>
+</section>
+<section id="id12">
+<h3>インデント<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Template</span> <span class="nb">format</span> <span class="n">error</span><span class="p">:</span> <span class="n">YAML</span> <span class="ow">not</span> <span class="n">well</span><span class="o">-</span><span class="n">formed</span><span class="o">.</span> <span class="p">(</span><span class="n">line</span> <span class="mi">40</span><span class="p">,</span> <span class="n">column</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>以下のように1つ目のリソースのインデントを誤っているにも関わらず、エラーの行数は2つ目のリソースを指してくるパターンもある。<br />
+2つ目ばっかり見ていたから気付くのに非常に時間がかかった。。。こういうのはきつい。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Resources:
+    SSMIAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: &#39;2012-10-17&#39;
+        Statement:
+          - Effect: &#39;Allow&#39;
+            Principal:
+              Service:
+                - &#39;ec2.amazonaws.com&#39;
+            Action:
+              - &#39;sts:AssumeRole&#39;
+      Path: &#39;/&#39;
+      RoleName: !Sub ${CommonName}-ssm-role
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+
+  SSMIAMProfile:
+    Type: &#39;AWS::IAM::InstanceProfile&#39;
+    Properties:
+      Path: &#39;/&#39;
+      Roles:
+        - !Ref SSMIAMRole
+</pre></div>
+</div>
+</section>
+<section id="id13">
+<h3>オートスケーリンググループエラーメモ<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
+<p>「LoadBalancerNames」を設定しているが、ALBの場合左記ではなく「TargetGroupARNs」が必要というエラー。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Resource</span> <span class="n">handler</span> <span class="n">returned</span> <span class="n">message</span><span class="p">:</span> <span class="s2">&quot;Provided Load Balancers may not be valid. Please ensure they exist and try again. (Service: AutoScaling, Status Code: 400, Request ID: 316a87f0-eb2d-4d9e-a347-aae690e5eb61)&quot;</span> <span class="p">(</span><span class="n">RequestToken</span><span class="p">:</span> <span class="mi">2</span><span class="n">db92335</span><span class="o">-</span><span class="mf">17e5</span><span class="o">-</span><span class="n">e79e</span><span class="o">-</span><span class="mi">3</span><span class="n">bcd</span><span class="o">-</span><span class="mi">7</span><span class="n">ceccff815de</span><span class="p">,</span> <span class="n">HandlerErrorCode</span><span class="p">:</span> <span class="n">InvalidRequest</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>起動設定作成部に記載しているキーペアが存在しないというエラー。新規作成したかったがやり方分からず。既存キーペア使用すれば問題なかったため保留。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Resource</span> <span class="n">handler</span> <span class="n">returned</span> <span class="n">message</span><span class="p">:</span> <span class="s2">&quot;You must use a valid fully-formed launch template. The key pair &#39;ma-kuramochiku-ec2-key&#39; does not exist (Service: AutoScaling, Status Code: 400, Request ID: fbe71325-7b27-470a-ac43-00ab72af682e)&quot;</span> <span class="p">(</span><span class="n">RequestToken</span><span class="p">:</span> <span class="mi">7</span><span class="n">f50cc4a</span><span class="o">-</span><span class="n">e688</span><span class="o">-</span><span class="mi">659</span><span class="n">b</span><span class="o">-</span><span class="mi">6138</span><span class="o">-</span><span class="mf">79e41</span><span class="n">e6dbedc</span><span class="p">,</span> <span class="n">HandlerErrorCode</span><span class="p">:</span> <span class="n">InvalidRequest</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="subnetstack">
+<h3>Subnetを再構成しようとStack更新した時のエラー<a class="headerlink" href="#subnetstack" title="Link to this heading">¶</a></h3>
+<p>/25×2個のサブネットから/26×4個のサブネット構成に変更しようとしてStack更新したが以下のエラーとなった。<br />
+既存サブネットが削除される前に新サブネットを追加しようとしてエラーとなったのかも？</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Resource</span> <span class="n">handler</span> <span class="n">returned</span> <span class="n">message</span><span class="p">:</span> <span class="s2">&quot;The CIDR &#39;10.2.77.128/26&#39; conflicts with another subnet (Service: Ec2, Status Code: 400, Request ID: 215e1dce-4a0d-4f45-b1c6-8566becc28b5)&quot;</span> <span class="p">(</span><span class="n">RequestToken</span><span class="p">:</span> <span class="mi">7482</span><span class="n">c495</span><span class="o">-</span><span class="n">a16d</span><span class="o">-</span><span class="mi">6</span><span class="n">fb3</span><span class="o">-</span><span class="n">a419</span><span class="o">-</span><span class="mi">601</span><span class="n">f7dd09766</span><span class="p">,</span> <span class="n">HandlerErrorCode</span><span class="p">:</span> <span class="n">AlreadyExists</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="igw">
+<h3>IGWのルーティング追加<a class="headerlink" href="#igw" title="Link to this heading">¶</a></h3>
+<p>IGW用のルートテーブル作成時に以下のようにルートテーブルと別ネットワークだよというエラー発生。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Resource</span> <span class="n">handler</span> <span class="n">returned</span> <span class="n">message</span><span class="p">:</span> <span class="s2">&quot;route table rtb-0f0208b3b143f23ea and network gateway igw-0ef28e6de1223f62a belong to different networks (Service: Ec2, Status Code: 400, Request ID: 2e551dfb-eca4-4308-84bf-2cb217ce6fa7)&quot;</span> <span class="p">(</span><span class="n">RequestToken</span><span class="p">:</span> <span class="mi">33</span><span class="n">a5c3a7</span><span class="o">-</span><span class="mi">3</span><span class="n">a8b</span><span class="o">-</span><span class="mf">1e36</span><span class="o">-</span><span class="mi">4</span><span class="n">a08</span><span class="o">-</span><span class="mf">6e957</span><span class="n">f41df29</span><span class="p">,</span> <span class="n">HandlerErrorCode</span><span class="p">:</span> <span class="n">GeneralServiceException</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>調べてみるとスタックとしては以下のようになっており、IGW作成時点ではVPCにアタッチされない。<br />
+そのため、アタッチ処理が完了してからルートテーブル編集するように「DependsOn」をつけてあげる必要がある。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  InternetGateway:
+    Type: &quot;AWS::EC2::InternetGateway&quot;
+    Properties:
+      Tags:
+      - Key: Name
+        Value: !Sub ${CommonName}-igw
+        
+  AttachGateway:
+    Type: &quot;AWS::EC2::VPCGatewayAttachment&quot;
+    Properties:
+      InternetGatewayId: !Ref InternetGateway
+      VpcId: !ImportValue KuramochikuVpcId
+
+  PubRoute01:
+    Type: &quot;AWS::EC2::Route&quot;
+    DependsOn: AttachGateway　　★　ここが重要
+    Properties:
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+      RouteTableId: !ImportValue KuramochikuPublicRouteTable
+</pre></div>
+</div>
+</section>
+<section id="natgateway-create-in-process">
+<h3>NatGateway作成が終わらない(CREATE IN PROCESSがずっと続く)<a class="headerlink" href="#natgateway-create-in-process" title="Link to this heading">¶</a></h3>
+<p>Stackが完了せず、以下のようにタイムアウトしてエラーとなった。今回は該当リソース作成開始から25分くらい。<br />
+該当処理はPrivateサブネットのルートテーブルにNatgateway向きのルート情報を追加しようとした処理である。<br />
+処理自体は完了しているように見え、Privateサブネットからのインターネット通信はできるようになったが処理が終わらない。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Resource</span> <span class="n">handler</span> <span class="n">returned</span> <span class="n">message</span><span class="p">:</span> <span class="s2">&quot;Exceeded attempts to wait&quot;</span> <span class="p">(</span><span class="n">RequestToken</span><span class="p">:</span> <span class="mi">94734</span><span class="n">a53</span><span class="o">-</span><span class="n">b53f</span><span class="o">-</span><span class="n">b335</span><span class="o">-</span><span class="mi">1</span><span class="n">b4f</span><span class="o">-</span><span class="mi">45</span><span class="n">f2716253c8</span><span class="p">,</span> <span class="n">HandlerErrorCode</span><span class="p">:</span> <span class="n">NotStabilized</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>結論から言うと、GatewayIdのキーにNATゲートウェイを指定していたことが原因でした。<br />
+本来は、NatGatewayIdというキーに対してNATゲートウェイを指定するのが正しい書き方になります。<br />
+「GatewayIdに設定できるのは、インターネットゲートウェイと仮装プライベートゲートウェイだけ」だそうです。<br />
+紛らわしい・・・。下手に一時的に動作しちゃうのも問題ですね。</p>
+</section>
+</section>
+<section id="id14">
+<h2>小技<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
 <section id="vpc-cidr">
 <h3>VPC Cidr関数<a class="headerlink" href="#vpc-cidr" title="Link to this heading">¶</a></h3>
 <p>Subnet作成時にVPC Cidrの範囲から作成することとなるが、これらをハードコーディングするのは不便である。<br />
@@ -246,8 +379,8 @@ Outputs:
 デフォルト VPC が存在するリージョンでは、デフォルトのサブネットがあるアベイラビリティーゾーンのみを返却する。</p>
 </section>
 </section>
-<section id="id12">
-<h2>その他<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h2>
+<section id="id15">
+<h2>その他<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h2>
 <section id="iam">
 <h3>IAMインスタンスプロファイル<a class="headerlink" href="#iam" title="Link to this heading">¶</a></h3>
 <p>EC2にIAM権限を付与する時は「IAMインスタンスプロファイル」というものをEC2にアタッチする。<br />
@@ -327,14 +460,20 @@ Resources:
 <li><a class="reference internal" href="#id8">何かが違う・・・？</a></li>
 <li><a class="reference internal" href="#id9">設定値の大文字、小文字によるエラー</a></li>
 <li><a class="reference internal" href="#id10">よく分からない系</a></li>
+<li><a class="reference internal" href="#id11">凡ミス</a></li>
+<li><a class="reference internal" href="#id12">インデント</a></li>
+<li><a class="reference internal" href="#id13">オートスケーリンググループエラーメモ</a></li>
+<li><a class="reference internal" href="#subnetstack">Subnetを再構成しようとStack更新した時のエラー</a></li>
+<li><a class="reference internal" href="#igw">IGWのルーティング追加</a></li>
+<li><a class="reference internal" href="#natgateway-create-in-process">NatGateway作成が終わらない(CREATE IN PROCESSがずっと続く)</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id11">小技</a><ul>
+<li><a class="reference internal" href="#id14">小技</a><ul>
 <li><a class="reference internal" href="#vpc-cidr">VPC Cidr関数</a></li>
 <li><a class="reference internal" href="#az">AZ取得関数</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id12">その他</a><ul>
+<li><a class="reference internal" href="#id15">その他</a><ul>
 <li><a class="reference internal" href="#iam">IAMインスタンスプロファイル</a></li>
 <li><a class="reference internal" href="#ssm">SSM接続</a></li>
 </ul>

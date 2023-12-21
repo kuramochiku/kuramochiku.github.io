@@ -137,7 +137,26 @@ Properties validation failed for resource ALBName with message: #/SecurityGroups
 ↓
       SecurityGroups: 
         - !Ref ALBSG 
-```  
+```
+
+VPCエンドポイントの「RouteTableIds」でも同事象あり。  
+マニュアルを見ると以下のようになっており、複数のものを羅列することが可能な場合は、例え1つしか記載しなくても、1行に記載するとエラーになると思われる。  
+```
+Type: AWS::EC2::VPCEndpoint
+Properties:
+  PolicyDocument: Json
+  PrivateDnsEnabled: Boolean
+  RouteTableIds: 
+    - String
+  SecurityGroupIds: 
+    - String
+  ServiceName: String
+  SubnetIds: 
+    - String
+  VpcEndpointType: String
+  VpcId: String
+```
+
 ### 設定値の大文字、小文字によるエラー  
 ELB作成時に以下エラーが発生した。 
 「internal」にしているはずだよな、スペルミスかなと確認したところ「Internal」となっていた。  
@@ -156,6 +175,121 @@ Resource handler returned message: "1 validation error detected: Value 'Internal
 エクスポート元のスタックでは変数出力出来ているようにしか見えないず、ググってもよく分からず。  
 試しに変数部分をハードコーディングに変更し、他にあったエラーを解消してから再度インポート変数化したところ、問題なく実行できた。  
 マネコン実行前のチェックによるエラーはよく分からない。(別のエラーとかに引っ張られた？)  
+
+### 凡ミス
+パラメータ指定している部分で以下エラーが出力。何度見てもおかしいところが分からなかったが・・・  
+```
+YAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 10, column 7: Type: String ^
+```
+
+1行前に「:」が抜けておりました。凡ミスですね。  
+```
+Parameters:
+ CommonName:
+  Type: String
+  Description: Name for CommonName
+  Default: ma-kuramochiku
+ S3prefix
+  Type: String
+  Description: Name for S3 prefix
+  Default: ma-kuramochiku-shizai
+```
+
+### インデント
+```
+Template format error: YAML not well-formed. (line 40, column 3)
+```
+
+以下のように1つ目のリソースのインデントを誤っているにも関わらず、エラーの行数は2つ目のリソースを指してくるパターンもある。  
+2つ目ばっかり見ていたから気付くのに非常に時間がかかった。。。こういうのはきつい。  
+
+```
+Resources:
+    SSMIAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              Service:
+                - 'ec2.amazonaws.com'
+            Action:
+              - 'sts:AssumeRole'
+      Path: '/'
+      RoleName: !Sub ${CommonName}-ssm-role
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+
+  SSMIAMProfile:
+    Type: 'AWS::IAM::InstanceProfile'
+    Properties:
+      Path: '/'
+      Roles:
+        - !Ref SSMIAMRole
+```
+
+### オートスケーリンググループエラーメモ
+「LoadBalancerNames」を設定しているが、ALBの場合左記ではなく「TargetGroupARNs」が必要というエラー。  
+```
+Resource handler returned message: "Provided Load Balancers may not be valid. Please ensure they exist and try again. (Service: AutoScaling, Status Code: 400, Request ID: 316a87f0-eb2d-4d9e-a347-aae690e5eb61)" (RequestToken: 2db92335-17e5-e79e-3bcd-7ceccff815de, HandlerErrorCode: InvalidRequest)
+```
+
+起動設定作成部に記載しているキーペアが存在しないというエラー。新規作成したかったがやり方分からず。既存キーペア使用すれば問題なかったため保留。  
+```
+Resource handler returned message: "You must use a valid fully-formed launch template. The key pair 'ma-kuramochiku-ec2-key' does not exist (Service: AutoScaling, Status Code: 400, Request ID: fbe71325-7b27-470a-ac43-00ab72af682e)" (RequestToken: 7f50cc4a-e688-659b-6138-79e41e6dbedc, HandlerErrorCode: InvalidRequest)
+```
+
+### Subnetを再構成しようとStack更新した時のエラー
+/25×2個のサブネットから/26×4個のサブネット構成に変更しようとしてStack更新したが以下のエラーとなった。  
+既存サブネットが削除される前に新サブネットを追加しようとしてエラーとなったのかも？  
+```
+Resource handler returned message: "The CIDR '10.2.77.128/26' conflicts with another subnet (Service: Ec2, Status Code: 400, Request ID: 215e1dce-4a0d-4f45-b1c6-8566becc28b5)" (RequestToken: 7482c495-a16d-6fb3-a419-601f7dd09766, HandlerErrorCode: AlreadyExists)
+```
+
+### IGWのルーティング追加
+IGW用のルートテーブル作成時に以下のようにルートテーブルと別ネットワークだよというエラー発生。  
+```
+Resource handler returned message: "route table rtb-0f0208b3b143f23ea and network gateway igw-0ef28e6de1223f62a belong to different networks (Service: Ec2, Status Code: 400, Request ID: 2e551dfb-eca4-4308-84bf-2cb217ce6fa7)" (RequestToken: 33a5c3a7-3a8b-1e36-4a08-6e957f41df29, HandlerErrorCode: GeneralServiceException)
+```
+調べてみるとスタックとしては以下のようになっており、IGW作成時点ではVPCにアタッチされない。  
+そのため、アタッチ処理が完了してからルートテーブル編集するように「DependsOn」をつけてあげる必要がある。  
+```
+  InternetGateway:
+    Type: "AWS::EC2::InternetGateway"
+    Properties:
+      Tags:
+      - Key: Name
+        Value: !Sub ${CommonName}-igw
+        
+  AttachGateway:
+    Type: "AWS::EC2::VPCGatewayAttachment"
+    Properties:
+      InternetGatewayId: !Ref InternetGateway
+      VpcId: !ImportValue KuramochikuVpcId
+
+  PubRoute01:
+    Type: "AWS::EC2::Route"
+    DependsOn: AttachGateway　　★　ここが重要
+    Properties:
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+      RouteTableId: !ImportValue KuramochikuPublicRouteTable
+```
+
+### NatGateway作成が終わらない(CREATE IN PROCESSがずっと続く)
+Stackが完了せず、以下のようにタイムアウトしてエラーとなった。今回は該当リソース作成開始から25分くらい。  
+該当処理はPrivateサブネットのルートテーブルにNatgateway向きのルート情報を追加しようとした処理である。  
+処理自体は完了しているように見え、Privateサブネットからのインターネット通信はできるようになったが処理が終わらない。  
+```
+Resource handler returned message: "Exceeded attempts to wait" (RequestToken: 94734a53-b53f-b335-1b4f-45f2716253c8, HandlerErrorCode: NotStabilized)
+```
+
+結論から言うと、GatewayIdのキーにNATゲートウェイを指定していたことが原因でした。  
+本来は、NatGatewayIdというキーに対してNATゲートウェイを指定するのが正しい書き方になります。  
+「GatewayIdに設定できるのは、インターネットゲートウェイと仮装プライベートゲートウェイだけ」だそうです。  
+紛らわしい・・・。下手に一時的に動作しちゃうのも問題ですね。  
 
 ## 小技  
 ### VPC Cidr関数  

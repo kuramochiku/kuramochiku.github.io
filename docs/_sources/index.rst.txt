@@ -26,7 +26,7 @@
    ./md/shpinx.md
    ./md/github.md
 
-spring奮闘記
+spring
 ==============
 
 .. toctree::
@@ -47,6 +47,7 @@ AWS検証記録
    
    ./md/CFS.md
    ./md/ECS.md
+   ./md/IAM.md
 
 その他検討など
 ================
@@ -57,7 +58,8 @@ AWS検証記録
    :numbered:
    
    ./md/AWS1.md
-   ./md/other.md
+   ./md/trouble.md
+   ./md/URL.md
    
 Indices and tables
 ==================
