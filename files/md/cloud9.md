@@ -22,6 +22,30 @@ Cloud9を利用するためにはEC2からインターネット接続が必要�
 閉域VPCからのSSM接続を選択する場合はSSM接続に必要なエンドポイントを作成する必要がある。  
 また、Nameタグは作成できない仕様。  
 
+### 初期セットアップ
+必要なミドルウェアをインストールする必要がある。(javaやdockerはインストール済み)  
+
+* mavenインストール
+```
+sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+sudo yum install -y apache-maven
+```
+
+### サンプルコード
+以下のサンプルコードを試してみる。  
+https://spring.pleiades.io/guides/gs/validating-form-input/  
+
+分からないまま、ソースコードをダウンロードし、各ファイルを作成して以下実行してjarファイル作成してjava実行  
+```
+cd gs-validating-form-input-main/initial/
+chmod 755 mvnw
+./mvnw clean package
+java -jar target/validating-form-input-initial-0.0.1-SNAPSHOT.jar 
+別ターミナルを開いて
+curl -v http://localhost:8080/
+```
+
 ## 操作情報まとめ
 ### ファイル/フォルダ作成、削除
 左側にはこの開発環境で作られているファイル一覧が表示されている。  
