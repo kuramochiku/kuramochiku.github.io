@@ -86,3 +86,43 @@ REpresentational State Transferの略称であり、以下4つの特徴を持つ
 
 * アプリケーション情報と状態遷移の両方を扱えるハイパーメディアの使用  
 ⇒情報の内部に、別の情報や(その情報の別の)状態へのリンクを含めることができる。
+
+## エラーについて
+### illegal start of type
+SpringでHello Worldを出力しようとチャレンジ中に以下のような簡易クラスを作成してコンパイルするも
+```
+public class Hello_rest {
+    System.out.println("Hello, World!"); 
+}
+```
+以下エラーが出力  
+```
+illegal start of type
+```
+「System.out.println」はSpringで使えないのかもしれない。
+
+```
+public class Hello_rest {
+    @RequestMapping("/test")
+    String home() {
+        return "Hello World!";
+    }
+}
+```
+と記載することで、「 curl "http://localhost:8080/test" 」接続時に「Hello World!」と返却された。  
+
+### symbol無いよエラー
+spring公式のサンプルコードを改良しつつ、コード作成にトライしていた時  
+見よう見まねでアノテーション「SpringBootApplication」を使ったが以下エラーが出力。  
+
+```
+ ./mvnw spring-boot:run
+中略
+[ERROR] /home/ec2-user/environment/TestRest/initial/src/main/java/com/example/restservice/TestKK.java:[3,2] cannot find symbol
+[ERROR]   symbol: class SpringBootApplication
+```
+
+mavenの使い方の問題かもしれないが、以下のようなimportが必要だった。  
+```
+import org.springframework.boot.SpringApplication;
+```
