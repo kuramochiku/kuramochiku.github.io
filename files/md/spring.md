@@ -72,3 +72,17 @@ Hello test
 「+」→「java」→「依存関係を持つモジュールから」をクリックする。  
 
 ![create_jar](./images/IntelliJ_create_jar.png)
+
+## RESTとは
+REpresentational State Transferの略称であり、以下4つの特徴を持つAPIをRESTful API(REST API)と言う。  
+* ステートレスなクライアント/サーバプロトコル  
+⇒セッションなどの状態管理を行わない。やり取りされる情報はそれ自体で完結する。  
+
+* リソースを一意なURIにより識別される  
+⇒URI（Uniform Resource Identifier）で表現されるユニークなアドレスを持つ。  
+
+* HTTPメソッドで操作方法を表現した統一されたインターフェース  
+⇒あらかじめ定義・共有された方法でやり取りされる。送信側はGET・POST・PUT・DELETE等のHTTPメソッドで送信し、受信側はJSON形式に返却する、など。  
+
+* アプリケーション情報と状態遷移の両方を扱えるハイパーメディアの使用  
+⇒情報の内部に、別の情報や(その情報の別の)状態へのリンクを含めることができる。
