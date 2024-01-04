@@ -28,8 +28,14 @@ AWS RE:INVENT2023
 https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2023_reInvent2023digest_1201_v1.pdf  
 
 ## Spring boot
-入門ガイド・チュートリアル
-https://spring.pleiades.io/guides/
+入門ガイド・チュートリアル  
+https://spring.pleiades.io/guides/  
+
+マニュアル  
+https://spring.pleiades.io/spring-boot/docs/current/reference/html/getting-started.html#getting-started.introducing-spring-boot  
+
+Springを動作させるための定型文の意味  
+https://spring.pleiades.io/spring-boot/docs/current/reference/html/getting-started.html#getting-started.first-application.code  
 
 ## 参考ソース  
 塾長  
