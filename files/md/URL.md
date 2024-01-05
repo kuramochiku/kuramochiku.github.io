@@ -37,6 +37,9 @@ https://spring.pleiades.io/spring-boot/docs/current/reference/html/getting-start
 Springを動作させるための定型文の意味  
 https://spring.pleiades.io/spring-boot/docs/current/reference/html/getting-started.html#getting-started.first-application.code  
 
+アノテーション説明  
+https://romptn.com/article/13710  
+
 ## 参考ソース  
 塾長  
 https://github.com/debugroom  
