@@ -35,6 +35,7 @@ spring
    :numbered:
 
    ./md/TERASOLUNA.md
+   ./md/java.md
    ./md/spring.md
 
 AWS検証記録
@@ -48,6 +49,7 @@ AWS検証記録
    ./md/CFS.md
    ./md/ECS.md
    ./md/IAM.md
+   ./md/cloud9.md
 
 その他検討など
 ================

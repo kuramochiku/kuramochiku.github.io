@@ -13,7 +13,7 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討" href="ECS.html" />
+    <link rel="next" title="CloudFormation入門" href="CFS.html" />
     <link rel="prev" title="1. TERASOLUNAチュートリアル" href="TERASOLUNA.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -23,7 +23,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="ECS.html" title="1. EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討"
+          <a href="CFS.html" title="CloudFormation入門"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="TERASOLUNA.html" title="1. TERASOLUNAチュートリアル"
@@ -106,6 +106,69 @@ Create Associations：特定のファイル拡張子をIntelliJ IDEAに関連付
 「+」→「java」→「依存関係を持つモジュールから」をクリックする。</p>
 <p><img alt="create_jar" src="../_images/IntelliJ_create_jar.png" /></p>
 </section>
+<section id="rest">
+<h2><span class="section-number">2.5. </span>RESTとは<a class="headerlink" href="#rest" title="Link to this heading">¶</a></h2>
+<p>REpresentational State Transferの略称であり、以下4つの特徴を持つAPIをRESTful API(REST API)と言う。</p>
+<ul class="simple">
+<li><p>ステートレスなクライアント/サーバプロトコル<br />
+⇒セッションなどの状態管理を行わない。やり取りされる情報はそれ自体で完結する。</p></li>
+<li><p>リソースを一意なURIにより識別される<br />
+⇒URI（Uniform Resource Identifier）で表現されるユニークなアドレスを持つ。</p></li>
+<li><p>HTTPメソッドで操作方法を表現した統一されたインターフェース<br />
+⇒あらかじめ定義・共有された方法でやり取りされる。送信側はGET・POST・PUT・DELETE等のHTTPメソッドで送信し、受信側はJSON形式に返却する、など。</p></li>
+<li><p>アプリケーション情報と状態遷移の両方を扱えるハイパーメディアの使用<br />
+⇒情報の内部に、別の情報や(その情報の別の)状態へのリンクを含めることができる。</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2><span class="section-number">2.6. </span>アノテーションとは<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>「アノテーション」は直訳すると「注釈」である。<br />
+Java開発でのアノテーションはコードに注釈として補足を加えることで、プログラムの動作を変更したり、開発時のルールを統一できたり、フレームワークに処理を指示したりできる仕組み。</p>
+<p>&#64;RestController<br />
+APIのコントローラに付与し、戻り値をStringにしたものがそのままクライアントへのレスポンスとなる。<br />
+RESTAPIを作成する時、該当クラスに本アノテーションを付与すると、returnの値がcurl実行時の返却値となった。</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">2.7. </span>エラーについて<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<section id="illegal-start-of-type">
+<h3><span class="section-number">2.7.1. </span>illegal start of type<a class="headerlink" href="#illegal-start-of-type" title="Link to this heading">¶</a></h3>
+<p>SpringでHello Worldを出力しようとチャレンジ中に以下のような簡易クラスを作成してコンパイルするも</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">public</span> <span class="k">class</span> <span class="nc">Hello_rest</span> <span class="p">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">);</span> 
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>以下エラーが出力</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">illegal</span> <span class="n">start</span> <span class="n">of</span> <span class="nb">type</span>
+</pre></div>
+</div>
+<p>「System.out.println」はSpringで使えないのかもしれない。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">public</span> <span class="k">class</span> <span class="nc">Hello_rest</span> <span class="p">{</span>
+    <span class="nd">@RequestMapping</span><span class="p">(</span><span class="s2">&quot;/test&quot;</span><span class="p">)</span>
+    <span class="n">String</span> <span class="n">home</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>と記載することで、「 curl &quot;http://localhost:8080/test&quot; 」接続時に「Hello World!」と返却された。</p>
+</section>
+<section id="symbol">
+<h3><span class="section-number">2.7.2. </span>symbol無いよエラー<a class="headerlink" href="#symbol" title="Link to this heading">¶</a></h3>
+<p>spring公式のサンプルコードを改良しつつ、コード作成にトライしていた時<br />
+見よう見まねでアノテーション「SpringBootApplication」を使ったが以下エラーが出力。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">./</span><span class="n">mvnw</span> <span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="p">:</span><span class="n">run</span>
+<span class="n">中略</span>
+<span class="p">[</span><span class="n">ERROR</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">ec2</span><span class="o">-</span><span class="n">user</span><span class="o">/</span><span class="n">environment</span><span class="o">/</span><span class="n">TestRest</span><span class="o">/</span><span class="n">initial</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="n">com</span><span class="o">/</span><span class="n">example</span><span class="o">/</span><span class="n">restservice</span><span class="o">/</span><span class="n">TestKK</span><span class="o">.</span><span class="n">java</span><span class="p">:[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="n">cannot</span> <span class="n">find</span> <span class="n">symbol</span>
+<span class="p">[</span><span class="n">ERROR</span><span class="p">]</span>   <span class="n">symbol</span><span class="p">:</span> <span class="k">class</span> <span class="nc">SpringBootApplication</span>
+</pre></div>
+</div>
+<p>mavenの使い方の問題かもしれないが、以下のようなimportが必要だった。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">org.springframework.boot.SpringApplication</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
 
@@ -123,6 +186,13 @@ Create Associations：特定のファイル拡張子をIntelliJ IDEAに関連付
 <li><a class="reference internal" href="#intellij">2.2. IntelliJとは</a></li>
 <li><a class="reference internal" href="#intellij-idea-windows">2.3. IntelliJ IDEAインストール(Windows)</a></li>
 <li><a class="reference internal" href="#intellij-idea">2.4. IntelliJ IDEAプロジェクトの作成(初心者向け)</a></li>
+<li><a class="reference internal" href="#rest">2.5. RESTとは</a></li>
+<li><a class="reference internal" href="#id2">2.6. アノテーションとは</a></li>
+<li><a class="reference internal" href="#id3">2.7. エラーについて</a><ul>
+<li><a class="reference internal" href="#illegal-start-of-type">2.7.1. illegal start of type</a></li>
+<li><a class="reference internal" href="#symbol">2.7.2. symbol無いよエラー</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -135,8 +205,8 @@ Create Associations：特定のファイル拡張子をIntelliJ IDEAに関連付
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="ECS.html"
-                          title="next chapter"><span class="section-number">1. </span>EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討</a></p>
+    <p class="topless"><a href="CFS.html"
+                          title="next chapter">CloudFormation入門</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -166,7 +236,7 @@ Create Associations：特定のファイル拡張子をIntelliJ IDEAに関連付
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="ECS.html" title="1. EC2/ECS/サーバレスの使い分け整理及び現プロジェクトの最適構成検討"
+          <a href="CFS.html" title="CloudFormation入門"
              >next</a> |</li>
         <li class="right" >
           <a href="TERASOLUNA.html" title="1. TERASOLUNAチュートリアル"

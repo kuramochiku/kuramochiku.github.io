@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="jp" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Cloud9入門 &#8212; workmemo 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
+    <script src="../_static/documentation_options.js?v=4f78e891"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Cloud9入門</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="cloud9">
+<h1>Cloud9入門<a class="headerlink" href="#cloud9" title="Link to this heading">¶</a></h1>
+<section id="id1">
+<h2>Cloud9について<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<section id="id2">
+<h3>Cloud9とは<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p>AWS Cloud9は、ブラウザ経由でコードを記述、実行、デバッグが出来るクラウドベースのIDEです。<br />
+今回はSpringBootの執筆環境としても利用する。</p>
+<p>なお、実態はEC2であり、作成時にVPCを選択する必要がある。(選択画面は隠れていて、デフォルトはデフォルトVPC)<br />
+Cloud9を利用するためにはEC2からインターネット接続が必要である。(IGWがあるサブネットかNATGateway経由のアクセスかVPCエンドポイント)</p>
+</section>
+<section id="id3">
+<h3>Cloud9の長所<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>インターネット環境があればどこからでも作業可能である。</p></li>
+<li><p>ブラウザアクセス可能であれば、ローカル端末の環境依存度は低い。</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>Cloud9の短所<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>インターネット接続が必要である。</p></li>
+<li><p>インスタンス費用がかかる。</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>Cloud9の始め方<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<p>「Cloud9」サービスから「環境の作成」を押下し、設定を行う。特に難しい項目はなく、直感的に設定が可能である。<br />
+設定を入れて「作成」を押下するとClouformationが実行され、SGとEC2が作成される。</p>
+<p>閉域VPCからのSSM接続を選択する場合はSSM接続に必要なエンドポイントを作成する必要がある。<br />
+また、Nameタグは作成できない仕様。</p>
+</section>
+<section id="id6">
+<h3>初期セットアップ<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<p>必要なミドルウェアをインストールする必要がある。(javaやdockerはインストール済み)</p>
+<ul class="simple">
+<li><p>mavenインストール</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+sudo yum install -y apache-maven
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3>サンプルコード<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<p>以下のサンプルコードを試してみる。<br />
+https://spring.pleiades.io/guides/gs/validating-form-input/</p>
+<p>分からないまま、ソースコードをダウンロードし、各ファイルを作成して以下実行してjarファイル作成してjava実行</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">gs</span><span class="o">-</span><span class="n">validating</span><span class="o">-</span><span class="n">form</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="n">main</span><span class="o">/</span><span class="n">initial</span><span class="o">/</span>
+<span class="n">chmod</span> <span class="mi">755</span> <span class="n">mvnw</span>
+<span class="o">./</span><span class="n">mvnw</span> <span class="n">clean</span> <span class="n">package</span>
+<span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="n">target</span><span class="o">/</span><span class="n">validating</span><span class="o">-</span><span class="n">form</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="n">initial</span><span class="o">-</span><span class="mf">0.0.1</span><span class="o">-</span><span class="n">SNAPSHOT</span><span class="o">.</span><span class="n">jar</span> 
+<span class="n">別ターミナルを開いて</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">v</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8080</span><span class="o">/</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id8">
+<h2>操作情報まとめ<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<section id="id9">
+<h3>ファイル/フォルダ作成、削除<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<p>左側にはこの開発環境で作られているファイル一覧が表示されている。<br />
+作成したい親フォルダを右クリックして「NewFile」「NewFolder」を選択すれば作成。<br />
+削除したいファイル/フォルダを右クリックして「Delete」を選択すれば削除。</p>
+</section>
+<section id="id10">
+<h3>ファイルアップロード<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<p>ドラッグアンドドロップで配置したいフォルダを選択すればアップロード可能。<br />
+メニューバーの「File」「Upload Local Files」を選択しても可能。</p>
+</section>
+</section>
+<section id="id11">
+<h2>トラブル系<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h2>
+<section id="id12">
+<h3>Cloud9でメニューバーが消えた時の対処<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<p>上の部分に隠れているという扱いらしく、隙間をクリックするとメニューバーが表示される。</p>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Cloud9入門</a><ul>
+<li><a class="reference internal" href="#id1">Cloud9について</a><ul>
+<li><a class="reference internal" href="#id2">Cloud9とは</a></li>
+<li><a class="reference internal" href="#id3">Cloud9の長所</a></li>
+<li><a class="reference internal" href="#id4">Cloud9の短所</a></li>
+<li><a class="reference internal" href="#id5">Cloud9の始め方</a></li>
+<li><a class="reference internal" href="#id6">初期セットアップ</a></li>
+<li><a class="reference internal" href="#id7">サンプルコード</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">操作情報まとめ</a><ul>
+<li><a class="reference internal" href="#id9">ファイル/フォルダ作成、削除</a></li>
+<li><a class="reference internal" href="#id10">ファイルアップロード</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id11">トラブル系</a><ul>
+<li><a class="reference internal" href="#id12">Cloud9でメニューバーが消えた時の対処</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/md/cloud9.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">workmemo 1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Cloud9入門</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, kuramochi.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>
