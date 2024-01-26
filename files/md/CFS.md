@@ -291,6 +291,17 @@ Resource handler returned message: "Exceeded attempts to wait" (RequestToken: 94
 「GatewayIdに設定できるのは、インターネットゲートウェイと仮装プライベートゲートウェイだけ」だそうです。  
 紛らわしい・・・。下手に一時的に動作しちゃうのも問題ですね。  
 
+### ECSサービス作成時のエラー
+ECS作成時に以下のようにELB関連でエラー出力した。  
+```
+Resource handler returned message: "Invalid request provided: CreateService error: The provided target group arn:aws:elasticloadbalancing:ap-northeast-1:xxxxxxxxxx:targetgroup/ma-kuramochiku-ecs-target/b0bf4528aa56a547 has target type instance, which is incompatible with the awsvpc network mode specified in the task definition. (Service: AmazonECS; Status Code: 400; Error Code: InvalidParameterException; 
+```
+Fargate 起動タイプの場合、ネットワークモードはawsvpcである。  
+awsvpc ネットワークモードのタスクを含む ECS サービスは、ターゲットグループの種類にipを指定する必要があり、instanceを指定したターゲットグループの設定はエラーとなるようである。  
+
+### ECSサービス作成が終了しない
+ECSサービス作成が終了しない。内部的にはタスクのデプロイが失敗し続けている。ログは出ておらず、原因が分かりにくい。  
+
 ## 小技  
 ### VPC Cidr関数  
 Subnet作成時にVPC Cidrの範囲から作成することとなるが、これらをハードコーディングするのは不便である。  
