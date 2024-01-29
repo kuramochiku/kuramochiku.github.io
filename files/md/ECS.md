@@ -52,8 +52,8 @@ https://docs.docker.jp/engine/reference/builder.html
 spring用のサンプルは以下となる。今回は～/TestRest/initial配下にDockerfileを作成する。
 ※ただし、ユーザ設定するとログ出力部分でエラーとなってしまった。本筋ではなくコメントアウトとした。指定しない場合はrootとなる。  
 ```
-FROM openjdk:8-jdk-alpine　# JDK8をベースとする
-# RUN addgroup -S spring && adduser -S spring -G spring　#　springユーザ、グループの作成
+FROM eclipse-temurin:21　# eclipseをベースとする
+# RUN groupadd spring && useradd spring -g spring　#　springユーザ、グループの作成
 # USER spring:spring　# ユーザをspringとする
 ARG JAR_FILE=target/*.jar　# 構築時build-time にユーザが渡せる変数を定義する。
 COPY ${JAR_FILE} app.jar　# Docker クライアントで操作しているディレクトリから、ファイルを（コンテナのレイヤに）追加
