@@ -43,10 +43,55 @@ Dockerを使うことで、1台のサーバー上で様々なアプリケーシ�
 一方でDockerではホストOSのカーネルを共有して利用することで、従来の仮想化と違いゲストOSを必要としません。  
 その分だけDockerは軽快に動作するのが特徴です。  
 
+## Dockerfile
 DocekrはDockerfileという、コンテナイメージ作成で使う命令が書かれているファイルにより構成されます。  
 本ファイルは書かれている内容が上から順に解釈され、コンテナイメージをどのように作成するか指定できます。  
 dockerのマニュアルページは以下となる。詳細はこちらを調べること。  
 https://docs.docker.jp/engine/reference/builder.html  
+
+spring用のサンプルは以下となる。今回は～/TestRest/initial配下にDockerfileを作成する。
+※ただし、ユーザ設定するとログ出力部分でエラーとなってしまった。本筋ではなくコメントアウトとした。指定しない場合はrootとなる。  
+```
+FROM openjdk:8-jdk-alpine　# JDK8をベースとする
+# RUN addgroup -S spring && adduser -S spring -G spring　#　springユーザ、グループの作成
+# USER spring:spring　# ユーザをspringとする
+ARG JAR_FILE=target/*.jar　# 構築時build-time にユーザが渡せる変数を定義する。
+COPY ${JAR_FILE} app.jar　# Docker クライアントで操作しているディレクトリから、ファイルを（コンテナのレイヤに）追加
+ENTRYPOINT ["java","-jar","/app.jar"]  # コンテナ起動時にjavaを実行する
+```
+
+## docker bulid
+dockerイメージの作成には以下のようにbulidコマンドを使用する。  
+-tでタグを付けられる。  
+
+```
+xxxx:~/environment/TestRest/initial $ docker build -t springio/testrest2 .
+[+] Building 1.6s (7/7) FINISHED                                                                                          docker:default
+ => [internal] load build definition from Dockerfile                                                                                0.0s
+ => => transferring dockerfile: 282B                                                                                                0.0s
+ => [internal] load .dockerignore                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for docker.io/library/eclipse-temurin:21                                                               1.3s
+ => [internal] load build context                                                                                                   0.0s
+ => => transferring context: 214B                                                                                                   0.0s
+ => CACHED [1/2] FROM docker.io/library/eclipse-temurin:21@sha256:18f800a7a9b4e69567694315d7abba066ef33ed321642d872b324f171864e85e  0.0s
+ => [2/2] COPY target/*.jar app.jar                                                                                                 0.1s
+ => exporting to image                                                                                                              0.1s
+ => => exporting layers                                                                                                             0.1s
+ => => writing image sha256:a50af4fa259cc4867103b3efc6d5bae742cfacb2b22b4f70f34f2e8b0c105c36                                        0.0s
+ => => naming to docker.io/springio/testrest2                                                                                       0.0s
+xxxx:~/environment/TestRest/initial $ 
+```
+
+保有イメージは以下で確認する。-aで停止中のイメージ含めて表示する。  
+```
+xxxx:~/environment/TestRest/initial $ docker images -a
+REPOSITORY           TAG       IMAGE ID       CREATED             SIZE
+springio/testrest2   latest    a50af4fa259c   5 minutes ago       456MB
+springio/testrest    latest    c3b373a153b2   28 minutes ago      456MB
+<none>               <none>    3c833b85c252   About an hour ago   124MB
+xxxx:~/environment/TestRest/initial $ 
+```
 
 ## Dockerエラー 
 ### docker bulid時 
@@ -61,3 +106,16 @@ Usage: docker build [OPTIONS] PATH | URL | -
 
 Build an image from a Dockerfile 
 ```
+
+### docker runした後にcurlするもエラー
+dockerイメージ作成後、runでイメージ起動し、接続確認をするためにcurlを実行するが以下のようにエラーとなった。  
+※-dなしでの起動やexecでコンテナに入っているターミナルが別にある場合は通信可能。この辺のロジックは不明。
+```
+xxxx:~/environment/TestRest/initial $ curl  http://localhost:8080/api/data
+curl: (56) Recv failure: Connection reset by peer
+```
+原因は、containerの外からリクエストが来るのにアプリがlocalhostでLISTENしているためである。  
+ホストサーバのlocalhost(127.0.0.1)8080ポート通信をコンテナ(172.17.0.x)の8080ポートに転送される。  
+(172.17.0.xはcontainerのbridgeネットワークのインターフェースに自動で与えられたIPアドレス)  
+しかしコンテナ上のAPは127.0.0.1でListenしているためエラーとなる。  
+ポートのListenを0.0.0.0にすれば良い。springはどうやるんだろ・・・？  
