@@ -70,7 +70,19 @@ COPY ${JAR_FILE} app.jar　# Docker クライアントで操作しているデ�
 ENTRYPOINT ["java","-jar","/app.jar"]  # コンテナ起動時にjavaを実行する
 ```
 
-## docker bulid
+## Docker基本コマンド
+### イメージの確認  
+保有イメージは以下で確認する。-aで停止中のイメージ含めて表示する。  
+```
+xxxx:~/environment/TestRest/initial $ docker images -a
+REPOSITORY           TAG       IMAGE ID       CREATED             SIZE
+springio/testrest2   latest    a50af4fa259c   5 minutes ago       456MB
+springio/testrest    latest    c3b373a153b2   28 minutes ago      456MB
+<none>               <none>    3c833b85c252   About an hour ago   124MB
+xxxx:~/environment/TestRest/initial $ 
+```
+
+### Current Directory内のDockerfileをビルドしてイメージ作成
 dockerイメージの作成には以下のようにbulidコマンドを使用する。  
 -tでタグを付けられる。  
 
@@ -93,14 +105,40 @@ xxxx:~/environment/TestRest/initial $ docker build -t springio/testrest2 .
 xxxx:~/environment/TestRest/initial $ 
 ```
 
-保有イメージは以下で確認する。-aで停止中のイメージ含めて表示する。  
+### イメージからコンテナの起動
+-dをつけるとバックグラウンドで起動する。  バックグラウンド起動時に停止する場合はstopコマンドを使用する。  
 ```
-xxxx:~/environment/TestRest/initial $ docker images -a
-REPOSITORY           TAG       IMAGE ID       CREATED             SIZE
-springio/testrest2   latest    a50af4fa259c   5 minutes ago       456MB
-springio/testrest    latest    c3b373a153b2   28 minutes ago      456MB
-<none>               <none>    3c833b85c252   About an hour ago   124MB
-xxxx:~/environment/TestRest/initial $ 
+ $  docker run -p 8080:8080 springio/testrest2
+省略
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+[INFO ] TestKK.logStarting:50 - Starting TestKK v0.0.1-SNAPSHOT using Java 21.0.2 with PID 1 (/app.jar started by root in /)
+[DEBUG] TestKK.logStarting:51 - Running with Spring Boot v3.2.0, Spring v6.1.1
+[INFO ] TestKK.logStartupProfileInfo:659 - The following 1 profile is active: "develop"
+[INFO ] TomcatWebServer.initialize:108 - Tomcat initialized with port 8080 (http)
+[INFO ] ServletWebServerApplicationContext.prepareWebApplicationContext:296 - Root WebApplicationContext: initialization completed in 3028 ms
+[INFO ] TomcatWebServer.start:221 - Tomcat started on port 8080 (http) with context path ''
+[INFO ] TestKK.logStarted:56 - Started TestKK in 6.837 seconds (process running for 8.457)
+```
+
+### 起動中コンテナの一覧表示
+```
+ $ docker ps 
+CONTAINER ID   IMAGE                COMMAND                CREATED         STATUS         PORTS                                       NAMES
+7ac48ae76172   springio/testrest2   "java -jar /app.jar"   3 minutes ago   Up 3 minutes   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   agitated_almeida
+```
+
+### 起動中コンテナへ接続
+NAMESは毎回変わる？ため、psで確認してから接続を行う。  
+```
+$ docker exec -i -t agitated_almeida bash
+root@7ac48ae76172:/#
 ```
 
 ## Dockerエラー 
