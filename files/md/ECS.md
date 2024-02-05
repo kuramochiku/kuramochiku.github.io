@@ -36,6 +36,16 @@ ECR用エンドポイント
 構築するリソースによって必要なエンドポイントは異なる。詳細は以下などを参照すること。  
 https://dev.classmethod.jp/articles/vpc-endpoints-for-ecs-2022/#toc-1  
 
+## 設定するIAMロール
+◆タスク実行ロール  
+⇒タスク実行時にアクセスしたいAWSリソースの権限を管理。無いと起動しないはず。主に以下のような権限が必要。  
+* コンテナイメージをECRからgetしてpullするためにECRの権限諸々を付与(AmazonECSTaskExecutionRolePolicyにあり)  
+* ログの出力先の作成と出力のためにCloudWatchLogsの権限諸々を付与(AmazonECSTaskExecutionRolePolicyにあり)  
+* タスク定義の環境変数に AWS System Manager パラメータストアの値を利用する場合、SecretsManageの権限を付与  
+
+◆タスクロール  
+⇒タスク実行して起動したコンテナがアクセスしたいAWSリソースの権限を管理。EC2に設定するIAMロールのようなイメージ。AWSリソースを使用しない場合は無くても良い。  
+
 # Docker入門  
 Dockerとは、軽量で高速に動作するコンテナ型仮想環境用のプラットフォームです。  
 Dockerを使うことで、1台のサーバー上で様々なアプリケーションを手軽に仮想化・実行できるようになります。  
