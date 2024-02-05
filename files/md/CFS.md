@@ -382,3 +382,7 @@ LinuxのEC2にSSM接続するためには以下の設定が必要である。
 
 なお、Cloudformationでエンドポイントを作成する場合、タグの付与は出来ないようである。作成後に手動追加が必要。(結構不便・・・)
 
+### CloudFormationのリソースごとの!Ref/!GetAtt戻り値メモ
+!Refと!GetAttでは戻り値が異なる。必要な情報に応じて使い分ける方が良いようである。  
+以下参考サイトである。  
+https://qiita.com/feifo/items/aa8d1ca524dce93274cd  
