@@ -302,6 +302,19 @@ awsvpc ネットワークモードのタスクを含む ECS サービスは、�
 ### ECSサービス作成が終了しない
 ECSサービス作成が終了しない。内部的にはタスクのデプロイが失敗し続けている。ログは出ておらず、原因が分かりにくい。  
 
+### lambda作成時のエラー
+lambda作成時に以下のようなエラーが出力された。  
+```
+Properties validation failed for resource CustomLambdaFunction with message: #/Role: failed validation constraint for keyword [pattern]
+```
+lambdaの設定時はロール名ではなく、ロールのARNが必要らしく、以下のように変更することでエラー解消した。
+
+```
+      Role: !Ref LambdaIAMRole
+↓
+      Role: !GetAtt LambdaIAMRole.Arn
+```
+
 ## 小技  
 ### VPC Cidr関数  
 Subnet作成時にVPC Cidrの範囲から作成することとなるが、これらをハードコーディングするのは不便である。  
