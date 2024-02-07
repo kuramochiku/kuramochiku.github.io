@@ -315,6 +315,12 @@ lambdaの設定時はロール名ではなく、ロールのARNが必要らし�
       Role: !GetAtt LambdaIAMRole.Arn
 ```
 
+### apigateway-lamdba連携
+apigateway-lamdba連携stack作成は正常終了するが、APIテストで500エラーとなる。  
+手動作成時のものと見比べても設定値差分は分からず苦戦した。  
+原因はlambdaリソースベースポリシーが無かったため。  
+こういうコンソール操作時はAWS側で良い感じに実施してくれるけど、cloudformation時は自分で作らないといけないものは嵌りやすいため注意。  
+
 ## 小技  
 ### VPC Cidr関数  
 Subnet作成時にVPC Cidrの範囲から作成することとなるが、これらをハードコーディングするのは不便である。  
