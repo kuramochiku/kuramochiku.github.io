@@ -178,3 +178,12 @@ curl: (56) Recv failure: Connection reset by peer
 (172.17.0.xはcontainerのbridgeネットワークのインターフェースに自動で与えられたIPアドレス)  
 しかしコンテナ上のAPは127.0.0.1でListenしているためエラーとなる。  
 ポートのListenを0.0.0.0にすれば良い。springはどうやるんだろ・・・？  
+
+## コンテナのログ管理
+コンテナのログには大きく2種類が存在する。nginxとtomcatである。  
+nginxで生成されるログファイルはaccess.logとerror.logだが、nginxのDockerfileはaccess.logとerror.logをそれぞれSTDOUTとSTDERRにリダイレクトする。　　
+一方Tomcat は catalina.log、access.log、manager.log、host-manager.log など複数のログファイルを生成するが、tomcat Dockerfile はこれらのログを標準出力にリダイレクトしせず、コンテナ内に保存される。  
+
+### 標準出力
+コンテナの標準出力は、Logging Driverで処理される。デフォルトはjson形式であり、  
+「/var/lib/docker/containers/<container-id>/<container-id>-json.log」にあるホストファイルに出力する。  
