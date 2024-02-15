@@ -187,3 +187,15 @@ nginxで生成されるログファイルはaccess.logとerror.logだが、nginx
 ### 標準出力
 コンテナの標準出力は、Logging Driverで処理される。デフォルトはjson形式であり、  
 「/var/lib/docker/containers/<container-id>/<container-id>-json.log」にあるホストファイルに出力する。  
+
+## 小技
+### ECS Execでコンテナログイン
+ECS Execという機能を使って起動中のコンテナへログインすることができる。  
+
+1,SSM権限を付与したIAMロールを準備する。  
+2,1で用意したIAMロールを用いて、ECSタスク定義を新規作成または更新する。(タスク実行ロールではなくタスクロールに設定する)  
+3,ECSサービスで「enableExecuteCommand」の設定を有効にし、タスクを更新する。(GUIでは設定不可？今回はcloudformationから設定する)  
+4,Cloudshellなどから以下のようなAWSCLIを実行する。  
+```
+aws ecs execute-command --cluster クラスタ名 --task タスクID --container コンテナ名 --interactive --command "/bin/sh"
+```
