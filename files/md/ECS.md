@@ -160,6 +160,23 @@ $ docker exec -i -t agitated_almeida bash
 root@7ac48ae76172:/#
 ```
 
+### dockerのログ確認
+```
+docker logs イメージID
+```
+
+### コンテナにログインして中を書き換えた後にイメージ保存する
+```
+docker commit コンテナID タグ名
+```
+
+### Exitedしたコンテナに入る
+別イメージとして作成して起動する。  
+```
+docker commit コンテナID 適当な名前
+docker run --rm -it 上でつけた名前 bash
+```
+
 ### dockerコンテナ、イメージの削除
 * dockerコンテナの削除
 dockerコンテナを停止した後、自動的に削除はされないため以下コマンドで削除する必要がある。
@@ -171,6 +188,13 @@ docker rm イメージID
 以下コマンドにて削除可能である。  
 ```
 docker rmi イメージID
+```
+
+### サイドカーコンテナの起動
+事前にメインコンテナを起動しておくこと。-pオプションと--netオプションは競合するらしい。サイドカーコンテナに外から通信したい時はどうするのだろうか。  
+→メインコンテナ起動時にサブコンテナ分のポート指定もしておけばOKだった。あくまでサブコンテナはメインのネットワーク使っているので。  
+```
+docker run --name nginx-test -d  --pid=container:メインコンテナID --net=container:メインコンテナID docker-nginx:version2
 ```
 
 ## Dockerエラー 
